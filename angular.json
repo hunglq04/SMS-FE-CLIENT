@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "SMS-FE-CLIENT"
+    }
+  },
+  "defaultProject": "SMS-FE-CLIENT",
+  "cli": {
+    "analytics": false
+  }
 }
