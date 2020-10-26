@@ -1,0 +1,9 @@
+a,
+p {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 300;
+    /* text-transform: uppercase; */
+    font-size: 1rem;
+    color: rgb(173, 169, 169) !important;
+    /* font-feature-settings: "ss01" on; */
+}

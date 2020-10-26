@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+    height: 100%;
+}
+
+.form-control {
+    text-rendering: auto;
+    text-indent: 0px;
+    display: inline-block;
+    text-align: start;
+    border: 1px solid #eeeeee !important;
+    border-radius: 2px !important;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.1) !important;
+    outline: none !important;
+    padding: 0 10px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    text-shadow: none !important;
+    letter-spacing: 1px !important;
+    height: 30pt;
+    border-radius: 0;
+    margin-right: 20px;
+    width: 100%;
+    background-color: #f1f3f4;
+}
+
+a {
+    cursor: pointer;
+    color: #17a2b8 !important;
+}
+
+.btn-dark {
+    padding: 0 25px !important;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    height: 38px;
+    -webkit-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    cursor: pointer;
+    border: 2px solid #333333;
+    background-color: #333333;
+}

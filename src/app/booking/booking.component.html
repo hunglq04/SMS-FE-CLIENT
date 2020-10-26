@@ -1,0 +1,343 @@
+<app-header></app-header>
+<div class="container-fluid" style="background-color: lightgrey;">
+    <!-- Step by step -->
+    <div style="margin-left: 250px; margin-right: 250px; background-color: white;">
+        <div id="stepper1" class="bs-stepper">
+            <div class="bs-stepper-header">
+                <div class="step" data-target="#test-l-1">
+                    <button class="step-trigger">
+            <span class="bs-stepper-circle">1</span>
+            <span class="bs-stepper-label">Chọn salon</span>
+          </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#test-l-2">
+                    <button class="step-trigger">
+            <span class="bs-stepper-circle">2</span>
+            <span class="bs-stepper-label">Chọn dịch vụ</span>
+          </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#test-l-3">
+                    <button class="step-trigger">
+            <span class="bs-stepper-circle">3</span>
+            <span class="bs-stepper-label">Chọn Stylist</span>
+          </button>
+                </div>
+                <div class="line"></div>
+                <div class="step" data-target="#test-l-4">
+                    <button class="step-trigger">
+            <span class="bs-stepper-circle">4</span>
+            <span class="bs-stepper-label">Hoàn tất</span>
+          </button>
+                </div>
+            </div>
+            <div class="bs-stepper-content">
+                <form (ngSubmit)="onSubmit()">
+                    <!-- Step 1 Chọn Salon-->
+                    <div id="test-l-1" class="content">
+                        <div class="container mt-3">
+                            <div style="padding-right: -100px;">
+                                <form class="example-form">
+                                    <h2>CHỌN SALON MUỐN ĐẶT LỊCH</h2>
+                                    <mat-form-field class="example-full-width">
+                                        <input type="text" placeholder="Tìm tên đường hoặc tỉnh thành..." aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                                {{option}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </form>
+                                <!-- <button style="float: right; margin: 10px 110px 10px 0px;" (click)="next()" class="btn btn-primary">Next</button> -->
+                            </div>
+                        </div>
+                        <!-- BXH salon miền nam -->
+                        <div class="container">
+                            <h2>Top salon miền Nam</h2>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="card card-block">
+                                                <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" src="assets/images/combobooking/101.png" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+                                                <div class="card-block">
+                                                    <h4 class="card-title">BaberShop</h4>
+                                                    <p class="card-text">65 Đặng Văn Bi</p>
+                                                    <a style="justify-content: center; color: black !important;" href="#" class="btn btn-primary">Chọn</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card card-block">
+                                                <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" src="assets/images/combobooking/104.png" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+                                                <div class="card-block">
+                                                    <h4 class="card-title">BaberShop</h4>
+                                                    <p class="card-text">65 Đặng Văn Bi</p>
+                                                    <a href="#" class="btn btn-primary">Button</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card card-block">
+                                                <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" src="assets/images/combobooking/105.png" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+                                                <div class="card-block">
+                                                    <h4 class="card-title">BaberShop</h4>
+                                                    <p class="card-text">755 BaberShop</p>
+                                                    <a href="#" class="btn btn-primary">Button</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- BXH salon miền Bắc -->
+                        <div class="container mt-3">
+                            <h2>Top salon miền Bắc</h2>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="card card-block">
+                                                <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" src="assets/images/combobooking/101.png" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+                                                <div class="card-block">
+                                                    <h4 class="card-title">BaberShop</h4>
+                                                    <p class="card-text">124214</p>
+                                                    <a href="#" class="btn btn-primary">Button</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card card-block">
+                                                <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" src="assets/images/combobooking/101.png" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+                                                <div class="card-block">
+                                                    <h4 class="card-title">BaberShop</h4>
+                                                    <p class="card-text">S124214.</p>
+                                                    <a href="#" class="btn btn-primary">Button</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="card card-block">
+                                                <img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" src="assets/images/combobooking/101.png" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+                                                <div class="card-block">
+                                                    <h4 class="card-title">BaberShop</h4>
+                                                    <p class="card-text">321</p>
+                                                    <a href="#" class="btn btn-primary">Button</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Buttton -->
+                    </div>
+                    <!-- Step 2 Chọn Dịch Vụ-->
+                    <div id="test-l-2" class="content">
+                        <div class="container mt-3">
+                            <div style="background-color: lightcoral;">
+                                <h2 style="text-transform: uppercase; color: white; padding: 10px;">Mời quý khách chọn dịch vụ</h2>
+                                <div style="display: flex;">
+                                    <div style="width: 33.33333%; text-align: center; border: 1px solid white;">
+                                        <a class="nav-link" href="#div11111">
+                                            <div>
+                                                <div>
+                                                    <img src="https://v3.30shine.org/data/images/Booking/ShineCombo-Selected.svg" alt="">
+                                                </div>
+                                                <span>Shine Combo</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div style="width: 33.33333%; text-align: center; border: 1px solid white;">
+                                        <a class="nav-link" href="#section2">
+                                            <div>
+                                                <div>
+                                                    <img src="https://v3.30shine.org/data/images/Booking/ShineCombo-Selected.svg" alt="">
+                                                </div>
+                                                <span>Uốn/Duỗi/Nhuộm</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div style="width: 33.33333%; text-align: center; border: 1px solid white;">
+                                        <a class="nav-link" href="#section3">
+                                            <div>
+                                                <div>
+                                                    <img src="https://v3.30shine.org/data/images/Booking/ShineCombo-Selected.svg" alt="">
+                                                </div>
+                                                <span>Khuyến mãi</span>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- Cắt -->
+                            <div style="margin-top: 3px; padding: 3px;">
+                                <!-- div1 -->
+                                <div id="div11111" class="item relative ">
+                                    <div class="content-center-middle absolute btn-check h2 br-4">
+                                        <div class="flex item-center "><span role="img" aria-label="plus-circle" class="anticon anticon-plus-circle" style="margin-right: 10px;"><svg viewBox="64 64 896 896"
+                    focusable="false" class="" data-icon="plus-circle" width="1em" height="1em" fill="currentColor"
+                    aria-hidden="true">
+                    <path
+                      d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z">
+                    </path>
+                    <path
+                      d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z">
+                    </path>
+                  </svg></span><span>Chọn</span></div>
+                                    </div>
+                                    <div class="placehoder" style="height: inherit;"><img class="block w-full" src="https://storage.30shine.com/service/combo_booking/306.png" alt=""></div>
+                                </div>
+                                <div id="div11111" class="item relative ">
+                                    <div class="content-center-middle absolute btn-check h2 br-4">
+                                        <div class="flex item-center "><span role="img" aria-label="plus-circle" class="anticon anticon-plus-circle" style="margin-right: 10px;"><svg viewBox="64 64 896 896"
+                  focusable="false" class="" data-icon="plus-circle" width="1em" height="1em" fill="currentColor"
+                  aria-hidden="true">
+                  <path
+                    d="M696 480H544V328c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v152H328c-4.4 0-8 3.6-8 8v48c0 4.4 3.6 8 8 8h152v152c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V544h152c4.4 0 8-3.6 8-8v-48c0-4.4-3.6-8-8-8z">
+                  </path>
+                  <path
+                    d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z">
+                  </path>
+                </svg></span><span>Chọn</span></div>
+                                    </div>
+                                    <div class="placehoder" style="height: inherit;"><img class="block w-full" src="https://storage.30shine.com/service/combo_booking/306.png" alt=""></div>
+                                </div>
+                                <!-- div2 -->
+                                <button (click)="previous()" class="btn btn-primary">Quay lại</button>
+                                <button style="float: right;" (click)="next()" class="btn btn-primary">Tiếp tục</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Step 3 Chọn Stylist-->
+                    <div id="test-l-3" class="content text-center">
+                        <div class="container mt-3">
+                            <div style="background-color: lightsalmon;">
+                                <h2>Xem thông tin stylist</h2>
+                                <!-- Chọn Ngày -->
+                                <nav>
+                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Hôm nay</a>
+                                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Ngày mai</a>
+                                        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Ngày kia</a>
+
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="col-xs-12">
+
+                                <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                        <!-- Chọn Stylist -->
+                                        <div class="card">
+                                            <h4>1.Chọn Stylist</h4>
+                                            <div class="card-body">
+                                                <div>
+                                                    <img alt="100%x180" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-OadwmNne_lQASl4IOgNeho88OatuSENzHA&usqp=CAU" style="border: 2px solid black; height: 70px; width: 70px; border-radius: 50%;">
+                                                    <img alt="100%x180" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-OadwmNne_lQASl4IOgNeho88OatuSENzHA&usqp=CAU" style="border: 2px solid black; height: 70px; width: 70px; border-radius: 50%;">
+                                                    <img alt="100%x180" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-OadwmNne_lQASl4IOgNeho88OatuSENzHA&usqp=CAU" style="border: 2px solid black; height: 70px; width: 70px; border-radius: 50%;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Chọn giờ -->
+                                        <div class="card">
+                                            <h4>2.Chọn giờ</h4>
+                                            <div class="card-body">
+                                                <div class="col">
+                                                    <!-- Group of material radios - option 1 -->
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios">
+                                                        <label class="form-check-label" for="materialGroupExample1">Option 1</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios">
+                                                        <label class="form-check-label" for="materialGroupExample1">Option 1</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios">
+                                                        <label class="form-check-label" for="materialGroupExample1">Option 1</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios">
+                                                        <label class="form-check-label" for="materialGroupExample1">Option 1</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios">
+                                                        <label class="form-check-label" for="materialGroupExample1">Option 1</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios">
+                                                        <label class="form-check-label" for="materialGroupExample1">Option 1</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                        <div class="card">
+                                            <h4>1.Chọn Stylist</h4>
+                                            <div class="card-body">
+                                                <div>
+                                                    <img alt="100%x180" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-OadwmNne_lQASl4IOgNeho88OatuSENzHA&usqp=CAU" style="border: 2px solid black; height: 70px; width: 70px; border-radius: 50%;">
+                                                    <img alt="100%x180" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-OadwmNne_lQASl4IOgNeho88OatuSENzHA&usqp=CAU" style="border: 2px solid black; height: 70px; width: 70px; border-radius: 50%;">
+                                                    <img alt="100%x180" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-OadwmNne_lQASl4IOgNeho88OatuSENzHA&usqp=CAU" style="border: 2px solid black; height: 70px; width: 70px; border-radius: 50%;">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="card">
+                                            <h4>2.Chọn giờ</h4>
+                                            <div class="card-body">
+                                                <div class="col">
+                                                    <!-- Group of material radios - option 1 -->
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios">
+                                                        <label class="form-check-label" for="materialGroupExample1">Option 1</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios">
+                                                        <label class="form-check-label" for="materialGroupExample1">Option 1</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios">
+                                                        <label class="form-check-label" for="materialGroupExample1">Option 1</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="materialGroupExample1" name="groupOfMaterialRadios">
+                                                        <label class="form-check-label" for="materialGroupExample1">Option 1</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                        <div class="card">
+                                            <h4>1.Chọn Stylist</h4>
+                                            <div class="card-body">
+                                                <div>
+                                                    <img alt="100%x180" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-OadwmNne_lQASl4IOgNeho88OatuSENzHA&usqp=CAU" style="border: 2px solid black; height: 70px; width: 70px; border-radius: 50%;">
+                                                    <img alt="100%x180" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-OadwmNne_lQASl4IOgNeho88OatuSENzHA&usqp=CAU" style="border: 2px solid black; height: 70px; width: 70px; border-radius: 50%;">
+                                                    <img alt="100%x180" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ-OadwmNne_lQASl4IOgNeho88OatuSENzHA&usqp=CAU" style="border: 2px solid black; height: 70px; width: 70px; border-radius: 50%;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Step 4 Hoàn Thành -->
+                    <div id="test-l-4" class="content text-center">
+                        <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <app-footer></app-footer> -->

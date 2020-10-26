@@ -1,0 +1,117 @@
+.carousel-item {
+    height: 100vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.with-chevron[aria-expanded='true'] i {
+    display: block;
+    /* transform: rotate(180deg) !important; */
+}
+
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+
+body {
+    min-height: 100vh;
+    background-color: #fafafa;
+}
+
+a {
+    /* font-family: 'Times New Roman', Times, serif; */
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: #fafafa !important;
+    /* font-feature-settings: "ss01" on; */
+}
+
+.container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.btn-test-1 {
+    background-image: linear-gradient(45deg, rgba(2, 126, 250, 0.8), 55%, rgb(45, 95, 93, 0.85)), url("https://v3.30shine.org/data/images/Booking/ShineCombo-Selected.svg");
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.btn-test-2 {
+    background-image: linear-gradient(45deg, rgba(77, 211, 95, 0.8), 55%, rgba(159, 168, 196, 0.85)), url("https://v3.30shine.org/data/images/Booking/ShineCombo-Selected.svg");
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.btn-test-3 {
+    background-image: linear-gradient(45deg, rgba(247, 231, 7, 0.8), 55%, rgba(133, 146, 185, 0.85)), url("https://v3.30shine.org/data/images/Booking/ShineCombo-Selected.svg");
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.btn-test-4 {
+    background-image: linear-gradient(45deg, rgba(255, 0, 0, 0.8), 55%, rgba(133, 146, 185, 0.85)), url("https://v3.30shine.org/data/images/Booking/ShineCombo-Selected.svg");
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.btn-test-5 {
+    background-image: linear-gradient(45deg, rgba(82, 177, 184, 0.8), 55%, rgba(255, 255, 255, 0.85)), url("https://v3.30shine.org/data/images/Booking/ShineCombo-Selected.svg");
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.btn-test-6 {
+    background-image: linear-gradient(45deg, rgba(133, 146, 185, 0.85), 55%, rgba(35, 46, 80, 0.85)), url("https://v3.30shine.org/data/images/Booking/ShineCombo-Selected.svg");
+    background-size: contain;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.item {
+    display: inline-grid;
+    min-width: 20%;
+    font-size: 15px;
+    text-align: center;
+    font-family: HelveticaVn-LtCn;
+    font-weight: 700;
+    margin: 7px 0;
+}
+
+.item img {
+    width: 70px;
+    margin: 5px auto;
+}
+
+.card-body .row {
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: nowrap !important;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.card-block {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-text {
+    justify-content: center;
+}
