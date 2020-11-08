@@ -1,0 +1,264 @@
+<form [formGroup]="stylistFormGroup">
+    <ng-template matStepLabel>Chọn Stylist</ng-template>
+    <div class="card">
+        <h2 class="card-title" style="text-transform: uppercase; color: rgb(0, 0, 0); padding: 10px;">Xem thông tin stylist</h2>
+        <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4 invisible-tabs">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    Hôm nay {{ showtimeNow}}
+                </ng-template>
+                <h4 style="text-align: center;">1.Chọn stylist</h4>
+                <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4 mat-label-style">
+                    <h4 style="text-align: center;">2.Chọn giờ</h4>
+                    <div *ngFor="let stylist of stylists">
+                        <mat-tab>
+                            <div style="background-color: red !important;">
+                                <ng-template mat-tab-label class="abc">
+                                    <span (click)="pickStylist2()">{{stylist.name}}</span>
+                                </ng-template>
+                            </div>
+                            <h4 style="text-align: center;">2.Chọn giờ</h4>
+                            <!-- <div> vag {{stylist}}</div> -->
+                            <div class="row" style="display: flex; justify-content: center;" mat-stretch-tabs>
+                                <!-- Group of material radios - option 1 -->
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot1}" class="test">
+                                                8h00 {{stylist.stylishSchedule[0]}}
+                                            </button>
+                                <button (click)="testClick()" [ngClass]="{'disableDiv':!stylist.stylishSchedule['08:30'] || !slot2}" class="test">
+                                                8h30 {{stylist.stylishSchedule['08:30']}}
+                                            </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot3}" class="test">
+                                             9h00
+                                            </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot4}" class="test">
+                                              9h30
+                                            </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot5}" class="test">
+                                              10h00
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot6}" class="test">
+                                              10h30
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot7}" class="test">
+                                              11h00
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot8}" class="test">
+                                              13h00
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot9}" class="test">
+                                              13h30
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot10}" class="test">
+                                              14h00
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot11}" class="test">
+                                              14h30
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot12}" class="test">
+                                              15h00
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot13}" class="test">
+                                              15h30
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot14}" class="test">
+                                              16h00
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot15}" class="test">
+                                              16h30
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot16}" class="test">
+                                              17h00
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot17}" class="test">
+                                              17h30
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot18}" class="test">
+                                              18h00
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot19}" class="test">
+                                              18h30
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot20}" class="test">
+                                              19h00
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot21}" class="test">
+                                              19h30
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot22}" class="test">
+                                              20h00
+                                             </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot23}" class="test">
+                                              20h30
+                                             </button>
+                            </div>
+                        </mat-tab>
+                    </div>
+                </mat-tab-group>
+            </mat-tab>
+            <mat-tab label="Ngày mai {{showtimeTomorow}}">
+                <h4 style="text-align: center;">1.Chọn stylist</h4>
+                <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+                    <div *ngFor="let stylist of stylists">
+                        <mat-tab label="{{stylist.name}}">
+                            <!-- <div> vag {{stylist}}</div> -->
+                            <div class="row" style="display: flex; justify-content: center;">
+                                <!-- Group of material radios - option 1 -->
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot1}" class="test">
+                                                  8h00 {{stylist.stylishSchedule[0]}}
+                                              </button>
+                                <button (click)="testClick()" [ngClass]="{'disableDiv':!stylist.stylishSchedule['08:30'] || !slot2}" class="test">
+                                                  8h30 {{stylist.stylishSchedule['08:30']}}
+                                              </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot3}" class="test">
+                                               9h00
+                                              </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot4}" class="test">
+                                                9h30
+                                              </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot5}" class="test">
+                                                10h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot6}" class="test">
+                                                10h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot7}" class="test">
+                                                11h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot8}" class="test">
+                                                13h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot9}" class="test">
+                                                13h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot10}" class="test">
+                                                14h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot11}" class="test">
+                                                14h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot12}" class="test">
+                                                15h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot13}" class="test">
+                                                15h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot14}" class="test">
+                                                16h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot15}" class="test">
+                                                16h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot16}" class="test">
+                                                17h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot17}" class="test">
+                                                17h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot18}" class="test">
+                                                18h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot19}" class="test">
+                                                18h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot20}" class="test">
+                                                19h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot21}" class="test">
+                                                19h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot22}" class="test">
+                                                20h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot23}" class="test">
+                                                20h30
+                                               </button>
+                            </div>
+                        </mat-tab>
+                    </div>
+                </mat-tab-group>
+            </mat-tab>
+            <mat-tab label="Ngày kia {{showtimeTomorow2}}">
+                <h4 style="text-align: center;">1.Chọn stylist</h4>
+                <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+                    <div *ngFor="let stylist of stylists">
+                        <mat-tab label="{{stylist.name}}">
+                            <!-- <div> vag {{stylist}}</div> -->
+                            <div class="row" style="display: flex; justify-content: center;">
+                                <!-- Group of material radios - option 1 -->
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot1}" class="test">
+                                                  8h00 {{stylist.stylishSchedule[0]}}
+                                              </button>
+                                <button (click)="testClick()" [ngClass]="{'disableDiv':!stylist.stylishSchedule['08:30'] || !slot2}" class="test">
+                                                  8h30 {{stylist.stylishSchedule['08:30']}}
+                                              </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot3}" class="test">
+                                               9h00
+                                              </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot4}" class="test">
+                                                9h30
+                                              </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot5}" class="test">
+                                                10h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot6}" class="test">
+                                                10h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot7}" class="test">
+                                                11h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot8}" class="test">
+                                                13h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot9}" class="test">
+                                                13h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot10}" class="test">
+                                                14h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot11}" class="test">
+                                                14h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot12}" class="test">
+                                                15h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot13}" class="test">
+                                                15h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot14}" class="test">
+                                                16h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot15}" class="test">
+                                                16h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot16}" class="test">
+                                                17h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot17}" class="test">
+                                                17h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot18}" class="test">
+                                                18h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot19}" class="test">
+                                                18h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot20}" class="test">
+                                                19h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot21}" class="test">
+                                                19h30
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot22}" class="test">
+                                                20h00
+                                               </button>
+                                <button [ngClass]="{'disableDiv': !stylist.stylishSchedule['08:00'] || !slot23}" class="test">
+                                                20h30
+                                               </button>
+                            </div>
+                        </mat-tab>
+                    </div>
+                </mat-tab-group>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</form>

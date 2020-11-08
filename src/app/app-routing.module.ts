@@ -3,14 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BookingComponent } from './booking/booking.component';
 import { ProductComponent } from './product/product.component';
-import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { LoginComponent } from './login/login.component';
 import {  SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider, AuthService} from 'ng4-social-login';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'booking', component: BookingComponent },
   { path: 'product', component: ProductComponent },
-  { path: 'login', component: LoginAdminComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

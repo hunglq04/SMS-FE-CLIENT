@@ -12,23 +12,26 @@ import { AuthGuardService } from './service/auth-guard.service';
 import { BasicAuthHttpInterceptorService } from './service/basic-auth-http-interceptor.service';
 import { LoadingService } from './loading/loading.service';
 import { LoadingInterceptor } from './loading/loading.interceptor';
-import { ProvinceService } from './service/province-service';
+import { SalonService } from './service/salon.service';
+import { StylistService } from './service/stylist.service';
 // Component
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { FooterComponent } from './footer/footer.component';
 import { BookingComponent } from './booking/booking.component';
 import { LoadingComponent } from './loading/loading.component';
-
+import { ProductComponent } from './product/product.component';
 // Template
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatStepperModule, MatHorizontalStepper, MatStep } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { ProductComponent } from './product/product.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
 // Social
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {
@@ -36,17 +39,24 @@ import {
   FacebookLoginProvider,
   AmazonLoginProvider,
 } from 'angularx-social-login';
+import { BookingStylistComponent } from './booking-stylist/booking-stylist.component';
+import { BookingSalonComponent } from './booking-salon/booking-salon.component';
+import { BookingServiceComponent } from './booking-service/booking-service.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoginAdminComponent,
+    LoginComponent,
     HomepageComponent,
     FooterComponent,
     BookingComponent,
     ProductComponent,
     LoadingComponent,
+    BookingStylistComponent,
+    BookingSalonComponent,
+    BookingServiceComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -57,7 +67,11 @@ import {
     MatStepperModule,
     MatInputModule,
     MatFormFieldModule,
+    MatCardModule,
     MatAutocompleteModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatTabsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     OverlayModule,
@@ -68,6 +82,8 @@ import {
     BasicAuthHttpInterceptorService,
     AuthGuardService,
     LoadingService,
+    SalonService,
+    StylistService,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

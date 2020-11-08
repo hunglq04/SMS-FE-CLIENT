@@ -1,0 +1,91 @@
+.img-stylist {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: -8px;
+    margin-top: -3px;
+}
+
+.btn-stylist {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+
+/* .btn:hover {
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    margin-right: 10px;
+}
+
+.btn:active {
+    border: 1px solid black;
+    border-radius: 50%;
+} */
+
+.nav-tabs .nav-link.active {
+    background-color: violet;
+}
+
+.nav-link {
+    color: white;
+}
+
+.test {
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 4px;
+    width: 70px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 3px;
+    text-align: center;
+    flex: 0 0 25%;
+    max-width: 25%;
+    margin-bottom: 3px;
+}
+
+.test:hover {
+    border: 1px solid gray;
+}
+
+.test:active {
+    border: 1px solid black;
+}
+
+.test:focus {
+    border: 1px solid black;
+    background-color: rgb(241, 243, 106);
+}
+
+.disableDiv {
+    pointer-events: none;
+    background-color: rgb(230, 230, 230);
+    border: 0px;
+}
+
+.mat-tab-labels {
+    display: flex;
+    background-color: lightgray !important;
+}
+
+::ng-deep mat-tab-header {
+    background-color: rgb(207, 207, 218);
+}
+
+::ng-deep mat-tab-header2 {
+    background-color: rgb(85, 85, 202) !important;
+}
+
+::ng-deep mat-tab-group.mat-label-style {
+    background-color: rgb(255, 255, 255) !important;
+}
+
+::ng-deep div.mat-style {
+    background-color: brown !important;
+}

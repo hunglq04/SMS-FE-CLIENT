@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,37 +8,41 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   isLogin = true;
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
 
-  user = {
-    username: '',
-    token: '',
-    roles: ''
-  };
-
-  checkLoggedAccount(user) {
-    if (user === null) {
+  ) { }
+  isBooking = true;
+  username = '';
+  checkLoggedAccount(username) {
+    if (username === null) {
       return false;
     }
     return true;
   }
   signOutClick() {
-    // this.socialAuth.signOut();
-    // localStorage.removeItem("LoggedInAccount");
-    // window.location.reload();
-    localStorage.removeItem('username');
+    sessionStorage.removeItem('username');
     window.location.reload();
+  }
+  btnLogin() {
+    this.isBooking = false;
+    localStorage.removeItem('test');
+  }
+  bookingclick() {
+    localStorage.setItem('test', 'test');
+    console.log(localStorage.getItem('test'));
+    this.isBooking = true;
   }
 
   ngOnInit() {
-    if (this.checkLoggedAccount(localStorage.getItem('username'))) {
+    if (this.checkLoggedAccount(sessionStorage.getItem('username'))) {
       this.isLogin = true;
-      this.user = JSON.parse(localStorage.getItem('username'));
-      console.log('Dung', localStorage.getItem('username'), this.user);
+      this.username = sessionStorage.getItem('username');
+      console.log('Dang nhap thanh cong' , this.username);
     }
     else {
       this.isLogin = false;
-      console.log('sai');
+      console.log('DNTB');
     }
   }
 

@@ -1,3 +1,4 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 html,
 body {
     height: 100%;
@@ -26,7 +27,7 @@ body {
 
 a {
     cursor: pointer;
-    color: #17a2b8 !important;
+    color: #ffffff;
 }
 
 .btn-dark {
@@ -43,4 +44,8 @@ a {
     cursor: pointer;
     border: 2px solid #333333;
     background-color: #333333;
+}
+
+.red-float.mat-focused label {
+    background-color: red !important;
 }

@@ -1,0 +1,81 @@
+<form [formGroup]="serviceFormGroup">
+    <ng-template matStepLabel>Chọn Dịch vụ</ng-template>
+    <div class="container mt-3">
+        <div class="card">
+            <div class="card-header" style="background-color: rgb(122, 120, 120);">
+                <h2 class="card-title" style="text-transform: uppercase; color: white; padding: 10px;">Mời quý khách chọn dịch vụ</h2>
+                <div style="display: flex;">
+                    <!-- ShineCombo Header -->
+                    <div style="width: 33.33333%; height: 70px; text-align: center; border: 1px solid white;">
+                        <a style="color: white !important;" (click)="scroll(section1)">
+                            <div style="padding-top: 15px;">
+                                <div>
+                                    <img class="card-img" style="height: 20px;" src="https://v3.30shine.org/data/images/Booking/ShineCombo-Selected.svg" alt="">
+                                </div>
+                                <span class="card-text">Shine Combo</span>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Uốn/Duỗi/Nhuộm Header -->
+                    <div style="width: 33.33333%;  height: 70px; text-align: center; border: 1px solid white;">
+                        <a style="color: white !important;" (click)="scroll(section2)">
+                            <div style="padding-top: 15px;">
+                                <div>
+                                    <img class="card-img" style="height: 20px;" src="https://v3.30shine.org/data/images/Booking/ShineCombo-Selected.svg" alt="">
+                                </div>
+                                <span class="card-text">Uốn/Duỗi/Nhuộm</span>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Khuyến mãi Header -->
+                    <div style="width: 33.33333%;  height: 70px; text-align: center; border: 1px solid white;">
+                        <a style="color: white !important;" (click)="scroll(section3)">
+                            <div style="padding-top: 15px;">
+                                <div>
+                                    <img class="card-img" style="height: 20px;" src="https://v3.30shine.org/data/images/Booking/ShineCombo-Selected.svg" alt="">
+                                </div>
+                                <span class="card-text">Khuyến mãi</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Cắt -->
+        <div class="card-body" style="margin-top: 3px; padding: 3px;">
+            <div #section1>
+                <h3 class="card-title" style="color: rgb(0, 0, 0)">Shine Combo</h3>
+                <button>
+                <div>
+                    <img class="card-img" src="https://storage.30shine.com/service/combo_booking/306.png" alt="">
+                </div>
+              </button>
+                <div>
+                    <img class="card-img" src="https://storage.30shine.com/service/combo_booking/306.png" alt="">
+                </div>
+                <div>
+                    <img class="card-img" src="https://storage.30shine.com/service/combo_booking/306.png" alt="">
+                </div>
+            </div>
+            <div #section2>
+                <h3 class="card-title" style="color: rgb(0, 0, 0)">Uốn/Duỗi/Nhuộm</h3>
+                <div>
+                    <img class="card-img" src="https://storage.30shine.com/service/combo_booking/306.png" alt="">
+                </div>
+                <div>
+                    <img class="card-img" src="https://storage.30shine.com/service/combo_booking/306.png" alt="">
+                </div>
+            </div>
+            <div #section3>
+                <h3 class="card-title" style="color: rgb(0, 0, 0)">Khuyến mãi</h3>
+                <div>
+                    <img class="card-img" src="https://storage.30shine.com/service/combo_booking/306.png" alt="">
+                </div>
+                <div>
+                    <img class="card-img" src="https://storage.30shine.com/service/combo_booking/306.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
