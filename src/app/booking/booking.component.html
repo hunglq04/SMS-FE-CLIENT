@@ -1,0 +1,56 @@
+<app-header></app-header>
+<div class="container">
+    <div class="col-8 offset-2">
+        <div class="card">
+            <!-- Step by step -->
+            <div class="card-header">
+                <button mat-raised-button (click)="isOptional = !isOptional">
+        {{!isOptional ? 'Enable optional steps' : 'Disable optional steps'}}
+      </button>
+                <mat-horizontal-stepper linear #stepper>
+                    <!-- Step 1 Chọn địa chỉ -->
+                    <mat-step [stepControl]="firstFormGroup">
+                        <form [formGroup]="firstFormGroup">
+                            <ng-template matStepLabel>Chọn Salon</ng-template>
+                            <app-booking-salon></app-booking-salon>
+                            <div>
+                                <button mat-button (click)="stepper.next()" mat-raised-button>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <!-- Step 2 Chọn dịch vụ -->
+                    <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+                        <form [formGroup]="secondFormGroup">
+                            <ng-template matStepLabel>Chọn Dịch Vụ</ng-template>
+                            <app-booking-service></app-booking-service>
+                            <div>
+                                <button mat-button matStepperPrevious>Back</button>
+                                <button mat-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <!-- Step 3 Chọn giờ -->
+                    <mat-step [stepControl]="thirdFormGroup" [optional]="isOptional">
+                        <form [formGroup]="thirdFormGroup">
+                            <ng-template matStepLabel>Chọn Stylist</ng-template>
+                            <app-booking-stylist></app-booking-stylist>
+                            <div>
+                                <button mat-button matStepperPrevious>Back</button>
+                                <button mat-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </mat-step>
+                    <!-- Step 3 Hoàn tất -->
+                    <mat-step>
+                        <ng-template matStepLabel>Hoàn tất</ng-template>
+                        <p>You are now done.</p>
+                        <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button (click)="stepper.reset()">Reset</button>
+                        </div>
+                    </mat-step>
+                </mat-horizontal-stepper>
+            </div>
+        </div>
+    </div>
+</div>

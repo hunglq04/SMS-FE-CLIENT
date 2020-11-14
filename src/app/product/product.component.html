@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="col-md-12">
+    <h2><b>Sản Phẩm</b> Thịnh Hành</h2>
+</div>
+<mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Tạo kiểu tóc" mat-align-tabs="center">
+        <div class="container-fluid" style="display: flex; justify-content: center;">
+            <div *ngFor="let s of [1,2,3,4,5]">
+                <mat-card class="example-card" style="margin: 20px">
+                    <img mat-card-image style="height: 200px; width: 200px;" src="https://product.hstatic.net/1000306701/product/3_e22d7a064efe451186c4210199d0372a_large.jpg" alt="Photo of a Shiba Inu">
+                    <mat-card-content style="text-align: center;">
+                        <h4>Apple iPad</h4>
+                        <p><span>$369.00</span></p>
+                        <div class="star-rating">
+                            <ul class="list-inline" style="display: flex; justify-content: center;">
+                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                            </ul>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions style="text-align: center;">
+                        <button mat-button>Add to cart</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Chăm sóc tóc">Content 2</mat-tab>
+    <mat-tab label="Chăm sóc da">Content 3</mat-tab>
+    <mat-tab label="Chăm sóc cơ thế">Content 2</mat-tab>
+    <mat-tab label="Chăm sóc râu">Content 3</mat-tab>
+</mat-tab-group>

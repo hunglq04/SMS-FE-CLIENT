@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: 'http://localhost:5000/api',
+  ROLE_ADMIN: 'ROLE_ADMIN',
+  ROLE_MANAGER: 'ROLE_MANAGER',
+  ROLE_CASHIER: 'ROLE_CASHIER',
+  ROLE_STYLIST: 'ROLE_STYLIST',
 };
 
 /*
