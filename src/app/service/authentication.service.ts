@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { RegistRequest } from '../model/registRequest.model';
 
 export class LoginResponse {
   constructor(
@@ -36,6 +37,21 @@ export class AuthenticationService {
   logOut() {
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('token');
+  }
+
+  registAccount(request: RegistRequest) {
+    return this.httpClient.post<void>(`${environment.baseUrl}/register`, request)
+      .toPromise()
+  }
+
+  loginSocial(request: RegistRequest) {
+    return this.httpClient.post<LoginResponse>(`${environment.baseUrl}/login/social`, request)
+      .toPromise()
+      .then(res => {
+        sessionStorage.setItem('username', request.username);
+        sessionStorage.setItem('token', 'Bearer ' + res.token);
+        return res;
+      })
   }
 
   extractUserRole(roles) {

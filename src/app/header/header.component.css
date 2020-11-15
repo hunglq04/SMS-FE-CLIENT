@@ -1,8 +1,13 @@
 a {
-  font-family: Oswald;
-  font-weight: 500;
-  text-transform: uppercase;
-  font-size: 1rem;
-  color: #000 !important;
-  /* font-feature-settings: "ss01" on; */
+    font-family: Oswald;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 1rem;
+    color: #000 !important;
+    /* font-feature-settings: "ss01" on; */
+}
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #333333 !important;
 }
