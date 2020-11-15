@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -6,13 +6,17 @@ import { AuthenticationService } from '../service/authentication.service';
 import { SocialUser } from 'angularx-social-login';
 import { SocialAuthService } from 'angularx-social-login';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
+import { RegistRequest } from '../model/registRequest.model';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-
+export class LoginComponent implements OnInit, OnChanges {
+  @Input()
+  username: string;
+  @Input()
+  password: string;
   loginForm: FormGroup;
   isShowError = false;
   user: SocialUser;
@@ -23,16 +27,30 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: SocialAuthService
   ) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loginForm.setValue({
+      username: changes.username.currentValue,
+      password: changes.password.currentValue
+    })
+  }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: [this.username, Validators.required],
+      password: [this.password, Validators.required]
     });
     this.authService.authState.subscribe((user) => {
       this.user = user;
-      console.log(this.user);
       this.loggedIn = (user != null);
+      if (user != null) {
+        let request = new RegistRequest();
+        request.username = user.email || 'facebook-' + user.id;
+        request.password = 'social-' + user.id;
+        request.name = user.name;
+        this.loginService.loginSocial(request)
+          .then(res => window.location.href = '/')
+          .catch(err => console.log(err));
+      }
     });
   }
 
@@ -55,18 +73,12 @@ export class LoginComponent implements OnInit {
     }
     this.loginService.authenticate(this.loginForm.controls.username.value, this.loginForm.controls.password.value)
       .then(res => {
-        let role = this.loginService.extractUserRole(res.roles);
-        if (role) {
-          if (localStorage.getItem('test') == null) {
-            window.location.href = '/';
-          }
-          else
-          {
-            window.location.href
-            localStorage.removeItem('test');
-          }
-        } else {
-          this.isShowError = true;
+        if (localStorage.getItem('test') == null) {
+          window.location.href = '/';
+        }
+        else {
+          window.location.href = '/booking';
+          localStorage.removeItem('test');
         }
       }).catch(err => {
         if (err.status) {

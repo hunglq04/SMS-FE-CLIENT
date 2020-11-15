@@ -41,14 +41,28 @@
             <div *ngIf="isBooking" class="alert alert-primary mb-2">
                 <a class="text-danger close" data-dismiss="alert" (click)="isBooking = false"></a> Đăng nhập để đặt lịch
             </div>
-            <app-login></app-login>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            <ng-template matTabContent>
+
+            </ng-template>
+            <mat-tab-group animationDuration="0ms" selectedIndex="0" mat-stretch-tabs class="mat-elevation-z4" #tabs>
+                <mat-tab label="Đăng nhập">
+                    <div class="mat-elevation-z4">
+                        <app-login [username]="username" [password]="password"></app-login>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Đăng kí">
+                    <div class="mat-elevation-z4">
+                        <app-sign-up (signUp)="signUp($event)"></app-sign-up>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+        <div class="modal-footer">
+            <button type="button" (click)="btnLogin()" class="btn btn-danger">Close</button>
         </div>
     </div>
 </div>
 <div class="fixed-bottom">
-    <!-- <a *ngIf="!isLogin" (click)="bookingclick()" style="float: right;" class="btn btn-success" data-toggle="modal" data-target="#myModal" role="button">Đặt lịch</a> -->
-    <a style="float: right;" class="btn btn-success" href="/booking" role="button">Đặt lịch</a>
+    <a *ngIf="!isLogin" (click)="bookingclick()" style="float: right;" class="btn btn-success" data-toggle="modal" data-target="#myModal" role="button">Đặt lịch</a>
+    <a *ngIf="isLogin" style="float: right;" class="btn btn-success" href="/booking" role="button">Đặt lịch</a>
 </div>

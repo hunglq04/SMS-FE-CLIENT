@@ -47,6 +47,7 @@ import {
 import { BookingStylistComponent } from './booking-stylist/booking-stylist.component';
 import { BookingSalonComponent } from './booking-salon/booking-salon.component';
 import { BookingServiceComponent } from './booking-service/booking-service.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { BookingServiceComponent } from './booking-service/booking-service.compo
     BookingStylistComponent,
     BookingSalonComponent,
     BookingServiceComponent,
+    SignUpComponent,
 
   ],
   imports: [

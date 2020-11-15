@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -7,13 +7,16 @@ import { Router, RouterLink } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild('tabs', {static: false}) tabs;
   isLogin = true;
+  username = '';
+  password = '';
+  isBooking = true;
+
   constructor(
     private router: Router,
 
   ) { }
-  isBooking = true;
-  username = '';
   checkLoggedAccount(username) {
     if (username === null) {
       return false;
@@ -25,6 +28,7 @@ export class HeaderComponent implements OnInit {
     window.location.reload();
   }
   btnLogin() {
+    this.tabs.realignInkBar();
     this.isBooking = false;
     localStorage.removeItem('test');
   }
@@ -42,6 +46,13 @@ export class HeaderComponent implements OnInit {
     else {
       this.isLogin = false;
     }
+  }
+
+  signUp(loginInfo) {
+    console.log(loginInfo);
+    this.tabs.selectedIndex = 0;
+    this.username = loginInfo.username;
+    this.password = loginInfo.password;
   }
 
 }

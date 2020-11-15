@@ -10,3 +10,8 @@ a {
 button {
     font-family: 'Times New Roman', Times, serif !important;
 }
+
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #333333 !important;
+}
