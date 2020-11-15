@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -12,9 +12,11 @@ import { Salon } from '../model/salon.model';
   styleUrls: ['./booking-salon.component.css']
 })
 export class BookingSalonComponent implements OnInit {
+  @Output() isSelected = new EventEmitter();
   salonFormGroup: FormGroup;
   salons: Array<Salon>;
   filteredSalon: Observable<Array<Salon>>;
+  salon = new Salon();
   constructor(
     private fb: FormBuilder,
     private salonService: SalonService
@@ -25,7 +27,7 @@ export class BookingSalonComponent implements OnInit {
       salon: ['', Validators.required],
     });
     await this.getSalon();
-    console.log("abc", this.salons);
+    localStorage.removeItem("salon");
   }
 
   displayFn(option: any): string {
@@ -50,14 +52,10 @@ export class BookingSalonComponent implements OnInit {
       })
   }
   saveSalon() {
-    // if (localStorage.getItem("salon") == null) {
-    //   localStorage.setItem("salon", this.salonFormGroup.get('salon').value);
-    // }
-    // else{
-    //   localStorage.removeItem("salon");
-    //   localStorage.setItem("salon", this.salonFormGroup.get('salon').value);
-    // }
-    localStorage.setItem("salon",JSON.stringify(this.salonFormGroup.get('salon').value))
-    console.log("salon",localStorage.getItem("salon") );
+    if (this.salonFormGroup.get('salon').value != '') {
+      this.salon = this.salonFormGroup.get('salon').value
+      sessionStorage.setItem('salon', this.salonFormGroup.get('salon').value.id)
+      this.isSelected.emit(this.salon);
+    }
   }
 }

@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { StylistService } from '../service/stylist.service';
 import { Stylist } from '../model/stylist.model';
 
@@ -10,38 +8,15 @@ import { Stylist } from '../model/stylist.model';
   styleUrls: ['./booking-stylist.component.css']
 })
 export class BookingStylistComponent implements OnInit {
-  stylists: any;
-  stylist: any;
-  stylistFormGroup: FormGroup;
-
-  constructor(
-    private fb: FormBuilder,
-    private stylistService: StylistService
-  ) { }
-
-  getStylist() {
-    return this.stylistService.getSylist()
-      .then(res => {
-        this.stylists = res;
-      })
-  }
-  pickStylist() {
-    // this.stylists.forEach(function (item, index, array) {
-    //   array[0].stylishSchedule['09:00'] = false;
-    //   console.log(array[0].stylishSchedule['09:00'])
-    // });
-    // this.stylist = this.stylists[0];
-    // this.stylist.stylishSchedule['08:00'] = false;
-  }
-  pickStylist2() {
-    console.log("a");
-  }
-  testClick() {
-    // this.stylists.stylishSchedule['08:30'] = false;
-    console.log(this.stylists)
-    console.log(this.stylists[0].stylishSchedule['08:30'])
-    this.stylists[0].stylishSchedule['08:30'] = false;
-  }
+  @Output() isSelectedDate = new EventEmitter();
+  @Output() isSelectedStylist = new EventEmitter();
+  @Output() isSelectedHour = new EventEmitter();
+  stylists: Array<Stylist>;
+  showtimeNow = new Date().toLocaleDateString();
+  showtimeTomorow
+  showtimeTomorow2
+  showtime
+  checkPickDate = false;
   slot1 = true;
   slot2 = true;
   slot3 = true;
@@ -65,9 +40,37 @@ export class BookingStylistComponent implements OnInit {
   slot21 = true;
   slot22 = true;
   slot23 = true;
-  showtimeNow
-  showtimeTomorow
-  showtimeTomorow2
+  salonId = sessionStorage.getItem('salon')
+  constructor(
+    private stylistService: StylistService
+  ) { }
+
+  getStylist() {
+    if (this.checkPickDate == false) {
+      var time = this.formatDate(this.showtimeNow)
+    }
+    else {
+      time = this.formatDate(this.showtime)
+    }
+    console.log('Ngay', time)
+    return this.stylistService.getSylist(this.salonId, time)
+      .then(res => {
+        this.stylists = res;
+        console.log(this.stylists)
+      })
+  }
+  pickDay(isSelectedDate) {
+    this.isSelectedDate.emit(isSelectedDate)
+    this.checkPickDate = true;
+    this.showtime = isSelectedDate;
+    this.getStylist();
+  }
+  pickStylist(isSelectedStylist) {
+    this.isSelectedStylist.emit(isSelectedStylist)
+  }
+  pickHour(isSelectedHour) {
+    this.isSelectedHour.emit(isSelectedHour)
+  }
   compareTime() {
     var settimeNow;
     var timeNowMiniute;
@@ -90,8 +93,6 @@ export class BookingStylistComponent implements OnInit {
     else {
       settimeNow = timeNow.getHours().toString() + timeNow.getMinutes().toString()
     }
-    console.log('abc', timeTomorow)
-    console.log("2", timeTomorow2)
 
     if (settimeNow > 800)
       this.slot1 = false;
@@ -140,12 +141,12 @@ export class BookingStylistComponent implements OnInit {
     if (settimeNow > 2030)
       this.slot23 = false;
   }
-
+  formatDate(date) {
+    if (!date) return "";
+    return date.split("/").reverse().join("-");
+  }
   async ngOnInit() {
-    this.stylistFormGroup = this.fb.group({
-    });
-    await this.getStylist();
-    this.pickStylist();
+    this.getStylist();
     this.compareTime();
   }
 }

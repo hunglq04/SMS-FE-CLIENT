@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Stylist } from '../model/stylist.model'
+import { Booking } from '../model/booking.model'
+
 @Injectable({
   providedIn: 'root'
 })
-export class StylistService {
+export class BookingService {
 
   constructor(
     private httpClient: HttpClient
   ) {}
 
-  getSylist(salonId, date) {
-    return this.httpClient.get<Array<Stylist>>(`${environment.baseUrl}/client/get-all-stylish?salonId=${salonId}&date=${date}`)
+  postBooking(booking: Booking){
+    return this.httpClient.post<Booking>(`${environment.baseUrl}/customer/booking`, booking)
               .toPromise();
   }
 }

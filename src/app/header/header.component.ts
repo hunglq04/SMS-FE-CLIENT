@@ -38,11 +38,9 @@ export class HeaderComponent implements OnInit {
     if (this.checkLoggedAccount(sessionStorage.getItem('username'))) {
       this.isLogin = true;
       this.username = sessionStorage.getItem('username');
-      console.log('Dang nhap thanh cong' , this.username);
     }
     else {
       this.isLogin = false;
-      console.log('DNTB');
     }
   }
 

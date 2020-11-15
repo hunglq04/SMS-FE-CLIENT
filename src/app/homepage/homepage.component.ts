@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { ServiceService } from '../service/service.service';
+import { Service } from '../model/service.model';
+
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -8,32 +12,27 @@ import { Router } from '@angular/router';
 export class HomepageComponent implements OnInit {
   isLogin = true;
   isShowLogin = false;
-  user = {
-    token: '',
-    roles: ''
-  };
+  services: Array<Service>;
 
-  checkLoggedAccount(user) {
-    if (user === null) {
-      return false;
-    }
-    return true;
-  }
-  constructor() { }
-
-  // bookingclick(){
-  //   localStorage.setItem('test', 'test');
-  //   console.log(localStorage.getItem('test'));
-  // }
+  constructor(
+    private serviceService: ServiceService
+  ) { }
 
   ngOnInit(): void {
-    if (this.checkLoggedAccount(localStorage.getItem('user'))) {
+    if (sessionStorage.getItem('username') != null) {
       this.isLogin = true;
-      this.user = JSON.parse(localStorage.getItem('user'));
       this.isShowLogin = true;
     }
     else {
       this.isLogin = false;
     }
+    this.getService();
+  }
+
+  getService() {
+    return this.serviceService.getService()
+      .then(res => {
+          this.services = res;
+      })
   }
 }

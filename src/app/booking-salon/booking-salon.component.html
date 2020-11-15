@@ -1,14 +1,12 @@
 <form [formGroup]="salonFormGroup">
-    <ng-template matStepLabel>Chọn Salon</ng-template>
     <mat-form-field appearance="fill" style="width: 380px;">
         <mat-label>Chọn Salon</mat-label>
         <input type="text" matInput placeholder="Địa chỉ" aria-label="Adress" [matAutocomplete]="auto" formControlName="salon" required>
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let option of filteredSalon | async" [value]="option">
+            <mat-option (click)="saveSalon()" *ngFor="let option of filteredSalon | async" [value]="option">
                 <img class="example-option-img" aria-hidden [src]="option.street" height="25">
                 <span>{{option.street}}, {{option.district}}, {{option.ward}}, {{option.province}}</span>
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
-    <button mat-button (click)="saveSalon()" class="btn btn-primary" cdkFocusInitial>Lưu</button>
 </form>

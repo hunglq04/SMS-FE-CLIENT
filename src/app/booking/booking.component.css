@@ -64,3 +64,114 @@
     max-width: 25%;
     margin-bottom: 3px;
 }
+
+
+/* Show booking */
+
+.affix {
+    font-size: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #151515;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+
+.affix .text-show {
+    color: rgb(255, 255, 255);
+    font-size: 13px;
+    font-family: 'Times New Roman', Times, serif;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btn,
+.pointer {
+    cursor: pointer;
+}
+
+.content-center-middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.affix .item:not(:last-child),
+.affix .text-show {
+    border-bottom: 1px solid #ffffff;
+}
+
+.affix .text-show span {
+    margin: 0 10px;
+}
+
+.affix .content-info-booking {
+    padding: 16px 16px 0;
+    font-size: 14px;
+}
+
+.affix .content-info-booking .box-item {
+    margin-bottom: 20px;
+}
+
+.affix .content-info-booking .box-item .title {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+}
+
+.affix .content-info-booking .box-item .content {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+}
+
+.item-center {
+    align-items: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.affix .content-info-booking .box-item {
+    margin-bottom: 20px;
+}
+
+.ant-row {
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    display: flex;
+}
+
+.ant-col {
+    position: relative;
+    max-width: 100%;
+    min-height: 1px;
+}
+
+.ant-col-8 {
+    /* display: block; */
+    -ms-flex: 0 0 33.33333333%;
+    flex: 0 0 33.33333333%;
+    max-width: 33.33333333%;
+}
+
+.affix .content-info-booking .box-service {
+    max-height: calc(90vh - 270px);
+    overflow-y: auto;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(255, 255, 255);
+}
+
+@media screen and (min-width: 768px) {
+    .affix .content-info-booking .box-service .service-list {
+        padding-right: 5px;
+    }
+}
+
+.affix .content-info-booking .box-service .service-list {
+    max-height: calc(91vh - 320px);
+    overflow-y: auto;
+}

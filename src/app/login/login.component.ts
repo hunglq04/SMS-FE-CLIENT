@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
           }
           else
           {
-            window.location.href = '/booking';
+            window.location.href
             localStorage.removeItem('test');
           }
         } else {

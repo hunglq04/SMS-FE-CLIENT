@@ -14,6 +14,8 @@ import { LoadingService } from './loading/loading.service';
 import { LoadingInterceptor } from './loading/loading.interceptor';
 import { SalonService } from './service/salon.service';
 import { StylistService } from './service/stylist.service';
+import { ServiceService } from './service/service.service';
+import { BookingService } from './service/booking.service';
 // Component
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -32,12 +34,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { FlexLayoutModule } from '@angular/flex-layout';
 // Social
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {
   GoogleLoginProvider,
   FacebookLoginProvider,
-  AmazonLoginProvider,
 } from 'angularx-social-login';
 import { BookingStylistComponent } from './booking-stylist/booking-stylist.component';
 import { BookingSalonComponent } from './booking-salon/booking-salon.component';
@@ -72,6 +77,10 @@ import { BookingServiceComponent } from './booking-service/booking-service.compo
     MatButtonModule,
     MatDialogModule,
     MatTabsModule,
+    MatGridListModule,
+    MatIconModule,
+    MatExpansionModule,
+    FlexLayoutModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     OverlayModule,
@@ -84,6 +93,8 @@ import { BookingServiceComponent } from './booking-service/booking-service.compo
     LoadingService,
     SalonService,
     StylistService,
+    ServiceService,
+    BookingService,
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -97,13 +108,7 @@ import { BookingServiceComponent } from './booking-service/booking-service.compo
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('953543585017412'),
-          },
-          {
-            id: AmazonLoginProvider.PROVIDER_ID,
-            provider: new AmazonLoginProvider(
-              'clientId'
-            ),
+            provider: new FacebookLoginProvider('2490283977735160'),
           },
         ],
       } as SocialAuthServiceConfig,
