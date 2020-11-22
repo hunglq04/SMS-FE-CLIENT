@@ -37,7 +37,7 @@
     </div>
 </nav>
 <div class="modal" id="myModal">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div *ngIf="isBooking" class="alert alert-primary mb-2">
                 <a class="text-danger close" data-dismiss="alert" (click)="isBooking = false"></a> Đăng nhập để đặt lịch
@@ -64,6 +64,6 @@
     </div>
 </div>
 <div class="fixed-bottom">
-    <a *ngIf="!isLogin" (click)="bookingclick()" style="float: right;" class="btn btn-success" data-toggle="modal" data-target="#myModal" role="button">Đặt lịch</a>
-    <a *ngIf="isLogin" style="float: right;" class="btn btn-success" href="/booking" role="button">Đặt lịch</a>
+    <!-- <a *ngIf="!isLogin" (click)="bookingclick()" style="float: right;" class="btn btn-success" data-toggle="modal" data-target="#myModal" role="button">Đặt lịch</a> -->
+    <a [hidden]="isBooking" style="float: right;" class="btn btn-success" href="/booking" role="button">Đặt lịch</a>
 </div>

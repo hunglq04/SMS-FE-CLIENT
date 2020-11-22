@@ -7,11 +7,11 @@ import { Router, RouterLink } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  @ViewChild('tabs', {static: false}) tabs;
+  @ViewChild('tabs', { static: false }) tabs;
   isLogin = true;
   username = '';
   password = '';
-  isBooking = true;
+  isBooking = false;
 
   constructor(
     private router: Router,
@@ -32,11 +32,6 @@ export class HeaderComponent implements OnInit {
     this.isBooking = false;
     localStorage.removeItem('test');
   }
-  bookingclick() {
-    localStorage.setItem('test', 'test');
-    console.log(localStorage.getItem('test'));
-    this.isBooking = true;
-  }
 
   ngOnInit() {
     if (this.checkLoggedAccount(sessionStorage.getItem('username'))) {
@@ -45,6 +40,12 @@ export class HeaderComponent implements OnInit {
     }
     else {
       this.isLogin = false;
+    }
+    if (window.location.href == 'http://localhost:4200/') {
+      this.isBooking = false;
+    }
+    else {
+      this.isBooking = true;
     }
   }
 

@@ -4,4 +4,5 @@ export class Salon {
   ward: string;
   district: string;
   province: string;
+  image: string;
 }

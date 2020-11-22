@@ -75,10 +75,11 @@ export class LoginComponent implements OnInit, OnChanges {
     this.loginService.authenticate(this.loginForm.controls.username.value, this.loginForm.controls.password.value)
       .then(res => {
         if (localStorage.getItem('test') == null) {
-          window.location.href = '/';
+          window.location.href = window.location.href;
         }
         else {
-          window.location.href = '/booking';
+          sessionStorage.setItem('isBookingLogin', 'true');
+          window.location.href = window.location.href;
           localStorage.removeItem('test');
         }
       }).catch(err => {

@@ -7,7 +7,7 @@ import {
   HttpResponse
 } from '@angular/common/http';
 import { Router } from '@angular/router';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/throw';
@@ -20,6 +20,17 @@ export class LoadingInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token: string = sessionStorage.getItem('token');
+
+    if (token) {
+      req = req.clone({ headers: req.headers.set('Authorization', token) });
+    }
+
+    if (!req.headers.has('Content-Type')) {
+      req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
+    }
+
+    req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
     let loadingRef: LoadingOverlayRef;
 
     // This is a little hacky and related to change detection (ExpressionChangedAfterItHasBeenCheckedError).
@@ -36,7 +47,11 @@ export class LoadingInterceptor implements HttpInterceptor {
       if (loadingRef) {
         loadingRef.close();
       }
-
+      if (error.status === 403) {
+        window.location.href = '/login'
+        sessionStorage.clear();
+      }
+      console.error('Error when call BE', error);
       return Observable.throw(error);
     });
   }

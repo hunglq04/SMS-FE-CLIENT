@@ -16,6 +16,7 @@ import { SalonService } from './service/salon.service';
 import { StylistService } from './service/stylist.service';
 import { ServiceService } from './service/service.service';
 import { BookingService } from './service/booking.service';
+
 // Component
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -26,7 +27,7 @@ import { BookingComponent } from './booking/booking.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ProductComponent } from './product/product.component';
 // Template
-import { MatStepperModule, MatHorizontalStepper, MatStep } from '@angular/material/stepper';
+import { MatStepperModule, MatHorizontalStepper } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -99,6 +100,7 @@ import { BookingHistoryComponent } from './booking-history/booking-history.compo
     StylistService,
     ServiceService,
     BookingService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -116,6 +118,7 @@ import { BookingHistoryComponent } from './booking-history/booking-history.compo
           },
         ],
       } as SocialAuthServiceConfig,
+
     }
 
   ],
