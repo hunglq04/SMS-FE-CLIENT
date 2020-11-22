@@ -53,3 +53,9 @@ a {
 * {
     font-family: 'Times New Roman', Times, serif;
 }
+
+.img-crop {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+}

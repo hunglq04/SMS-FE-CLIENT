@@ -16,4 +16,9 @@ export class BookingService {
     return this.httpClient.post<Booking>(`${environment.baseUrl}/customer/booking`, booking)
               .toPromise();
   }
+
+  getBookingHistory() {
+    return this.httpClient.get<any>(`${environment.baseUrl}/customer/booking`)
+      .toPromise();
+  }
 }

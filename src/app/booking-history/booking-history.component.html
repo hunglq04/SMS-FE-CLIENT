@@ -1,0 +1,79 @@
+<div class="container mt-4">
+    <h2>Lịch sử đặt lịch</h2>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Ngày đặt</th>
+                <th scope="col">Salon</th>
+                <th scope="col">Dịch vụ</th>
+                <th scope="col">Tổng tiền</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let booking of history; let i = index">
+                <td scope="row">{{booking.dateTime}}</td>
+                <td>{{booking.salon.street}}, {{booking.salon.district}}, {{booking.salon.ward}}, {{booking.salon.province}}</td>
+                <td>
+                    <p *ngFor="let service of booking.services">{{service.name}} ({{ service.price | currency: "VND" }})</p>
+                </td>
+                <td>{{booking.services | totalServicePrice | currency: "VND" }}</td>
+                <td>{{booking.bookingStatus}}</td>
+                <td>
+                    <a class="btn btn-outline-success btn-sm" (click)="showModal(i)" data-toggle="modal" data-target="#bookingDetail">Xem chi tiết</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal Booking Detail-->
+    <div class="modal fade" id="bookingDetail" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">THÔNG TIN LỊCH ĐẶT</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <span class="w-title">
+                            <img src="../../assets/images/icons/pin-location.svg" alt=""> 
+                            <strong class="text-secondary">&nbsp;SALON&nbsp;</strong> 
+                        </span>
+                    </div>
+                    <div class="mt-1">{{salon}}</div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="text-secondary"><img src="../../assets/images/icons/calendar.svg">&nbsp; <strong>NGÀY</strong></div>
+                            <strong class="text-danger">{{date}}</strong>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-secondary"><img src="../../assets/images/icons/time.svg">&nbsp; <strong>GIỜ</strong></div>
+                            <strong class="text-danger">{{time}}</strong>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-secondary"><img src="../../assets/images/icons/user-2.svg">&nbsp; <strong>STYLIST</strong></div>
+                            <strong class="text-danger">{{stylist}}</strong>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <div class="text-secondary"><img src="../../assets/images/icons/stars-24px.svg">&nbsp; <strong>DỊCH VỤ</strong></div>
+                        <ng-container *ngFor="let service of services">
+                            <div class="my-2">
+                                <img class="img-fluid" style="width: 120px;" [src]="service.bookingImage"> {{service.name}} - {{service.price | currency : "VND"}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-outline-danger">HỦY LỊCH</a>
+                        <a type="button" routerLink="/booking" data-dismiss="modal" class="btn btn-warning">ĐỔI LỊCH</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -49,7 +49,10 @@ import { BookingStylistComponent } from './booking-stylist/booking-stylist.compo
 import { BookingSalonComponent } from './booking-salon/booking-salon.component';
 import { BookingServiceComponent } from './booking-service/booking-service.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { BookingHistoryComponent } from './booking-history/booking-history.component';
 
+//Custom pipe
+import { TotalServicePricePipe } from './pipe/total-service-price.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +67,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     BookingSalonComponent,
     BookingServiceComponent,
     SignUpComponent,
-
+    BookingHistoryComponent,
+    TotalServicePricePipe
   ],
   imports: [
     BrowserModule,
