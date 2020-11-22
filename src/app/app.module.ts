@@ -51,6 +51,8 @@ import { BookingServiceComponent } from './booking-service/booking-service.compo
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { BookingHistoryComponent } from './booking-history/booking-history.component';
 
+//Custom pipe
+import { TotalServicePricePipe } from './pipe/total-service-price.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +68,7 @@ import { BookingHistoryComponent } from './booking-history/booking-history.compo
     BookingServiceComponent,
     SignUpComponent,
     BookingHistoryComponent,
-
+    TotalServicePricePipe
   ],
   imports: [
     BrowserModule,

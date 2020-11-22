@@ -8,18 +8,34 @@ import { BookingService } from '../service/booking.service';
 })
 export class BookingHistoryComponent implements OnInit {
 
+  history = [];
+  salon = '';
+  date = '';
+  time = '';
+  stylist = '';
+  services = [];
+
   constructor(
     private bookingService: BookingService
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getBooKingHistory();
   }
 
-  getBooKingHistory() {
+  async getBooKingHistory() {
     this.bookingService.getBookingHistory()
-      .then(res => console.log(res))
+      .then(res => this.history = res)
       .catch(err => console.log(err));
+  }
+
+  showModal(index) {
+    let salonInfo = this.history[index].salon;
+    this.salon = [salonInfo.street, salonInfo.district, salonInfo.ward, salonInfo.province].join(", ");
+    this.date = this.history[index].dateTime.split(' ')[0];
+    this.time = this.history[index].dateTime.split(' ')[1];
+    this.stylist = this.history[index].stylist;
+    this.services = this.history[index].services;
   }
 
 }

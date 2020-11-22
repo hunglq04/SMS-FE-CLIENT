@@ -49,3 +49,9 @@ a {
 .red-float.mat-focused label {
     background-color: red !important;
 }
+
+.img-crop {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+}
