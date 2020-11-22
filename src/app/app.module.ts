@@ -48,6 +48,7 @@ import { BookingStylistComponent } from './booking-stylist/booking-stylist.compo
 import { BookingSalonComponent } from './booking-salon/booking-salon.component';
 import { BookingServiceComponent } from './booking-service/booking-service.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { BookingHistoryComponent } from './booking-history/booking-history.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     BookingSalonComponent,
     BookingServiceComponent,
     SignUpComponent,
+    BookingHistoryComponent,
 
   ],
   imports: [

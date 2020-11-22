@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit, OnChanges {
     private authService: SocialAuthService
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
+    if (!changes.username.currentValue || !changes.password.currentValue) return;
     this.loginForm.setValue({
       username: changes.username.currentValue,
       password: changes.password.currentValue
