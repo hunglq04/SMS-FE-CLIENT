@@ -1,6 +1,6 @@
 <ng-template matStepLabel>
     Chọn Stylist</ng-template>
-<div class="card">
+<div class="card" style="margin-bottom: 60px;">
     <h2 class="card-title" style="text-transform: uppercase; color: rgb(0, 0, 0); padding: 10px;">Xem thông tin stylist</h2>
     <mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4 invisible-tabs">
         <mat-tab>
@@ -15,7 +15,7 @@
                     <mat-tab>
                         <ng-template mat-tab-label>
                             <div (click)="pickStylist(stylist)">
-                                <img style="height: 60px;" src="../../assets/images/icon.png" alt="logo">
+                                <img style="height: 60px;" src="{{stylist.avatar}}" alt="logo">
                                 <br>
                                 <span>{{stylist.name}}</span>
                             </div>
@@ -42,6 +42,9 @@
                                              </button>
                             <button (click)="pickHour('11:00')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['11:00'] || !slot7}" class="test">
                                               11:00
+                                             </button>
+                            <button (click)="pickHour('11:30')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['11:30'] || !slot24}" class="test">
+                                              11:30
                                              </button>
                             <button (click)="pickHour('13:00')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['13:00'] || !slot8}" class="test">
                                               13:00
@@ -88,6 +91,9 @@
                             <button (click)="pickHour('20:00')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['20:00'] || !slot22}" class="test">
                                               20:00
                                              </button>
+                            <button (click)="pickHour('20:00')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['20:30'] || !slot23}" class="test">
+                                              20:00
+                                             </button>
                         </div>
                     </mat-tab>
                 </div>
@@ -105,7 +111,7 @@
                     <mat-tab>
                         <ng-template mat-tab-label>
                             <div (click)="pickStylist(stylist)">
-                                <img style="height: 60px;" src="../../assets/images/icon.png" alt="logo">
+                                <img style="height: 60px;" src="{{stylist.avatar}}" alt="logo">
                                 <br>
                                 <span>{{stylist.name}}</span>
                             </div>
@@ -131,6 +137,9 @@
                                            </button>
                             <button (click)="pickHour('11:00')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['11:00']}" class="test">
                                             11:00
+                                           </button>
+                            <button (click)="pickHour('11:30')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['11:30']}" class="test">
+                                            11:30
                                            </button>
                             <button (click)="pickHour('13:00')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['13:00']}" class="test">
                                             13:00
@@ -177,6 +186,9 @@
                             <button (click)="pickHour('20:00')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['20:00']}" class="test">
                                             20:00
                                            </button>
+                            <button (click)="pickHour('20:30')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['20:30']}" class="test">
+                                            20:30
+                                           </button>
                         </div>
                     </mat-tab>
                 </div>
@@ -196,7 +208,7 @@
                     <mat-tab>
                         <ng-template mat-tab-label>
                             <div (click)="pickStylist(stylist)">
-                                <img style="height: 60px;" src="../../assets/images/icon.png" alt="logo">
+                                <img style="height: 60px;" src="{{stylist.avatar}}" alt="logo">
                                 <br>
                                 <span>{{stylist.name}}</span>
                             </div>
@@ -223,6 +235,9 @@
                                          </button>
                             <button (click)="pickHour('11:00')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['11:00']}" class="test">
                                           11:00
+                                         </button>
+                            <button (click)="pickHour('11:30')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['11:30']}" class="test">
+                                          11:30
                                          </button>
                             <button (click)="pickHour('13:00')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['13:00']}" class="test">
                                           13:00
@@ -268,6 +283,9 @@
                                          </button>
                             <button (click)="pickHour('20:00')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['20:00']}" class="test">
                                           20:00
+                                         </button>
+                            <button (click)="pickHour('20:30')" [ngClass]="{'disableDiv': !stylist.stylishSchedule['20:30']}" class="test">
+                                          20:30
                                          </button>
                         </div>
                     </mat-tab>

@@ -11,7 +11,7 @@
                     <div class="row">
                         <div *ngFor="let service of services let i = index">
                             <div *ngIf="service.recommend">
-                                <a type="button" (click)="checkisSeclect(i)" (click)="pickService(service.id, i)">
+                                <a type="button" (click)="pickService(service, i)">
                                     <div class="selectService">
                                         <img style="width: 398px; padding: 5px; height: 150px;" src="{{service.bookingImage}}" data-holder-rendered="true">
                                         <button class="btnSelect">{{!isSelect[i]? 'Chọn' : 'Đã chọn'}}</button>
@@ -35,7 +35,7 @@
                     <div class="row">
                         <div *ngFor="let service of services let i = index">
                             <div *ngIf="service.serviceType == 'Combo'">
-                                <a type="button" (click)="checkisSeclect(i)" (click)="pickService(service.id, i)">
+                                <a type="button" (click)="pickService(service, i)">
                                     <div class="selectService">
                                         <img style="width: 398px; padding: 5px; height: 150px;" src="{{service.bookingImage}}" data-holder-rendered="true">
                                         <button class="btnSelect">{{!isSelect[i]? 'Chọn' : 'Đã chọn'}}</button>
@@ -59,7 +59,7 @@
                     <div class="row">
                         <div *ngFor="let service of services let i = index">
                             <div *ngIf="service.serviceType == 'Uốn' || service.serviceType == 'Dưỡng' || service.serviceType == 'Nhuộm'">
-                                <a type="button" (click)="checkisSeclect(i)" (click)="pickService(service.id, i)">
+                                <a type="button" (click)="pickService(service, i)">
                                     <div class="selectService">
                                         <img style="width: 398px; padding: 5px; height: 150px;" src="{{service.bookingImage}}" data-holder-rendered="true">
                                         <button class="btnSelect">{{!isSelect[i]? 'Chọn' : 'Đã chọn'}}</button>
@@ -78,12 +78,12 @@
             <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2"><strong class="text-uppercase">Chăm sóc da</strong><i class="fa fa-angle-down"></i></p>
         </a>
         <div>
-            <div class="card">
+            <div class="card" style="margin-bottom: 60px;">
                 <div class="card-body">
                     <div class="row">
                         <div *ngFor="let service of services let i = index">
                             <div *ngIf="service.serviceType == 'Chăm sóc da'">
-                                <a type="button" (click)="checkisSeclect(i)" (click)="pickService(service.id, i)">
+                                <a type="button" (click)="pickService(service, i)">
                                     <div class="selectService">
                                         <img style="width: 398px; padding: 5px; height: 150px;" src="{{service.bookingImage}}" data-holder-rendered="true">
                                         <button class="btnSelect">{{!isSelect[i]? 'Chọn' : 'Đã chọn'}}</button>

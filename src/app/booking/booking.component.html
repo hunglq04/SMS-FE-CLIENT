@@ -1,94 +1,139 @@
 <app-header></app-header>
-<div class="container" style="margin-top: 20px;">
-    <div class="col-8 offset-2">
-        <div class="card">
-            <!-- Step by step -->
-            <div class="card-header">
-                <mat-horizontal-stepper linear #stepper>
-                    <!-- Step 1 Chọn địa chỉ -->
-                    <mat-step [completed]="isCompletedSalon">
-                        <ng-template matStepLabel>Chọn Salon</ng-template>
-                        <app-booking-salon (isSelected)="selectSalon($event)"></app-booking-salon>
+
+<div class="card">
+    <!-- Step by step -->
+    <div class="card-header">
+        <mat-horizontal-stepper linear #stepper>
+            <!-- Step 1 Chọn địa chỉ -->
+            <mat-step [completed]="isCompletedSalon">
+                <ng-template matStepLabel>Chọn Salon</ng-template>
+                <app-booking-salon (isSelected)="selectSalon($event)" (click)="!this.isCompletedSalon || stepper.next()"></app-booking-salon>
+            </mat-step>
+            <!-- Step 2 Chọn dịch vụ -->
+            <mat-step [completed]=" isCompletedService">
+                <ng-template matStepLabel>Chọn Dịch Vụ</ng-template>
+                <app-booking-service *ngIf="isCompletedSalon" (isSelected)="selectService($event)"></app-booking-service>
+            </mat-step>
+            <!-- Step 3 Chọn giờ -->
+            <mat-step [completed]="isCompletedStylist">
+                <ng-template matStepLabel>Chọn Stylist</ng-template>
+                <app-booking-stylist *ngIf="isCompletedService" (isSelectedDate)="selectDate($event)" (isSelectedStylist)="selectStylist($event)" (isSelectedHour)="selectHour($event)">
+                </app-booking-stylist>
+            </mat-step>
+            <!-- Step 3 Hoàn tất -->
+            <mat-step>
+                <ng-template matStepLabel>Hoàn tất</ng-template>
+                <div *ngIf="!isLogin" class="col-6 offset-3">
+                    <div class="alert alert-danger mb-2">
+                        <a class="text-success close" data-dismiss="alert">&times;</a> Bạn chưa đăng nhập đăng nhập để đặt lịch
+                        <a (click)="bookingclick()" class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal" role="button">Đăng nhập</a>
+                    </div>
+                </div>
+                <div class="ant-affix">
+                    <div class="affix">
                         <div>
-                            <button mat-button (click)="stepper.next()" mat-raised-button>Next</button>
-                        </div>
-                    </mat-step>
-                    <!-- Step 2 Chọn dịch vụ -->
-                    <mat-step [completed]=" isCompletedService">
-                        <ng-template matStepLabel>Chọn Dịch Vụ</ng-template>
-                        <app-booking-service (isSelected)="selectService($event)"></app-booking-service>
-                        <div>
-                            <button mat-button matStepperPrevious>Back</button>
-                            <button mat-button matStepperNext>Next</button>
-                        </div>
-                    </mat-step>
-                    <!-- Step 3 Chọn giờ -->
-                    <mat-step [completed]="isCompletedStylist">
-                        <ng-template matStepLabel>Chọn Stylist</ng-template>
-                        <app-booking-stylist (isSelectedDate)="selectDate($event)" (isSelectedStylist)="selectStylist($event)" (isSelectedHour)="selectHour($event)">
-                        </app-booking-stylist>
-                        <div>
-                            <button mat-button matStepperPrevious>Back</button>
-                            <button mat-button matStepperNext>Next</button>
-                        </div>
-                    </mat-step>
-                    <!-- Step 3 Hoàn tất -->
-                    <mat-step>
-                        <ng-template matStepLabel>Hoàn tất</ng-template>
-                        <div *ngIf="!isLogin" class="col-6 offset-3">
-                            <div class="alert alert-danger mb-2">
-                                <a class="text-success close" data-dismiss="alert">&times;</a> Đăng nhập để đặt lịch
-                                <a (click)="bookingclick()" class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal" role="button">Đăng nhập</a>
-                            </div>
-                        </div>
-                        <div>
-                            <button mat-button (click)="bookingS()">Lưu</button>
-                        </div>
-                    </mat-step>
-                </mat-horizontal-stepper>
-            </div>
-        </div>
-    </div>
-    <div class="fixed-bottom">
-        <div class="col-8 offset-2">
-            <div class="ant-affix">
-                <div class="affix">
-                    <div>
-                        <div>
-                            <div (click)="isHidden()" class="text-show content-center-middle pointer f-bee"><span role="img"><img src="/static/media/AngleDoubleDownWhite.50f3e274.svg" class="bounceArrowDown" alt=""></span> <span>{{hidden?'Ẩn thông tin' : 'Hiện thông tin'}}</span> <span role="img"><img src="/static/media/AngleDoubleDownWhite.50f3e274.svg" class="bounceArrowDown" alt=""></span></div>
-                            <div class="content-info-booking" [hidden]="!hidden">
-                                <div class="box-item">
-                                    <div class="title flex item-center f-oswald"><img src="/static/media/pin location.3c5f5a08.svg" alt="" class="icon">SALON</div>
-                                    <div class="content f-be">{{this.bookingDetail.salon.street}}, {{this.bookingDetail.salon.ward}}, {{this.bookingDetail.salon.distrist}}, {{this.bookingDetail.salon.province}}</div>
-                                </div>
-                                <div class="box-item">
-                                    <div class="ant-row">
-                                        <div class="ant-col ant-col-8">
-                                            <div class="title flex item-center"><img src="/static/media/calendar.67158d06.svg" alt="" class="icon">NGÀY</div>
-                                            <div class="content"> {{this.bookingDetail.date}}</div>
-                                        </div>
-                                        <div class="ant-col ant-col-8">
-                                            <div class="title flex item-center"><img src="/static/media/time.ffd37a1c.svg" alt="" class="icon">GIỜ</div>
-                                            <div class="content">{{this.bookingDetail.time}}</div>
-                                        </div>
-                                        <div class="ant-col ant-col-8">
-                                            <div class="title flex item-center"><img src="/static/media/user2.00eb2b41.svg" alt="" class="icon">STYLIST</div>
-                                            <div class="content">{{this.bookingDetail.stylistId}} </div>
+                            <div>
+                                <div class="text-show content-center-middle pointer f-bee"><span>Thông tin lịch {{this.countService}}</span></div>
+                                <div class="content-info-booking">
+                                    <div class="box-item">
+                                        <div class="title flex item-center f-oswald"><i class="fas fa-map-marker-alt" style="margin-right: 4px;"></i>SALON</div>
+                                        <div class="content f-be">{{this.bookingDetail.salon.street}} {{this.bookingDetail.salon.ward}} {{this.bookingDetail.salon.distrist}} {{this.bookingDetail.salon.province}}</div>
+                                    </div>
+                                    <div class="box-item">
+                                        <div class="ant-row">
+                                            <div class="ant-col ant-col-8">
+                                                <div class="title flex item-center"><i class="fas fa-calendar-alt" style="margin-right: 4px;"></i>NGÀY</div>
+                                                <div class="content"> {{this.bookingDetail.date}}</div>
+                                            </div>
+                                            <div class="ant-col ant-col-8">
+                                                <div class="title flex item-center"><i class="fas fa-clock" style="margin-right: 4px;"></i>GIỜ</div>
+                                                <div class="content">{{this.bookingDetail.time}}</div>
+                                            </div>
+                                            <div class="ant-col ant-col-8">
+                                                <div class="title flex item-center"><i class="fas fa-user" style="margin-right: 4px;"></i>STYLIST</div>
+                                                <div class="content">{{this.bookingDetail.stylistId}} </div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="box-service">
+                                        <div class="title flex item-center"><i class="fas fa-star" style="margin-right: 4px;"></i>DỊCH VỤ ĐÃ CHỌN</div>
+                                        <div style="display: flex; margin-bottom: 10px;" *ngFor="let service of this.bookingDetail.services let i = index">
+                                            <img style="width:70px; height:30px" src="{{service['bookingImage']}}" alt="">
+                                            <div style="margin-left: 10px;" class="service-list">{{service['name']}}</div>
+                                            <div style="margin-left: 10px;" class="service-list">{{service['price']}} VNĐ</div>
+                                            <div type="button" (click)="deleteService(i)" style="float: right;"><i class="fas fa-minus-circle" style="margin-left: 3px;"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="box-service">
+                                        <div class="title flex item-center"><i class="fas fa-clock" style="margin-right: 4px;"></i>THỜI GIAN</div>
+                                        <div class="service-list">{{this.bookingDetail.duration}} PHÚT</div>
+                                    </div>
+                                    <div class="box-service">
+                                        <div class="title flex item-center"><i class="fas fa-money-check-alt" style="margin-right: 4px;"></i>TỔNG TIỀN</div>
+                                        <div class="service-list">{{this.bookingDetail.price | currency : "VND"}}</div>
+                                    </div>
+                                    <br>
                                 </div>
-                                <div class="box-service">
-                                    <div class="title flex item-center"><img src="/static/media/Service.1133fe79.svg" alt="" class="icon">DỊCH VỤ ĐÃ CHỌN</div>
-                                    <div class="service-list" *ngFor="let service of this.bookingDetail.serviceIds">{{service}}</div>
-                                </div>
-                                <br>
-                            </div>
-                            <div class="buttton-step">
-                                <a type="button" class="btn btn-danger btn-round btn-just-icon" (click)="stepper.previous()">Trở về</a>
-                                <a type="button" class="btn btn-success btn-round btn-just-icon float-right" (click)="stepper.next()">Tiếp tục</a>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div style="text-align: center; margin-bottom: 60px; margin-top:10px;">
+                    <button class="btn-dark" mat-button (click)="stepper.previous()">Trở về</button>
+                    <button class="btn-dark" mat-button (click)="bookingS()">Hoàn tất</button>
+                </div>
+            </mat-step>
+        </mat-horizontal-stepper>
+    </div>
+</div>
+<div [hidden]="!isSelectSalon" class="fixed-bottom">
+    <div class="col-sm-8">
+        <div class="ant-affix">
+            <div class="affix">
+                <div (click)="isHidden()" class="text-show content-center-middle pointer f-bee"> <span>{{hidden?'Ẩn thông tin' : 'Hiện thông tin'}} {{this.countService}}</span><i class="{{hidden?'fas fa-caret-down': 'fas fa-sort-up'}}"></i></div>
+                <div class="content-info-booking" [hidden]="!hidden">
+                    <div class="box-item">
+                        <div class="title flex item-center f-oswald"><i class="fas fa-map-marker-alt" style="margin-right: 4px;"></i>SALON</div>
+                        <div class="content f-be">{{this.bookingDetail.salon.street}} {{this.bookingDetail.salon.ward}} {{this.bookingDetail.salon.distrist}} {{this.bookingDetail.salon.province}}</div>
+                    </div>
+                    <div class="box-item">
+                        <div class="ant-row">
+                            <div class="ant-col ant-col-8">
+                                <div class="title flex item-center"><i class="fas fa-calendar-alt" style="margin-right: 4px;"></i>NGÀY</div>
+                                <div class="content"> {{this.bookingDetail.date}}</div>
+                            </div>
+                            <div class="ant-col ant-col-8">
+                                <div class="title flex item-center"><i class="fas fa-clock" style="margin-right: 4px;"></i>GIỜ</div>
+                                <div class="content">{{this.bookingDetail.time}}</div>
+                            </div>
+                            <div class="ant-col ant-col-8">
+                                <div class="title flex item-center"><i class="fas fa-user" style="margin-right: 4px;"></i>STYLIST</div>
+                                <div class="content">{{this.bookingDetail.stylistId}} </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-service">
+                        <div class="title flex item-center"><i class="fas fa-star" style="margin-right: 4px;"></i>DỊCH VỤ ĐÃ CHỌN</div>
+                        <div style="display: flex; margin-bottom: 10px; border-bottom: 1px solid #ffffff;" *ngFor="let service of this.bookingDetail.services let i = index">
+                            <img style="width:70px; height:30px" src="{{service['bookingImage']}}" alt="">
+                            <div style="margin-left: 10px;" class="service-list">{{service['name']}}</div>
+                            <div style="margin-left: 10px;" class="service-list">{{service['price']}} VNĐ</div>
+                            <div type="button" (click)="deleteService(i)" style="float: right;"><i class="fas fa-minus-circle" style="margin-left: 3px;"></i></div>
+                        </div>
+                    </div>
+                    <div class="box-service">
+                        <div class="title flex item-center"><i class="fas fa-clock" style="margin-right: 4px;"></i>THỜI GIAN</div>
+                        <div class="service-list">{{this.bookingDetail.duration}} PHÚT</div>
+                    </div>
+                    <div class="box-service">
+                        <div class="title flex item-center"><i class="fas fa-money-check-alt" style="margin-right: 4px;"></i>TỔNG TIỀN</div>
+                        <div class="service-list">{{this.bookingDetail.price | currency : "VND"}}</div>
+                    </div>
+                    <br>
+                </div>
+                <div class="button-booking">
+                    <a type="button" (click)="stepper.previous()">Trở về</a>
+                    <a type="button" class="float-right" (click)="next()" (click)="stepper.next()">Tiếp tục</a>
                 </div>
             </div>
         </div>

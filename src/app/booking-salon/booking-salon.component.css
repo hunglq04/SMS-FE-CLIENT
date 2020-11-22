@@ -1,0 +1,9 @@
+.row {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+}
+
+.activeSalon div {
+    /* border: 2px solid black;
+    color: rgb(0, 0, 0); */
+}

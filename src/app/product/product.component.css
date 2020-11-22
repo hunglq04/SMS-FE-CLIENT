@@ -18,3 +18,7 @@ h4 {
     font-size: 14px;
     color: #321dee;
 }
+
+.disableCard {
+    display: none !important;
+}

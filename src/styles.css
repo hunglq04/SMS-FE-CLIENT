@@ -49,3 +49,7 @@ a {
 .red-float.mat-focused label {
     background-color: red !important;
 }
+
+* {
+    font-family: 'Times New Roman', Times, serif;
+}

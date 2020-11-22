@@ -40,6 +40,7 @@ export class BookingStylistComponent implements OnInit {
   slot21 = true;
   slot22 = true;
   slot23 = true;
+  slot24 = true;
   salonId = sessionStorage.getItem('salon')
   constructor(
     private stylistService: StylistService
@@ -52,11 +53,9 @@ export class BookingStylistComponent implements OnInit {
     else {
       time = this.formatDate(this.showtime)
     }
-    console.log('Ngay', time)
     return this.stylistService.getSylist(this.salonId, time)
       .then(res => {
         this.stylists = res;
-        console.log(this.stylists)
       })
   }
   pickDay(isSelectedDate) {
@@ -82,6 +81,7 @@ export class BookingStylistComponent implements OnInit {
     timeTomorow.setDate(timeTomorow.getDate() + 1);
     timeTomorow2.setDate(timeTomorow2.getDate() + 2);
 
+    // Hiển thị ngày
     this.showtimeNow = timeNow.toLocaleDateString();
     this.showtimeTomorow = timeTomorow.toLocaleDateString();
     this.showtimeTomorow2 = timeTomorow2.toLocaleDateString();
@@ -94,6 +94,7 @@ export class BookingStylistComponent implements OnInit {
       settimeNow = timeNow.getHours().toString() + timeNow.getMinutes().toString()
     }
 
+    // Kiểm tra thời gian đặt lịch
     if (settimeNow > 800)
       this.slot1 = false;
     if (settimeNow > 830)
@@ -108,6 +109,8 @@ export class BookingStylistComponent implements OnInit {
       this.slot6 = false;
     if (settimeNow > 1100)
       this.slot7 = false;
+    if (settimeNow > 1130)
+      this.slot24 = false;
     if (settimeNow > 1300)
       this.slot8 = false;
     if (settimeNow > 1330)
@@ -147,6 +150,7 @@ export class BookingStylistComponent implements OnInit {
   }
   async ngOnInit() {
     this.getStylist();
+    // this.isSelectedDate.emit(this.formatDate(this.showtimeNow))
     this.compareTime();
   }
 }

@@ -68,6 +68,11 @@
 
 /* Show booking */
 
+.fixed-bottom {
+    display: flex;
+    justify-content: center;
+}
+
 .affix {
     font-size: 25px;
     font-family: 'Times New Roman', Times, serif;
@@ -95,7 +100,6 @@
     align-items: center;
 }
 
-.affix .item:not(:last-child),
 .affix .text-show {
     border-bottom: 1px solid #ffffff;
 }
@@ -107,6 +111,16 @@
 .affix .content-info-booking {
     padding: 16px 16px 0;
     font-size: 14px;
+}
+
+.affix .button-booking {
+    padding: 16px 16px 0;
+}
+
+.affix .button-booking a {
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
 }
 
 .affix .content-info-booking .box-item {
@@ -174,4 +188,9 @@
 .affix .content-info-booking .box-service .service-list {
     max-height: calc(91vh - 320px);
     overflow-y: auto;
+}
+
+button {
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(255, 255, 255);
 }

@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { ServiceService } from '../service/service.service';
 import { Service } from '../model/service.model';
+import { splitClasses } from '@angular/compiler';
 
 @Component({
   selector: 'app-booking-service',
@@ -13,20 +14,23 @@ export class BookingServiceComponent implements OnInit {
   services: Array<Service>;
   bookingservices = [];
   isSelect = [];
+  servicesType = [];
+  servicesId = [];
+  indexService = []
+  isbookingServices = false;
   constructor(
     private serviceService: ServiceService
   ) { }
 
   async ngOnInit() {
     await this.getService();
-    for (let i = 0; i < this.services.length; i++) {
+    for (let i = 0; i <= this.services.length; i++) {
       this.isSelect.push(false);
     }
   }
   scroll(el: HTMLElement) {
     console.log(el);
     el.scrollIntoView({ behavior: 'smooth' });
-
   }
   getService() {
     return this.serviceService.getService()
@@ -35,51 +39,27 @@ export class BookingServiceComponent implements OnInit {
       })
   }
   pickService(isSelectedService, index) {
-    var select = true;
-    for (let i = 0; i < this.bookingservices.length; i++) {
-      if (isSelectedService == this.bookingservices[i]) {
-        select = false;
+    for (let i = 0; i <= this.servicesId.length; i++) {
+      if (this.servicesType[i] != 'Chăm sóc da' && this.servicesType[i] == isSelectedService.serviceType) {
+        this.isSelect[index] = true;
+        this.isSelect[this.indexService[i]] = false;
+        console.log(this.isSelect)
+        this.servicesId[i] = isSelectedService.id;
+        this.indexService[i] = index;
+        this.isbookingServices = true;
+        break;
+      }
+      else {
+        this.isbookingServices = false;
       }
     }
-    console.log(this.isSelect)
-    if (this.isSelect[index] === false) {
-      for (let i = 0; i < this.bookingservices.length; i++) {
-        if (this.bookingservices[i] == isSelectedService) {
-          this.bookingservices.splice(i, 1);
-        }
-      }
-    } else if (select) {
-      {
-        if (index >= 0 && index <= 6) {
-          for (let j = 0; j <= 6; j++) {
-            if (this.isSelect[j] == true && j != index) {
-              this.bookingservices.splice(j, 1);
-              this.isSelect[j] = false;
-            }
-          }
-          this.bookingservices.push(isSelectedService)
+    if (!this.isbookingServices) {
+      this.isSelect[index] = !this.isSelect[index];
+      this.indexService.push(index);
+      this.servicesType.push(isSelectedService.serviceType)
+      this.servicesId.push(isSelectedService.id)
 
-        }
-        else {
-          this.bookingservices.push(isSelectedService)
-        }
-      }
     }
     this.isSelected.emit(isSelectedService)
-    console.log(this.bookingservices)
-  }
-  checkisSeclect(i) {
-    // if (i >= 0 && i <= 6) {
-    //   for (let j = 0; j <= 6; j++) {
-    //     if (this.isSelect[j] == true && j != i) {
-    //       this.isSelect[j] = false;
-    //     }
-    //   }
-    //   this.isSelect[i] = !this.isSelect[i];
-    // }
-    // else {
-    //   this.isSelect[i] = !this.isSelect[i];
-    // }
-    this.isSelect[i] = !this.isSelect[i];
   }
 }

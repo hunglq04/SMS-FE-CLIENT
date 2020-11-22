@@ -1,26 +1,86 @@
 <app-header></app-header>
-<div class="col-md-12" style="text-align: center;">
-    <h2><b>Sản Phẩm</b> Thịnh Hành</h2>
-</div>
 <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Tạo kiểu tóc" mat-align-tabs="center">
-        <div class="container-sm" style="margin-top: 30px">
+        <div class="container-sm" style="margin: 30px">
             <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
-                <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3,4,5,6,7]">
+                <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products" [ngClass]="{'disableCard': product.productType != 'Tạo kiểu tóc'}">
                     <mat-card class="mat-elevation-z4">
-                        <img mat-card-image src="//product.hstatic.net/1000306701/product/dsc01356_dcea08d6f73d4c8790ca858e70ec1f5f_large.jpg">
-                        <mat-card-content style="text-align: center;">
-                            <h4>Apple iPad</h4>
-                            <p><span>$369.00</span></p>
-                            <div class="star-rating">
-                                <ul class="list-inline" style="display: flex; justify-content: center;">
-                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                </ul>
-                            </div>
+                        <img mat-card-image src="{{product.image}}">
+                        <mat-card-content style="text-align: center; height: 70px;">
+                            <h4>{{product.name}}</h4>
+                            <p><span>{{product.price | currency : "VND"}}</span></p>
+                        </mat-card-content>
+                        <mat-card-actions style="text-align: center;">
+                            <button mat-button>Mua Hàng</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Chăm sóc tóc" mat-align-tabs="center">
+        <div class="container-sm" style="margin: 30px">
+            <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+                <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products" [ngClass]="{'disableCard': product.productType != 'Chăm sóc tóc'}">
+                    <mat-card class="mat-elevation-z4">
+                        <img mat-card-image src="{{product.image}}">
+                        <mat-card-content style="text-align: center; height: 70px;">
+                            <h4>{{product.name}}</h4>
+                            <p><span>{{product.price | currency : "VND"}}</span></p>
+                        </mat-card-content>
+                        <mat-card-actions style="text-align: center;">
+                            <button mat-button>Mua Hàng</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Chăm sóc da" mat-align-tabs="center">
+        <div class="container-sm" style="margin: 30px">
+            <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+                <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products" [ngClass]="{'disableCard': product.productType != 'Chăm sóc da'}">
+                    <mat-card class="mat-elevation-z4">
+                        <img mat-card-image src="{{product.image}}">
+                        <mat-card-content style="text-align: center; height: 70px;">
+                            <h4>{{product.name}}</h4>
+                            <p><span>{{product.price | currency : "VND"}}</span></p>
+                        </mat-card-content>
+                        <mat-card-actions style="text-align: center;">
+                            <button mat-button>Mua Hàng</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Chăm sóc cơ thể" mat-align-tabs="center" x>
+        <div class="container-sm" style="margin: 30px">
+            <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+                <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products" [ngClass]="{'disableCard': product.productType != 'Chăm sóc cơ thể'}">
+                    <mat-card class="mat-elevation-z4">
+                        <img mat-card-image src="{{product.image}}">
+                        <mat-card-content style="text-align: center; height: 70px;">
+                            <h4>{{product.name}}</h4>
+                            <p><span>{{product.price | currency : "VND"}}</span></p>
+                        </mat-card-content>
+                        <mat-card-actions style="text-align: center;">
+                            <button mat-button>Mua Hàng</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Chăm sóc râu" mat-align-tabs="center">
+        <div class="container-sm" style="margin: 30px">
+            <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+                <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products" [ngClass]="{'disableCard': product.productType != 'Chăm sóc râu'}">
+                    <mat-card class="mat-elevation-z4">
+                        <img mat-card-image src="{{product.image}}">
+                        <mat-card-content style="text-align: center; height: 70px;">
+                            <h4>{{product.name}}</h4>
+                            <p><span>{{product.price | currency : "VND"}}</span></p>
                         </mat-card-content>
                         <mat-card-actions style="text-align: center;">
                             <button mat-button>Add to cart</button>
@@ -30,8 +90,4 @@
             </div>
         </div>
     </mat-tab>
-    <mat-tab label="Chăm sóc tóc">Content 2</mat-tab>
-    <mat-tab label="Chăm sóc da">Content 3</mat-tab>
-    <mat-tab label="Chăm sóc cơ thế">Content 2</mat-tab>
-    <mat-tab label="Chăm sóc râu">Content 3</mat-tab>
 </mat-tab-group>

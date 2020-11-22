@@ -1,7 +1,7 @@
-<form [formGroup]="salonFormGroup">
+<!-- <form [formGroup]="salonFormGroup">
     <mat-form-field appearance="fill" style="width: 380px;">
         <mat-label>Chọn Salon</mat-label>
-        <input type="text" matInput placeholder="Địa chỉ" aria-label="Adress" [matAutocomplete]="auto" formControlName="salon" required>
+        <input type="text" matInput placeholder="Địa chỉ"  [matAutocomplete]="auto" formControlName="salon" required>
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
             <mat-option (click)="saveSalon()" *ngFor="let option of filteredSalon | async" [value]="option">
                 <img class="example-option-img" aria-hidden [src]="option.street" height="25">
@@ -9,4 +9,66 @@
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
+</form> -->
+<form [formGroup]="provinceForm" style="text-align: center;">
+    <mat-form-field appearance="fill" style="width: 380px;">
+        <mat-label>Tỉnh/Thành phố</mat-label>
+        <input type="text" matInput placeholder="Địa chỉ" [matAutocomplete]="auto" formControlName="province">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredProvinces | async" [value]="option.name">
+                <span>{{option.name}}</span>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
 </form>
+<div class="card" style="margin-bottom: 10px" *ngIf="this.provinceForm.get('province').value === ''">
+    <div class="card-body">
+        <h1>Top Salon Miền Nam</h1>
+        <div class="row" style="justify-content: center;">
+            <div *ngFor="let salon of this.salons let i = index">
+                <div>
+                    <a type="button" (click)="bookingSalon(salon, i)">
+                        <div class="selectService">
+                            <img style="width: 220px; height: 220px; padding: 5px;" src="{{salon.image}}" data-holder-rendered="true">
+                            <p style="width: 220px; padding: 5px;">{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="margin-bottom: 60px" *ngIf="this.provinceForm.get('province').value === ''">
+    <div class="card-body">
+        <h1>Top Salon Miền Bắc</h1>
+        <div class="row" style="justify-content: center;">
+            <div *ngFor="let salon of this.salons">
+                <div>
+                    <a type="button" (click)="bookingSalon(salon)">
+                        <div class="selectService">
+                            <img style="width: 220px; height: 220px; padding: 5px;" src="https://storage.30shine.com/salon_image/front/142.png" data-holder-rendered="true">
+                            <p style="width: 220px; padding: 5px;">{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="margin-bottom: 60px" *ngIf="this.provinceForm.get('province').value != ''">
+    <div class="card-body">
+        <h1>Salon tại {{this.provinceForm.get('province').value}}</h1>
+        <div class="row">
+            <div *ngFor="let salon of this.salons">
+                <div *ngIf="salon.province === this.provinceForm.get('province').value">
+                    <a type="button" (click)="bookingSalon(salon)">
+                        <div class="selectService">
+                            <img style="width: 220px; height: 220px; padding: 5px;" src="https://storage.30shine.com/salon_image/front/142.png" data-holder-rendered="true">
+                            <p style="width: 220px; padding: 5px;">{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
