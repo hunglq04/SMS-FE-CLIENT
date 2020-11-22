@@ -15,3 +15,19 @@ button {
 .mat-tab-nav-bar.mat-primary .mat-ink-bar {
     background-color: #333333 !important;
 }
+
+.button-booking {
+    top: 50%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    display: fixed;
+}

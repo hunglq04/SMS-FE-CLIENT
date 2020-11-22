@@ -4,5 +4,6 @@ export class Service {
   id: number;
   price: number;
   recommend: boolean;
+  duration: number;
   serviceType: string;
 }

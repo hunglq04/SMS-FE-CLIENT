@@ -27,7 +27,7 @@
                             <form class="form-inline my-2 my-lg-0 ml-auto">
                                 <a class="btn btn-outline-warning" href="/profile"><span class="fa fa-user-circle"></span>{{username}}</a>
                                 <!-- <a class="navbar-brand text-test" href="/" (click)="signOutClick()"><span class="fa fa-sign-out"></span>Log out</a> -->
-                                <a class="navbar-brand text-test" href="/" (click)="signOutClick()"><span class="fa fa-sign-out"></span>Log out</a>
+                                <a class="navbar-brand text-test" (click)="signOutClick()"><span class="fa fa-sign-out"></span>Log out</a>
                             </form>
                         </div>
                     </li>
@@ -36,7 +36,7 @@
     </div>
 </nav>
 <div class="modal" id="myModal">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div *ngIf="isBooking" class="alert alert-primary mb-2">
                 <a class="text-danger close" data-dismiss="alert" (click)="isBooking = false"></a> Đăng nhập để đặt lịch
@@ -63,6 +63,6 @@
     </div>
 </div>
 <div class="fixed-bottom">
-    <a *ngIf="!isLogin" (click)="bookingclick()" style="float: right;" class="btn btn-success" data-toggle="modal" data-target="#myModal" role="button">Đặt lịch</a>
-    <a *ngIf="isLogin" style="float: right;" class="btn btn-success" href="/booking" role="button">Đặt lịch</a>
+    <!-- <a *ngIf="!isLogin" (click)="bookingclick()" style="float: right;" class="btn btn-success" data-toggle="modal" data-target="#myModal" role="button">Đặt lịch</a> -->
+    <a [hidden]="isBooking" style="float: right;" class="btn btn-success" href="/booking" role="button">Đặt lịch</a>
 </div>
