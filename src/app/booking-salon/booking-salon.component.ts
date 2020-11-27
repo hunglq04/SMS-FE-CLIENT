@@ -5,8 +5,8 @@ import { map, startWith } from 'rxjs/operators';
 import { SalonService } from '../service/salon.service';
 import { Salon } from '../model/salon.model';
 import { Province } from '../model/province.model';
-import Stepper from 'bs-stepper';
-
+import { District } from '../model/district.model';
+import { ConstantPool } from '@angular/compiler';
 @Component({
   selector: 'app-booking-salon',
   templateUrl: './booking-salon.component.html',
@@ -18,8 +18,10 @@ export class BookingSalonComponent implements OnInit {
   provinceForm: FormGroup;
   salons: Array<Salon>;
   provinces: Array<Province>;
+  districts: Array<District>;
   filteredProvinces: Observable<Array<Province>>;
   filteredSalons: Observable<Array<Salon>>;
+  filteredDistricts: Observable<Array<District>>;
   salon = new Salon();
   salonID
   selectSalon: any;
@@ -33,14 +35,19 @@ export class BookingSalonComponent implements OnInit {
     });
     this.provinceForm = this.fb.group({
       province: [''],
+      district: [''],
     });
     await this.getSalon();
     await this.getProvince();
     sessionStorage.removeItem('salon')
   }
 
-  displayFn(option: any): string {
+  displayFnSalon(option: any): string {
     return option ? `${option.street}, ${option.ward}, ${option.district}, ${option.province}` : '';
+  }
+
+  displayFn(option: any): string {
+    return option && option.name ? option.name : '';
   }
 
   filterSalons(name: string): Salon[] {
@@ -51,6 +58,11 @@ export class BookingSalonComponent implements OnInit {
   filterProvinces(name: string): Province[] {
     const filterValue = name.toLowerCase();
     return this.provinces.filter(option => option.name.toLowerCase().includes(filterValue));
+  }
+
+  filterDistricts(name: string): District[] {
+    const filterValue = name.toLowerCase();
+    return this.districts.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   getSalon() {
@@ -68,6 +80,20 @@ export class BookingSalonComponent implements OnInit {
             startWith(''),
             map(value => typeof value === 'string' ? value : value.name),
             map(name => name ? this.filterProvinces(name) : this.provinces.slice())
+          );
+      })
+  }
+  getDistrictsAndWards(provinceId) {
+    console.log(provinceId)
+    this.provinceForm.controls['district'].setValue('');
+    this.salonService.getDistrictsAndWards(provinceId)
+      .then(res => {
+        this.districts = res;
+        this.filteredDistricts = this.provinceForm.controls['district'].valueChanges
+          .pipe(
+            startWith(''),
+            map(value => typeof value === 'string' ? value : value.name),
+            map(name => name ? this.filterDistricts(name) : this.districts.slice())
           );
       })
   }

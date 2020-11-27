@@ -38,6 +38,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
 import { FlexLayoutModule } from '@angular/flex-layout';
 // Social
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
@@ -53,6 +54,7 @@ import { BookingHistoryComponent } from './booking-history/booking-history.compo
 
 //Custom pipe
 import { TotalServicePricePipe } from './pipe/total-service-price.pipe';
+import { CartComponent } from './cart/cart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,7 +70,8 @@ import { TotalServicePricePipe } from './pipe/total-service-price.pipe';
     BookingServiceComponent,
     SignUpComponent,
     BookingHistoryComponent,
-    TotalServicePricePipe
+    TotalServicePricePipe,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +90,7 @@ import { TotalServicePricePipe } from './pipe/total-service-price.pipe';
     MatGridListModule,
     MatIconModule,
     MatExpansionModule,
+    MatSelectModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

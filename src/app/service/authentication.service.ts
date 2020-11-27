@@ -7,7 +7,9 @@ export class LoginResponse {
   constructor(
     public username: string,
     public token: string,
-    public roles: Array<string>
+    public roles: Array<string>,
+    public name: string,
+    public avatar: string
   ) { }
 }
 
@@ -26,6 +28,8 @@ export class AuthenticationService {
       .then(res => {
         sessionStorage.setItem('username', username);
         sessionStorage.setItem('token', 'Bearer ' + res.token);
+        sessionStorage.setItem('name', res.name)
+        sessionStorage.setItem('avatar', res.avatar)
         return res;
       })
   }
@@ -48,6 +52,8 @@ export class AuthenticationService {
     return this.httpClient.post<LoginResponse>(`${environment.baseUrl}/login/social`, request)
       .toPromise()
       .then(res => {
+        sessionStorage.setItem('name', res.name)
+        sessionStorage.setItem('avatar', res.avatar)
         sessionStorage.setItem('username', request.username);
         sessionStorage.setItem('token', 'Bearer ' + res.token);
         return res;

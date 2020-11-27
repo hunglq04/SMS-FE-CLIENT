@@ -63,6 +63,11 @@
     background-color: rgb(241, 243, 106);
 }
 
+.activetest {
+    border: 1px solid black !important;
+    background-color: rgb(241, 243, 106);
+}
+
 .disableDiv {
     pointer-events: none;
     background-color: rgb(230, 230, 230);

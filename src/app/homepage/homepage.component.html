@@ -9,24 +9,24 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active" style="background-image: url('../../assets/images/beck.jpg')">
+            <div class="carousel-item active" style="background-image: url('https://i.pinimg.com/originals/f3/e2/4d/f3e24d37faf7feb883850faf90deec09.jpg')">
                 <div class="carousel-caption d-none d-md-block">
                     <h2 class="display-4">BaberShop</h2>
-                    <p class="lead">Cắt tóc tạo kiểu phong cách tự tin</p>
+                    <p class="lead">Chuỗi cửa hàng cắt tóc uy tín tại Việt Nam</p>
                 </div>
             </div>
             <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('https://kenh14cdn.com/thumb_w/640/2020/1/9/photo-1-15785678260551668154007-crop-15785687249741802732942.jpg')">
+            <div class="carousel-item" style="background-image: url('https://blog.hairbros.vn/wp-content/uploads/2017/12/img-1.jpg')">
                 <div class="carousel-caption d-none d-md-block">
-                    <h2 class="display-4">Second Slide</h2>
-                    <p class="lead">This is a description for the second slide.</p>
+                    <h2 class="display-4">Nhà tạo mẫu chuyên nghiệp</h2>
+                    <p class="lead">Phục vụ tận tình, tư vấn và tạo kiểu tóc phù hợp</p>
                 </div>
             </div>
             <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('https://source.unsplash.com/szFUQoyvrxM/1920x1080')">
+            <div class="carousel-item" style="background-image: url('https://i.ytimg.com/vi/ZSgiZSiDXkc/maxresdefault.jpg')">
                 <div class="carousel-caption d-none d-md-block">
-                    <h2 class="display-4">Third Slide</h2>
-                    <p class="lead">This is a description for the third slide.</p>
+                    <h2 class="display-4">Mẫu tóc thịnh hành</h2>
+                    <p class="lead">Cắt tóc tạo kiểu phong cách tự tin</p>
                 </div>
             </div>
         </div>
@@ -172,8 +172,18 @@
         </div>
     </div>
     <!-- BXH style hot -->
-    <mat-card class="mat-elevation-z4" style="background-color: rgba(184, 188, 190, 0.8); margin-top: 30px;">
+    <mat-card class="mat-elevation-z4" style="margin-top: 30px;">
         <div class="container-fluid">
+            <h1 style="border-bottom: 2px solid black; padding: 5px 0px 5px 0px;">BXH kiểu tóc <a style="float: right; color: black !important;" href="/product">Xem Thêm</a></h1>
+            <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
+                <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products">
+                    <mat-card class="mat-elevation-z4">
+                        <img mat-card-image src="https://static2.yan.vn/YanNews/2167221/201706/20170603-034824-chieu-cao-va-tieu-su-cua-dien-vien-yoo-seung-ho_600x900.jpg">
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="container-fluid">
             <h1 style="border-bottom: 2px solid black; padding: 5px 0px 5px 0px;">BXH tóc tháng này</h1>
             <div class="row text-center text-lg-left" style="padding: 20px;">
                 <img style="border: 1px solid black; height: 280px; width: 200px;" src="https://static2.yan.vn/YanNews/2167221/201706/20170603-034824-chieu-cao-va-tieu-su-cua-dien-vien-yoo-seung-ho_600x900.jpg" alt="..." class="rounded mx-auto d-block">
@@ -181,22 +191,22 @@
                 <img style="border: 1px solid black; height: 280px; width: 200px;" src="https://image.winudf.com/v2/image1/Y29tLmtpbWJlb20ua3BvcHdhbGxwYXBlcnNfc2NyZWVuXzBfMTU2Mzc5MTY5OF8wNDA/screen-0.jpg?fakeurl=1&type=.jpg" alt="..." class="rounded mx-auto d-block">
                 <img style="border: 1px solid black; height: 280px; width: 200px;" src="https://i.pinimg.com/originals/f2/e0/2e/f2e02ed1bb9b0a3249f9105be7fda074.jpg" alt="..." class="rounded mx-auto d-block">
             </div>
-        </div>
+        </div> -->
     </mat-card>
     <!-- Sản phẩm -->
     <mat-card class="mat-elevation-z4" style="margin-top: 15px;">
         <div class="container-fluid">
             <h1 style="border-bottom: 2px solid black; padding: 5px 0px 5px 0px;">Sản phẩm hot <a style="float: right; color: black !important;" href="/product">Xem Thêm</a></h1>
             <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
-                <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2]">
+                <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products">
                     <mat-card class="mat-elevation-z4">
-                        <img mat-card-image src="//product.hstatic.net/1000306701/product/dsc01356_dcea08d6f73d4c8790ca858e70ec1f5f_large.jpg">
-                        <mat-card-content style="text-align: center;">
-                            <h4>Keo xịt tóc</h4>
-                            <p><span>$369.00</span></p>
+                        <img mat-card-image src="{{product.image}}">
+                        <mat-card-content style="text-align: center; height: 70px;">
+                            <h4>{{product.name}}</h4>
+                            <p><span>{{product.price | currency : "VND"}}</span></p>
                         </mat-card-content>
                         <mat-card-actions style="text-align: center;">
-                            <button mat-button>Mua Hàng</button>
+                            <button [routerLink]="['/cart', { id:product.id }]" mat-button>Mua Hàng</button>
                         </mat-card-actions>
                     </mat-card>
                 </div>
@@ -230,11 +240,54 @@
                     <span>Nghe nhạc bản quyền</span></div>
             </div>
         </div>
-
     </mat-card>
-    <!-- <div class="fixed-bottom">
-        <a *ngIf="!isLogin" (click)="bookingclick()" style="float: right;" class="btn btn-success" data-toggle="modal" data-target="#myModal" role="button">Đặt lịch</a>
-        <a *ngIf="isLogin" style="float: right;" class="btn btn-success" href="/booking" role="button">Đặt lịch</a>
-    </div> -->
+    <mat-card>
+        <form [formGroup]="provinceForm">
+            <div class="row" style="justify-content: center;">
+                <div class="col-md-8">
+                    <h1>Danh Sách Cửa Hàng</h1>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label>Tỉnh/Thành Phố</label>
+                        <input type="text" class="form-control" placeholder="Chọn Tỉnh/Thành Phố" matInput [matAutocomplete]="auto" formControlName="province">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngFor="let option of filteredProvinces | async" [value]="option">
+                                <span>{{option.name}}</span>
+                            </mat-option>
+                        </mat-autocomplete>
+                    </div>
+                </div>
+                <div class="col-md-8" *ngIf="this.provinceForm.get('province').value === ''">
+                    <div class="card" style="height: 200px; overflow-y:auto; padding-top: 10px;">
+                        <div *ngFor="let salon of this.salons let i = index">
+                            <div style="display: flex; width: 100%;">
+                                <div class="col-md-8">
+                                    <h3 style="color: black;">{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</h3>
+                                </div>
+                                <div class="col-md-4">
+                                    <a type="button" class="btn btn-success float-right">Đặt lịch</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8" *ngIf="this.provinceForm.get('province').value !== ''">
+                    <div class="card" style="height: 200px; overflow-y:auto;">
+                        <div *ngFor="let salon of this.salons let i = index">
+                            <div style="display: flex; width: 100%;" *ngIf="salon.province === this.provinceForm.get('province').value.name">
+                                <div class="col-md-8">
+                                    <h3 style="color: black;">{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</h3>
+                                </div>
+                                <div class="col-md-4">
+                                    <a type="button" class="btn btn-success float-right">Đặt lịch</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-card>
     <app-footer></app-footer>
 </div>

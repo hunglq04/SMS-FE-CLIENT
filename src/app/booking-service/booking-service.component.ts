@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { ServiceService } from '../service/service.service';
 import { Service } from '../model/service.model';
@@ -12,11 +12,10 @@ import { splitClasses } from '@angular/compiler';
 export class BookingServiceComponent implements OnInit {
   @Output() isSelected = new EventEmitter();
   services: Array<Service>;
-  bookingservices = [];
   isSelect = [];
   servicesType = [];
   servicesId = [];
-  indexService = []
+  indexService = [];
   isbookingServices = false;
   constructor(
     private serviceService: ServiceService
@@ -26,6 +25,9 @@ export class BookingServiceComponent implements OnInit {
     await this.getService();
     for (let i = 0; i <= this.services.length; i++) {
       this.isSelect.push(false);
+    }
+    if (sessionStorage.getItem('isSelectServices') != null) {
+      this.isSelect = JSON.parse(sessionStorage.getItem('isSelectServices'));
     }
   }
   scroll(el: HTMLElement) {
@@ -39,13 +41,12 @@ export class BookingServiceComponent implements OnInit {
       })
   }
   pickService(isSelectedService, index) {
-    for (let i = 0; i <= this.servicesId.length; i++) {
-      if (this.servicesType[i] != 'Chăm sóc da' && this.servicesType[i] == isSelectedService.serviceType) {
-        this.isSelect[index] = true;
-        this.isSelect[this.indexService[i]] = false;
-        console.log(this.isSelect)
-        this.servicesId[i] = isSelectedService.id;
-        this.indexService[i] = index;
+    for (let j = 0; j <= this.servicesId.length; j++) {
+      if (this.servicesId[j] == isSelectedService.id) {
+        this.isSelect[index] = !this.isSelect[index];
+        this.indexService.splice(j, 1);
+        this.servicesType.splice(j, 1);
+        this.servicesId.splice(j, 1);
         this.isbookingServices = true;
         break;
       }
@@ -54,12 +55,28 @@ export class BookingServiceComponent implements OnInit {
       }
     }
     if (!this.isbookingServices) {
+      for (let i = 0; i <= this.servicesId.length; i++) {
+        if (this.servicesType[i] != 'Chăm sóc da' && this.servicesType[i] == isSelectedService.serviceType) {
+          this.isSelect[index] = true;
+          this.isSelect[this.indexService[i]] = false;
+          console.log(this.isSelect)
+          this.servicesId[i] = isSelectedService.id;
+          this.indexService[i] = index;
+          this.isbookingServices = true;
+          break;
+        }
+        else {
+          this.isbookingServices = false;
+        }
+      }
+    }
+    if (!this.isbookingServices) {
       this.isSelect[index] = !this.isSelect[index];
       this.indexService.push(index);
       this.servicesType.push(isSelectedService.serviceType)
       this.servicesId.push(isSelectedService.id)
-
     }
     this.isSelected.emit(isSelectedService)
+    sessionStorage.setItem('isSelectServices', JSON.stringify(this.isSelect));
   }
 }

@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   username = '';
   password = '';
   isBooking = false;
+  name = '';
 
   constructor(
     private router: Router,
@@ -25,6 +26,7 @@ export class HeaderComponent implements OnInit {
   }
   signOutClick() {
     sessionStorage.removeItem('username');
+    sessionStorage.removeItem('token');
     window.location.reload();
   }
   btnLogin() {
@@ -37,6 +39,7 @@ export class HeaderComponent implements OnInit {
     if (this.checkLoggedAccount(sessionStorage.getItem('username'))) {
       this.isLogin = true;
       this.username = sessionStorage.getItem('username');
+      this.name = sessionStorage.getItem('name');
     }
     else {
       this.isLogin = false;

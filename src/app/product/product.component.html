@@ -1,6 +1,6 @@
-<app-header></app-header>
 <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Tạo kiểu tóc" mat-align-tabs="center">
+
         <div class="container-sm" style="margin: 30px">
             <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
                 <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products" [ngClass]="{'disableCard': product.productType != 'Tạo kiểu tóc'}">
@@ -11,7 +11,7 @@
                             <p><span>{{product.price | currency : "VND"}}</span></p>
                         </mat-card-content>
                         <mat-card-actions style="text-align: center;">
-                            <button mat-button>Mua Hàng</button>
+                            <button [routerLink]="['/cart', { id:product.id }]" mat-button>Mua Hàng</button>
                         </mat-card-actions>
                     </mat-card>
                 </div>

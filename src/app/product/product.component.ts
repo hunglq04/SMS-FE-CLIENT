@@ -10,7 +10,8 @@ import { Product } from '../model/product.model';
 })
 export class ProductComponent implements OnInit {
   products: Array<Product>
-  isProductType = true;
+  searchText;
+
   constructor(
     private productService: ProductService
   ) {
@@ -18,24 +19,6 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProduct();
-    // for (let i = 0; i <= this.products.length; i++) {
-    //   if (this.products[i].productType == 'Tạo kiểu tóc') {
-    //     this.isProductType = false;
-    //   } else if (this.products[i].productType == 'Chăm sóc tóc') {
-    //     this.isProductType = false;
-    //   } else if (this.products[i].productType == 'Chăm sóc da') {
-    //     this.isProductType = false;
-    //   } else if (this.products[i].productType == 'Chăm sóc cơ thể') {
-    //     this.isProductType = false;
-    //   } else if (this.products[i].productType == 'Chăm sóc râu') {
-    //     this.isProductType = false
-    //   }
-    // }
-    for (let i = 0; i <= this.products.length; i++) {
-      if (this.products[i].productType == 'Chăm sóc da') {
-        this.isProductType = false;
-      }
-    }
   }
 
   getProduct() {

@@ -23,9 +23,12 @@
                     <a class="nav-link" href="/product">Baber Shop</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" routerLink="/cart"><i class="fa fa-shopping-cart"></i></a>
+                </li>
+                <li class="nav-item">
                     <a *ngIf="!isLogin" (click)="btnLogin()" class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal" role="button">Đăng nhập</a>
                     <div *ngIf="isLogin" class="btn-group">
-                        <a type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{username}}</a>
+                        <a type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{name}}</a>
                         <div class="dropdown-menu dropdown-menu-right mt-2">
                             <a routerLink="/history" class="dropdown-item">Lịch đã đặt</a>
                             <a (click)="signOutClick()" class="dropdown-item">Đăng xuất</a>
@@ -43,7 +46,6 @@
                 <a class="text-danger close" data-dismiss="alert" (click)="isBooking = false"></a> Đăng nhập để đặt lịch
             </div>
             <ng-template matTabContent>
-
             </ng-template>
             <mat-tab-group animationDuration="0ms" selectedIndex="0" mat-stretch-tabs class="mat-elevation-z4" #tabs>
                 <mat-tab label="Đăng nhập">
@@ -56,10 +58,8 @@
                         <app-sign-up (signUp)="signUp($event)"></app-sign-up>
                     </div>
                 </mat-tab>
+
             </mat-tab-group>
-        </div>
-        <div class="modal-footer">
-            <button type="button" (click)="btnLogin()" class="btn btn-danger">Close</button>
         </div>
     </div>
 </div>

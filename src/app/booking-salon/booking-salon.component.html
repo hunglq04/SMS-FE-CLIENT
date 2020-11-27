@@ -10,21 +10,36 @@
         </mat-autocomplete>
     </mat-form-field>
 </form> -->
-<form [formGroup]="provinceForm" style="text-align: center;">
-    <mat-form-field appearance="fill" style="width: 380px;">
-        <mat-label>Tỉnh/Thành phố</mat-label>
-        <input type="text" matInput placeholder="Địa chỉ" [matAutocomplete]="auto" formControlName="province">
-        <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredProvinces | async" [value]="option.name">
-                <span>{{option.name}}</span>
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
+<form [formGroup]="provinceForm">
+    <div class="row" style="justify-content: center;">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Tỉnh/Thành Phố</label>
+                <input type="text" class="form-control" placeholder="Chọn Tỉnh/Thành Phố" matInput [matAutocomplete]="auto" formControlName="province">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="getDistrictsAndWards($event.option.value.id)">
+                    <mat-option *ngFor="let option of filteredProvinces | async" [value]="option">
+                        <span>{{option.name}}</span>
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Quận/huyện</label>
+                <input type="text" class="form-control" placeholder="Chọn Quận/Huyện" matInput [matAutocomplete]="auto2" formControlName="district">
+                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let option of filteredDistricts | async" [value]="option">
+                        {{option.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+        </div>
+    </div>
 </form>
 <div class="card" style="margin-bottom: 10px" *ngIf="this.provinceForm.get('province').value === ''">
     <div class="card-body">
-        <h1>Top Salon Miền Nam</h1>
-        <div class="row" style="justify-content: center;">
+        <h1 style="text-align: center;">Top Salon Miền Nam</h1>
+        <div class="row" style="text-align: center;">
             <div *ngFor="let salon of this.salons let i = index">
                 <div>
                     <a type="button" (click)="bookingSalon(salon, i)">
@@ -40,8 +55,8 @@
 </div>
 <div class="card" style="margin-bottom: 60px" *ngIf="this.provinceForm.get('province').value === ''">
     <div class="card-body">
-        <h1>Top Salon Miền Bắc</h1>
-        <div class="row" style="justify-content: center;">
+        <h1 style="text-align: center;">Top Salon Miền Bắc</h1>
+        <div class="row" style="text-align: center;">
             <div *ngFor="let salon of this.salons">
                 <div>
                     <a type="button" (click)="bookingSalon(salon)">
@@ -55,12 +70,29 @@
         </div>
     </div>
 </div>
-<div class="card" style="margin-bottom: 60px" *ngIf="this.provinceForm.get('province').value != ''">
+<div class="card" style="margin-bottom: 10px" *ngIf="this.provinceForm.get('province').value != ''">
     <div class="card-body">
-        <h1>Salon tại {{this.provinceForm.get('province').value}}</h1>
-        <div class="row">
+        <h1 style="text-align: center;">Salon tại {{this.provinceForm.get('province').value.name}}</h1>
+        <div class="row" style="text-align: center;">
             <div *ngFor="let salon of this.salons">
-                <div *ngIf="salon.province === this.provinceForm.get('province').value">
+                <div *ngIf="salon.province === this.provinceForm.get('province').value.name">
+                    <a type="button" (click)="bookingSalon(salon)">
+                        <div class="selectService">
+                            <img style="width: 220px; height: 220px; padding: 5px;" src="https://storage.30shine.com/salon_image/front/142.png" data-holder-rendered="true">
+                            <p style="width: 220px; padding: 5px;">{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card" style="margin-bottom: 60px" *ngIf="this.provinceForm.get('province').value != '' && this.provinceForm.get('district').value != ''">
+    <div class="card-body">
+        <h1 style="text-align: center;">Salon tại {{this.provinceForm.get('district').value.name}}, {{this.provinceForm.get('province').value.name}}</h1>
+        <div class="row" style="text-align: center;">
+            <div *ngFor="let salon of this.salons">
+                <div *ngIf="salon.province === this.provinceForm.get('province').value.name && salon.district == this.provinceForm.get('district').value.name ">
                     <a type="button" (click)="bookingSalon(salon)">
                         <div class="selectService">
                             <img style="width: 220px; height: 220px; padding: 5px;" src="https://storage.30shine.com/salon_image/front/142.png" data-holder-rendered="true">

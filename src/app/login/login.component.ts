@@ -49,7 +49,16 @@ export class LoginComponent implements OnInit, OnChanges {
         request.password = 'social-' + user.id;
         request.name = user.name;
         this.loginService.loginSocial(request)
-          .then(res => window.location.href = '/')
+          .then(res => {
+            if (localStorage.getItem('test') == null) {
+              window.location.href = window.location.href;
+            }
+            else {
+              sessionStorage.setItem('isBookingLogin', 'true');
+              window.location.href = window.location.href;
+              localStorage.removeItem('test');
+            }
+          })
           .catch(err => console.log(err));
       }
     });
@@ -65,6 +74,9 @@ export class LoginComponent implements OnInit, OnChanges {
 
   signOut(): void {
     this.authService.signOut();
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('token');
+    window.sessionStorage.clear();
   }
 
   onLogin() {

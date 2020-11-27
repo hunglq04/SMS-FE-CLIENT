@@ -6,13 +6,12 @@ import { Product } from '../model/product.model'
   providedIn: 'root'
 })
 export class ProductService {
-
   constructor(
     private httpClient: HttpClient
-  ) {}
+  ) { }
 
   getProduct() {
     return this.httpClient.get<Array<Product>>(`${environment.baseUrl}/client/product`)
-              .toPromise();
+      .toPromise();
   }
 }
