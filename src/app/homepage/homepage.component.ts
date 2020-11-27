@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -87,11 +87,11 @@ export class HomepageComponent implements OnInit {
       .then(res => {
         this.provinces = res;
         this.filteredProvinces = this.provinceForm.controls['province'].valueChanges
-        .pipe(
-          startWith(''),
-          map(value => typeof value === 'string' ? value : value.name),
-          map(name => name ? this.filterProvinces(name) : this.provinces.slice())
-        );
+          .pipe(
+            startWith(''),
+            map(value => typeof value === 'string' ? value : value.name),
+            map(name => name ? this.filterProvinces(name) : this.provinces.slice())
+          );
       })
   }
   getSalon() {
@@ -99,5 +99,8 @@ export class HomepageComponent implements OnInit {
       .then(res => {
         this.salons = res;
       })
+  }
+  pickSalonHomePage(salon) {
+    sessionStorage.setItem('selectSalonHome', JSON.stringify(salon));
   }
 }

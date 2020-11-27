@@ -3,6 +3,7 @@ import { BookingService } from '../service/booking.service';
 import { Booking } from '../model/booking.model';
 import { BookingServiceComponent } from '../booking-service/booking-service.component';
 import { MatStepper } from '@angular/material/stepper';
+import { Salon } from '../model/salon.model';
 
 
 @Component({
@@ -49,12 +50,17 @@ export class BookingComponent implements OnInit, AfterViewInit {
     this.booking.date = this.formatDate(new Date().toLocaleDateString());
   }
   ngAfterViewInit() {
-    //Sau khi đăng nhập set step = 3
     if (sessionStorage.getItem('isBookingLogin') != null) {
       this.stepper.selectedIndex = 3;
       sessionStorage.removeItem('isBookingLogin');
     }
-
+    if (sessionStorage.getItem('selectSalonHome') != null) {
+      this.booking.salonId = JSON.parse(sessionStorage.getItem('selectSalonHome'))['id']
+      let salonInfo = JSON.parse(sessionStorage.getItem('selectSalonHome'));
+      console.log(salonInfo)
+      this.bookingDetail.salon = [salonInfo.street, salonInfo.ward , salonInfo.district, salonInfo.province].join(", ");
+      this.stepper.selectedIndex = 1;
+    }
   }
   ngOnInit() {
     if (sessionStorage.getItem('username') != null) {
@@ -67,7 +73,6 @@ export class BookingComponent implements OnInit, AfterViewInit {
     if (sessionStorage.getItem('isBookingLogin') == null) {
       sessionStorage.removeItem('isSelectServices');
     }
-
     // Đặt lịch khi chưa đăng nhập
     if (sessionStorage.getItem('isBookingLogin') != null) {
       this.booking.salonId = JSON.parse(sessionStorage.getItem('salon'));
@@ -88,9 +93,11 @@ export class BookingComponent implements OnInit, AfterViewInit {
       this.isCompletedService = true;
       this.isCompletedStylist = true;
     }
-    else{
-      sessionStorage.clear();
+    if (sessionStorage.getItem('selectSalonHome') != null)
+    {
+      this.isCompletedSalon = true;
     }
+
 
   }
   //Chọn Salon
@@ -98,7 +105,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
     this.isCompletedSalon = true;
     this.booking.salonId = isSelected.id;
     // Thông tin chi tiết lịch
-    this.bookingDetail.salon = [isSelected.street, isSelected.district, isSelected.ward, isSelected.province].join(", ");
+    this.bookingDetail.salon = [isSelected.street, isSelected.ward, isSelected.district, isSelected.province].join(", ");
     sessionStorage.setItem('salon', JSON.stringify(this.booking.salonId));
     sessionStorage.setItem('salonDetail', this.bookingDetail.salon);
 
