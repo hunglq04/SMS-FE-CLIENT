@@ -60,6 +60,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
       console.log(salonInfo)
       this.bookingDetail.salon = [salonInfo.street, salonInfo.ward , salonInfo.district, salonInfo.province].join(", ");
       this.stepper.selectedIndex = 1;
+      sessionStorage.removeItem('selectSalonHome')
     }
   }
   ngOnInit() {
@@ -75,12 +76,13 @@ export class BookingComponent implements OnInit, AfterViewInit {
     }
     // Đặt lịch khi chưa đăng nhập
     if (sessionStorage.getItem('isBookingLogin') != null) {
+      //load dữ liệu lịch đặt
       this.booking.salonId = JSON.parse(sessionStorage.getItem('salon'));
       this.booking.stylistId = JSON.parse(sessionStorage.getItem('stylist'))
       this.booking.date = sessionStorage.getItem('date2');
       this.booking.time = sessionStorage.getItem('hour');
       this.booking.serviceIds = JSON.parse(sessionStorage.getItem('service'));
-
+      //Load dữ liệu thông tin lịch đặt
       this.bookingDetail.salon = sessionStorage.getItem('salonDetail');
       this.bookingDetail.services = JSON.parse(sessionStorage.getItem('serviceDetail'));
       this.bookingDetail.price = JSON.parse(sessionStorage.getItem('servicePrice'));
@@ -95,10 +97,9 @@ export class BookingComponent implements OnInit, AfterViewInit {
     }
     if (sessionStorage.getItem('selectSalonHome') != null)
     {
+      sessionStorage.setItem('salon', JSON.parse(sessionStorage.getItem('selectSalonHome'))['id']);
       this.isCompletedSalon = true;
     }
-
-
   }
   //Chọn Salon
   selectSalon(isSelected) {
@@ -108,7 +109,6 @@ export class BookingComponent implements OnInit, AfterViewInit {
     this.bookingDetail.salon = [isSelected.street, isSelected.ward, isSelected.district, isSelected.province].join(", ");
     sessionStorage.setItem('salon', JSON.stringify(this.booking.salonId));
     sessionStorage.setItem('salonDetail', this.bookingDetail.salon);
-
   }
   //Xóa dịch vụ
   deleteService(i, serviceId) {
@@ -303,6 +303,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
       this.isCompletedService = false;
       this.isCompletedStylist = false;
       sessionStorage.removeItem('salon');
+      sessionStorage.removeItem('selectSalonHome')
       sessionStorage.removeItem('salonDetail');
       sessionStorage.removeItem('service');
       sessionStorage.removeItem('serviceDetail');

@@ -8,7 +8,7 @@
                 <app-booking-salon (isSelected)="selectSalon($event)" (click)="!this.isCompletedSalon || stepper.next()"></app-booking-salon>
             </mat-step>
             <!-- Step 2 Chọn dịch vụ -->
-            <mat-step [completed]=" isCompletedService">
+            <mat-step [completed]="isCompletedService">
                 <ng-template matStepLabel>Chọn Dịch Vụ</ng-template>
                 <app-booking-service *ngIf="isCompletedSalon" (isSelected)="selectService($event)"></app-booking-service>
             </mat-step>

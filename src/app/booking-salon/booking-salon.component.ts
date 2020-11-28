@@ -39,7 +39,6 @@ export class BookingSalonComponent implements OnInit {
     });
     await this.getSalon();
     await this.getProvince();
-    sessionStorage.removeItem('salon')
   }
 
   displayFnSalon(option: any): string {

@@ -1,7 +1,6 @@
 <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Tạo kiểu tóc" mat-align-tabs="center">
-
-        <div class="container-sm" style="margin: 30px">
+        <div class="container-sm" style="margin-top: 30px">
             <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
                 <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products" [ngClass]="{'disableCard': product.productType != 'Tạo kiểu tóc'}">
                     <mat-card class="mat-elevation-z4">
@@ -19,7 +18,7 @@
         </div>
     </mat-tab>
     <mat-tab label="Chăm sóc tóc" mat-align-tabs="center">
-        <div class="container-sm" style="margin: 30px">
+        <div class="container-sm" style="margin-top: 30px">
             <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
                 <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products" [ngClass]="{'disableCard': product.productType != 'Chăm sóc tóc'}">
                     <mat-card class="mat-elevation-z4">
@@ -37,7 +36,7 @@
         </div>
     </mat-tab>
     <mat-tab label="Chăm sóc da" mat-align-tabs="center">
-        <div class="container-sm" style="margin: 30px">
+        <div class="container-sm" style="margin-top: 30px">
             <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
                 <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products" [ngClass]="{'disableCard': product.productType != 'Chăm sóc da'}">
                     <mat-card class="mat-elevation-z4">
@@ -55,7 +54,7 @@
         </div>
     </mat-tab>
     <mat-tab label="Chăm sóc cơ thể" mat-align-tabs="center" x>
-        <div class="container-sm" style="margin: 30px">
+        <div class="container-sm" style="margin-top: 30px">
             <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
                 <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products" [ngClass]="{'disableCard': product.productType != 'Chăm sóc cơ thể'}">
                     <mat-card class="mat-elevation-z4">
@@ -73,7 +72,7 @@
         </div>
     </mat-tab>
     <mat-tab label="Chăm sóc râu" mat-align-tabs="center">
-        <div class="container-sm" style="margin: 30px">
+        <div class="container-sm" style="margin-top: 30px">
             <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
                 <div [fxFlex]="(100/4) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let product of this.products" [ngClass]="{'disableCard': product.productType != 'Chăm sóc râu'}">
                     <mat-card class="mat-elevation-z4">
@@ -83,7 +82,7 @@
                             <p><span>{{product.price | currency : "VND"}}</span></p>
                         </mat-card-content>
                         <mat-card-actions style="text-align: center;">
-                            <button mat-button>Add to cart</button>
+                            <button mat-button>Mua Hàng</button>
                         </mat-card-actions>
                     </mat-card>
                 </div>
