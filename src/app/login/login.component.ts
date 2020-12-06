@@ -76,6 +76,8 @@ export class LoginComponent implements OnInit, OnChanges {
     this.authService.signOut();
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('avatar');
     window.sessionStorage.clear();
   }
 

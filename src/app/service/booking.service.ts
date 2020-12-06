@@ -10,15 +10,20 @@ export class BookingService {
 
   constructor(
     private httpClient: HttpClient
-  ) {}
+  ) { }
 
-  postBooking(booking: Booking){
+  postBooking(booking: Booking) {
     return this.httpClient.post<Booking>(`${environment.baseUrl}/customer/booking`, booking)
-              .toPromise();
+      .toPromise();
   }
 
   getBookingHistory() {
     return this.httpClient.get<any>(`${environment.baseUrl}/customer/booking`)
+      .toPromise();
+  }
+
+  deleteBooking(id) {
+    return this.httpClient.delete<any>(`${environment.baseUrl}/customer/booking/${id}`)
       .toPromise();
   }
 }

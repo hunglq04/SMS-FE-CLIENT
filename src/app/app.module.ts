@@ -16,6 +16,7 @@ import { SalonService } from './service/salon.service';
 import { StylistService } from './service/stylist.service';
 import { ServiceService } from './service/service.service';
 import { BookingService } from './service/booking.service';
+import { OrderService } from './service/order.service';
 
 // Component
 import { AppComponent } from './app.component';
@@ -55,6 +56,10 @@ import { BookingHistoryComponent } from './booking-history/booking-history.compo
 //Custom pipe
 import { TotalServicePricePipe } from './pipe/total-service-price.pipe';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ServiceDetailComponent } from './service-detail/service-detail.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +76,11 @@ import { CartComponent } from './cart/cart.component';
     SignUpComponent,
     BookingHistoryComponent,
     TotalServicePricePipe,
-    CartComponent
+    CartComponent,
+    CheckoutComponent,
+    ProductDetailComponent,
+    ServiceDetailComponent,
+    OrderHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -79,6 +88,7 @@ import { CartComponent } from './cart/cart.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     MatStepperModule,
     MatInputModule,
     MatFormFieldModule,
@@ -92,8 +102,6 @@ import { CartComponent } from './cart/cart.component';
     MatExpansionModule,
     MatSelectModule,
     FlexLayoutModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
     OverlayModule,
     SocialLoginModule
   ],
@@ -106,6 +114,7 @@ import { CartComponent } from './cart/cart.component';
     StylistService,
     ServiceService,
     BookingService,
+    OrderService,
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     {
       provide: 'SocialAuthServiceConfig',

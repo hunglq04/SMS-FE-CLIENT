@@ -82,9 +82,27 @@ export class BookingStylistComponent implements OnInit {
     timeTomorow2.setDate(timeTomorow2.getDate() + 2);
 
     // Hiển thị ngày
-    this.showtimeNow = timeNow.toLocaleDateString();
-    this.showtimeTomorow = timeTomorow.toLocaleDateString();
-    this.showtimeTomorow2 = timeTomorow2.toLocaleDateString();
+    if (timeNow.getDate() < 10) {
+      this.showtimeNow = "0" + timeNow.toLocaleDateString();
+    }
+    else {
+      this.showtimeNow = timeNow.toLocaleDateString();
+    }
+    if(timeTomorow.getDate() < 10)
+    {
+      this.showtimeTomorow = "0" + timeTomorow.toLocaleDateString();
+    }
+    else{
+      this.showtimeTomorow = timeTomorow.toLocaleDateString();
+    }
+    if(timeTomorow2.getDate() < 10)
+    {
+      this.showtimeTomorow2 = "0" + timeTomorow2.toLocaleDateString();
+    }
+    else{
+      this.showtimeTomorow2 = timeTomorow2.toLocaleDateString();
+    }
+
 
     if (timeNow.getMinutes() < 10) {
       timeNowMiniute = 0 + timeNow.getMinutes().toString();
@@ -149,8 +167,16 @@ export class BookingStylistComponent implements OnInit {
     return date.split("/").reverse().join("-");
   }
   async ngOnInit() {
+    var date = new Date()
+    if(date.getDate() < 10)
+    {
+      this.showtimeNow = "0" + this.showtimeNow
+    }
     this.getStylist();
-    // this.isSelectedDate.emit(this.formatDate(this.showtimeNow))
+    if (sessionStorage.getItem('date2') == null) {
+      this.isSelectedDate.emit(this.formatDate(this.showtimeNow))
+    }
+
     this.compareTime();
   }
 }

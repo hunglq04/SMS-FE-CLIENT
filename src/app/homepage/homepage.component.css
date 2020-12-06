@@ -76,6 +76,13 @@ a {
     background-attachment: fixed;
 }
 
+.img-service {
+    width: 398px;
+    padding-right: 5px;
+    height: 150px;
+    cursor: pointer;
+}
+
 .item {
     display: inline-grid;
     min-width: 20%;

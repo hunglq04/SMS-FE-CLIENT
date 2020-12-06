@@ -1,5 +1,4 @@
 export class Booking {
-
   public customerId: number;
   public stylistId: number;
   public salonId: number;

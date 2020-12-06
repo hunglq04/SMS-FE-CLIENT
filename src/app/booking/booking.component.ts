@@ -4,6 +4,7 @@ import { Booking } from '../model/booking.model';
 import { BookingServiceComponent } from '../booking-service/booking-service.component';
 import { MatStepper } from '@angular/material/stepper';
 import { Salon } from '../model/salon.model';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -44,7 +45,9 @@ export class BookingComponent implements OnInit, AfterViewInit {
   services = [];
   servicesType = [];
   countService = 0;
+  historyBooking = [];
   constructor(
+    private activatedRoute: ActivatedRoute,
     private bookingService: BookingService
   ) {
     this.booking.date = this.formatDate(new Date().toLocaleDateString());
@@ -58,7 +61,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
       this.booking.salonId = JSON.parse(sessionStorage.getItem('selectSalonHome'))['id']
       let salonInfo = JSON.parse(sessionStorage.getItem('selectSalonHome'));
       console.log(salonInfo)
-      this.bookingDetail.salon = [salonInfo.street, salonInfo.ward , salonInfo.district, salonInfo.province].join(", ");
+      this.bookingDetail.salon = [salonInfo.street, salonInfo.ward, salonInfo.district, salonInfo.province].join(", ");
       this.stepper.selectedIndex = 1;
       sessionStorage.removeItem('selectSalonHome')
     }
@@ -95,8 +98,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
       this.isCompletedService = true;
       this.isCompletedStylist = true;
     }
-    if (sessionStorage.getItem('selectSalonHome') != null)
-    {
+    if (sessionStorage.getItem('selectSalonHome') != null) {
       sessionStorage.setItem('salon', JSON.parse(sessionStorage.getItem('selectSalonHome'))['id']);
       this.isCompletedSalon = true;
     }
@@ -123,6 +125,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
     this.bookingDetail.servicesDuration.splice(i, 1);
     this.countService -= 1;
     //Set lại button chọn service
+
     for (let i = 0; i < this.serviceChild.servicesId.length; i++) {
       if (this.serviceChild.servicesId[i] == serviceId) {
         this.serviceChild.indexService.splice(i, 1);
@@ -250,7 +253,16 @@ export class BookingComponent implements OnInit, AfterViewInit {
   }
   //Đặt lịch
   bookingS() {
-    return this.bookingService.postBooking(this.booking)
+    var id
+    this.activatedRoute.params.subscribe(params => {
+      id = params['id'];
+    })
+    if (id != null) {
+      this.bookingService.deleteBooking(id)
+        .then(res => console.log(res))
+    }
+
+    this.bookingService.postBooking(this.booking)
       .then(res => {
         alert("Đặt lịch thành công");
         sessionStorage.removeItem('salon');
@@ -278,7 +290,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
     this.hidden = !this.hidden
   }
   bookingclick() {
-    localStorage.setItem('test', 'test');
+    localStorage.setItem('test', 'Kiểm tra đăng nhập');
     console.log(localStorage.getItem('test'));
   }
   previous() {

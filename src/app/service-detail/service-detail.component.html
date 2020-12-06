@@ -1,0 +1,19 @@
+<div class="container mt-4">
+    <div class="row" style="justify-content: center;">
+        <div class="col-sm-12" style="text-align: center;">
+            <div>
+                <h1>{{service.name}}</h1>
+            </div>
+            <img class="img-fluid" src="{{service.bookingImage}}">
+            <div>
+                <h2>Nội dung</h2>
+                <p>{{service.description}}</p>
+                <h2>Giá tiền</h2>
+                <p>{{service.price | currency : "VND"}}</p>
+                <h2>Thời gian thực hiện</h2>
+                <p>{{service.duration}} phút</p>
+            </div>
+            <button routerLink="/booking" class="btn btn-success mb-4">Đặt lịch</button>
+        </div>
+    </div>
+</div>

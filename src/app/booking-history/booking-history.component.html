@@ -21,7 +21,7 @@
                 <td>{{booking.services | totalServicePrice | currency: "VND" }}</td>
                 <td>{{booking.bookingStatus}}</td>
                 <td>
-                    <a class="btn btn-outline-success btn-sm" (click)="showModal(i)" data-toggle="modal" data-target="#bookingDetail">Xem chi tiết</a>
+                    <a class="btn btn-outline-success btn-sm" (click)="showModal(i, booking.bookingId)" data-toggle="modal" data-target="#bookingDetail">Xem chi tiết</a>
                 </td>
             </tr>
         </tbody>
@@ -70,10 +70,35 @@
                         </ng-container>
                     </div>
                     <div class="modal-footer">
-                        <a type="button" class="btn btn-outline-danger">HỦY LỊCH</a>
-                        <a type="button" routerLink="/booking" data-dismiss="modal" class="btn btn-warning">ĐỔI LỊCH</a>
+                        <a type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#bookingDelete">HỦY LỊCH</a>
+                        <a type="button" [routerLink]="['/booking', {id: id}]" data-dismiss="modal" class="btn btn-warning">ĐỔI LỊCH</a>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete Booking -->
+    <div class="modal fade" id="bookingDelete" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title custom_align" id="Heading" style="margin-left: auto;">
+                        <strong>Hủy lịch
+                    </strong></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Bạn chắc chắn muốn hủy lịch
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button data-dismiss="modal" type="button" class="btn btn-success" (click)="deleteBooking(id)"><span
+                        class="	fa fa-check-circle"></span>Có</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                        class="fa fa-remove"></span>Không</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
         </div>
     </div>

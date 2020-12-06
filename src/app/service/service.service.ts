@@ -15,4 +15,8 @@ export class ServiceService {
     return this.httpClient.get<Array<Service>>(`${environment.baseUrl}/client/service/booking`)
               .toPromise();
   }
+  getServiceId(id) {
+    return this.httpClient.get<Array<Service>>(`${environment.baseUrl}/client/service/booking/detail?id=${id}`)
+      .toPromise();
+  }
 }

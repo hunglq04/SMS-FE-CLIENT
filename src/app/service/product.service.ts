@@ -14,4 +14,8 @@ export class ProductService {
     return this.httpClient.get<Array<Product>>(`${environment.baseUrl}/client/product`)
       .toPromise();
   }
+  getProductId(id) {
+    return this.httpClient.get<Array<Product>>(`${environment.baseUrl}/client/product/detail?id=${id}`)
+      .toPromise();
+  }
 }
