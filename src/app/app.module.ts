@@ -124,7 +124,7 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '201743325017-1ise698g5n723en1u6antjv68hogbkb7.apps.googleusercontent.com'
+              '201743325017-fdu6iqh59889tg6l5kbpmmt2odeiico2.apps.googleusercontent.com'
             ),
           },
           {

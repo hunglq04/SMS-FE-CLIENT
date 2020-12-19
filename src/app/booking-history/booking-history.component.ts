@@ -14,6 +14,7 @@ export class BookingHistoryComponent implements OnInit {
   date = '';
   time = '';
   stylist = '';
+  bookingStatus = '';
   services = [];
 
   constructor(
@@ -27,7 +28,8 @@ export class BookingHistoryComponent implements OnInit {
 
   async getBooKingHistory() {
     this.bookingService.getBookingHistory()
-      .then(res =>{ this.history = res
+      .then(res => {
+        this.history = res
         console.log(res[0]['bookingStatus'])
       })
       .catch(err => console.log(err));
@@ -45,6 +47,7 @@ export class BookingHistoryComponent implements OnInit {
     this.time = this.history[index].dateTime.split(' ')[1];
     this.stylist = this.history[index].stylist;
     this.services = this.history[index].services;
+    this.bookingStatus = this.history[index].bookingStatus;
     this.id = bookingId;
   }
 

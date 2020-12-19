@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../model/product.model';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../service/product.service';
@@ -14,9 +14,11 @@ export class ProductDetailComponent implements OnInit {
     private productService: ProductService,
     private activatedRoute: ActivatedRoute
   ) { }
+
   ngOnInit(): void {
     this.getProductId();
   }
+
   getProductId() {
     var id
     this.activatedRoute.params.subscribe(params => {
@@ -27,10 +29,16 @@ export class ProductDetailComponent implements OnInit {
         this.product = res;
       })
   }
+
+  updateQuantity(value: number) {
+    this.quantity = value;
+  }
+
   minusQuanlitiClick(quantity) {
     quantity -= 1;
     this.quantity = quantity;
   }
+
   plusQuanlitiClick(quantity) {
     quantity += 1;
     this.quantity = quantity;

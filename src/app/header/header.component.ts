@@ -44,12 +44,6 @@ export class HeaderComponent implements OnInit {
     else {
       this.isLogin = false;
     }
-    if (window.location.href == 'http://localhost:4200/') {
-      this.isBooking = false;
-    }
-    else {
-      this.isBooking = true;
-    }
   }
 
   signUp(loginInfo) {
