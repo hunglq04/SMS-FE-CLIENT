@@ -30,6 +30,7 @@
                     <div *ngIf="isLogin" class="btn-group">
                         <a type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{name}}</a>
                         <div class="dropdown-menu dropdown-menu-right mt-2">
+                            <a routerLink="/history" class="dropdown-item">Thông tin cá nhân</a>
                             <a routerLink="/history" class="dropdown-item">Lịch đã đặt</a>
                             <a routerLink="/orderhistory" class="dropdown-item">Đơn hàng</a>
                             <a (click)="signOutClick()" class="dropdown-item">Đăng xuất</a>
@@ -43,9 +44,9 @@
 <div class="modal" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div *ngIf="isBooking" class="alert alert-primary mb-2">
+            <!-- <div *ngIf="isBooking" class="alert alert-primary mb-2">
                 <a class="text-danger close" data-dismiss="alert" (click)="isBooking = false"></a> Đăng nhập để đặt lịch
-            </div>
+            </div> -->
             <ng-template matTabContent>
             </ng-template>
             <mat-tab-group animationDuration="0ms" selectedIndex="0" mat-stretch-tabs class="mat-elevation-z4" #tabs>
@@ -64,7 +65,6 @@
         </div>
     </div>
 </div>
-<div class="fixed-bottom">
-    <!-- <a *ngIf="!isLogin" (click)="bookingclick()" style="float: right;" class="btn btn-success" data-toggle="modal" data-target="#myModal" role="button">Đặt lịch</a> -->
+<!-- <div class="fixed-bottom">
     <a [hidden]="isBooking" style="float: right;" class="btn btn-success" routerLink="/booking" role="button">Đặt lịch</a>
-</div>
+</div> -->

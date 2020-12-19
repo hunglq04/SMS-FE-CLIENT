@@ -75,7 +75,7 @@
 
 .affix {
     font-size: 25px;
-    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Times New Roman', Times, serif; */
     background-color: #151515;
     margin-left: 35px;
     margin-right: 35px;

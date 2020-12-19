@@ -7,6 +7,7 @@ import { SocialUser } from 'angularx-social-login';
 import { SocialAuthService } from 'angularx-social-login';
 import { FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { RegistRequest } from '../model/registRequest.model';
+import { timer } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -66,6 +67,7 @@ export class LoginComponent implements OnInit, OnChanges {
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+
   }
 
   signInWithFB(): void {

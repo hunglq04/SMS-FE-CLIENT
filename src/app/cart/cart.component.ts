@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ProductService } from '../service/product.service';
 import { Product } from '../model/product.model';
 import { Item } from '../model/item.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -13,28 +14,52 @@ import { Item } from '../model/item.model';
 export class CartComponent implements OnInit {
   items: Item[] = [];
   total: number = 0;
+  isCheckout = false;
   products: Product[]
+  checkout = {
+    email: '',
+    name: '',
+    phone: '',
+    address: '',
+    cartInfo: []
+  }
+  checkoutForm: FormGroup;
   constructor(
+    private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private productService: ProductService
   ) { }
 
   async ngOnInit() {
+    this.checkoutForm = this.fb.group({
+      name: ['', Validators.required],
+      address: ['', Validators.required],
+      phone: ['', Validators.required],
+      email: ['', Validators.required],
+    });
     await this.getProduct();
     this.activatedRoute.params.subscribe(params => {
       var id = params['id'];
       if (id) {
-        var item: Item = {
-          product: this.find(id),
-          quantity: 1
-        };
-        console.log(item)
-        if (localStorage.getItem('cart') == null) {
+        let quantity = params['quantity']
+        if (quantity > 1) {
+          var item: Item = {
+            product: this.find(id),
+            quantity: parseInt(quantity)
+          };
+        }
+        else {
+          var item: Item = {
+            product: this.find(id),
+            quantity: 1
+          };
+        }
+        if (sessionStorage.getItem('cart') == null) {
           let cart: any = [];
           cart.push(JSON.stringify(item));
-          localStorage.setItem('cart', JSON.stringify(cart));
+         sessionStorage.setItem('cart', JSON.stringify(cart));
         } else {
-          let cart: any = JSON.parse(localStorage.getItem('cart'));
+          let cart: any = JSON.parse(sessionStorage.getItem('cart'));
           let index: number = -1;
           for (var i = 0; i < cart.length; i++) {
             let item: Item = JSON.parse(cart[i]);
@@ -45,12 +70,18 @@ export class CartComponent implements OnInit {
           }
           if (index == -1) {
             cart.push(JSON.stringify(item));
-            localStorage.setItem('cart', JSON.stringify(cart));
+            sessionStorage.setItem('cart', JSON.stringify(cart));
           } else {
             let item: Item = JSON.parse(cart[index]);
-            item.quantity += 1;
+            let quantity = params['quantity']
+            if (quantity > 1) {
+              item.quantity += parseInt(quantity);
+            }
+            else {
+              item.quantity += 1;
+            }
             cart[index] = JSON.stringify(item);
-            localStorage.setItem("cart", JSON.stringify(cart));
+            sessionStorage.setItem("cart", JSON.stringify(cart));
           }
         }
         this.loadCart();
@@ -58,6 +89,7 @@ export class CartComponent implements OnInit {
         this.loadCart();
       }
     });
+
   }
   getProduct() {
     return this.productService.getProduct()
@@ -79,7 +111,7 @@ export class CartComponent implements OnInit {
   loadCart(): void {
     this.total = 0;
     this.items = [];
-    let cart = JSON.parse(localStorage.getItem('cart'));
+    let cart = JSON.parse(sessionStorage.getItem('cart'));
     for (var i = 0; i < cart.length; i++) {
       let item = JSON.parse(cart[i]);
       this.items.push({
@@ -88,28 +120,31 @@ export class CartComponent implements OnInit {
       });
       this.total += item.product.price * item.quantity;
     }
+    sessionStorage.setItem('items', JSON.stringify(this.items));
+    sessionStorage.setItem('total', JSON.stringify(this.total));
   }
 
-	changeQuantity(quantity, changedQuantityId) {
-		console.log('event: ', quantity);
-		console.log('change id: ', changedQuantityId);
-		var changedQuantity = parseInt(quantity.target.value);
-		let cart: any = JSON.parse(localStorage.getItem('cart'));
-		this.items;
-		for (var i = 0; i < cart.length; i++) {
-			let item = JSON.parse(cart[i]);
-			if (item.product.id == changedQuantityId) {
-				item.quantity = changedQuantity;
-				cart.splice(i, 1);
-				cart.push(JSON.stringify(item));
-			}
-		}
-		localStorage.setItem("cart", JSON.stringify(cart));
-		this.loadCart();
-	}
+  changeQuantity(quantity, changedQuantityId) {
+    console.log('event: ', quantity);
+    console.log('change id: ', changedQuantityId);
+    var changedQuantity = parseInt(quantity.target.value);
+    let cart: any = JSON.parse(sessionStorage.getItem('cart'));
+    this.items;
+    for (var i = 0; i < cart.length; i++) {
+      let item = JSON.parse(cart[i]);
+      if (item.product.id == changedQuantityId) {
+        item.quantity = changedQuantity;
+        cart.splice(i, 1);
+        // cart.push(JSON.stringify(item));
+        cart.splice(i, 0, JSON.stringify(item));
+      }
+    }
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+    this.loadCart();
+  }
 
   remove(id: number): void {
-    let cart: any = JSON.parse(localStorage.getItem('cart'));
+    let cart: any = JSON.parse(sessionStorage.getItem('cart'));
     let index: number = -1;
     for (var i = 0; i < cart.length; i++) {
       let item: Item = JSON.parse(cart[i]);
@@ -118,7 +153,10 @@ export class CartComponent implements OnInit {
         break;
       }
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
+    sessionStorage.setItem("cart", JSON.stringify(cart));
     this.loadCart();
+  }
+  checkOut() {
+    this.isCheckout = true;
   }
 }

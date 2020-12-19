@@ -1,5 +1,12 @@
 <div class="container mt-4">
-    <h2>Lịch sử đặt lịch</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="card-title ">Lịch sử đặt lịch</h4>
+        </div>
+        <div class="col-md-6 text-right">
+            <a type="button" routerLink="/booking" data-dismiss="modal" class="btn btn-success">ĐẶT LỊCH MỚI</a>
+        </div>
+    </div>
     <table class="table">
         <thead class="thead-light">
             <tr>
@@ -19,7 +26,12 @@
                     <p *ngFor="let service of booking.services">{{service.name}} ({{ service.price | currency: "VND" }})</p>
                 </td>
                 <td>{{booking.services | totalServicePrice | currency: "VND" }}</td>
-                <td>{{booking.bookingStatus}}</td>
+                <td [ngSwitch]="booking.bookingStatus">
+                    <span *ngSwitchCase="'DONE'" class="badge badge-success">Hoàn thành</span>
+                    <span *ngSwitchCase="'CANCEL'" class="badge badge-danger">Đã hủy</span>
+                    <span *ngSwitchCase="'WAITING'" class="badge badge-warning text-grey">Đang đợi</span>
+                    <span *ngSwitchCase="'IN_PROGRESS'" class="badge badge-info">Đang thực hiện</span>
+                </td>
                 <td>
                     <a class="btn btn-outline-success btn-sm" (click)="showModal(i, booking.bookingId)" data-toggle="modal" data-target="#bookingDetail">Xem chi tiết</a>
                 </td>
@@ -69,9 +81,14 @@
                             </div>
                         </ng-container>
                     </div>
-                    <div class="modal-footer">
-                        <a type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#bookingDelete">HỦY LỊCH</a>
-                        <a type="button" [routerLink]="['/booking', {id: id}]" data-dismiss="modal" class="btn btn-warning">ĐỔI LỊCH</a>
+                    <div class="modal-footer" [ngSwitch]="bookingStatus">
+                        <div *ngSwitchCase="'WAITING'">
+                            <a type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#bookingDelete">HỦY LỊCH</a>
+                            <a type="button" [routerLink]="['/booking', {id: id}]" data-dismiss="modal" class="btn btn-warning">ĐỔI LỊCH</a>
+                        </div>
+                        <!-- <div *ngSwitchCase="'DONE'">
+                            <a type="button" routerLink="/booking" data-dismiss="modal" class="btn btn-success">ĐẶT LỊCH MỚI</a>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -82,21 +99,13 @@
     <div class="modal fade" id="bookingDelete" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title custom_align" id="Heading" style="margin-left: auto;">
-                        <strong>Hủy lịch
-                    </strong></h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
                 <div class="modal-body">
                     <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Bạn chắc chắn muốn hủy lịch
                     </div>
                 </div>
                 <div class="modal-footer ">
-                    <button data-dismiss="modal" type="button" class="btn btn-success" (click)="deleteBooking(id)"><span
-                        class="	fa fa-check-circle"></span>Có</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span
-                        class="fa fa-remove"></span>Không</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
+                    <button data-dismiss="modal" type="button" class="btn btn-success" (click)="deleteBooking(id)">Có</button>
                 </div>
             </div>
             <!-- /.modal-content -->

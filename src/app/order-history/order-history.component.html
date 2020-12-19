@@ -1,0 +1,81 @@
+<div class="container mt-4">
+    <h2>Đơn hàng cá nhân</h2>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Ngày đặt</th>
+                <th scope="col">Địa chỉ</th>
+                <th scope="col">Sản Phẩm</th>
+                <th scope="col">Tổng tiền</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of history; let i = index">
+                <td scope="row">{{order.date}}</td>
+                <td>{{order.address}}</td>
+                <td>
+                    <p *ngFor="let product of order.products">{{product.product.name}} ({{ product.price | currency: "VND" }})</p>
+                </td>
+                <td>{{order.products | totalServicePrice | currency: "VND" }}</td>
+                <td [ngSwitch]="order.orderStatus">
+                    <span *ngSwitchCase="'NEW'" class="badge badge-warning text-grey">Mới</span>
+                </td>
+                <td>
+                    <a class="btn btn-outline-success btn-sm" (click)="showModal(i, order.orderId)" data-toggle="modal" data-target="#orderDetail">Xem chi tiết</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Modal Booking Detail-->
+    <div class="modal fade" id="orderDetail" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">THÔNG TIN ĐƠN HÀNG</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <span class="w-title">
+                          <img src="../../assets/images/icons/pin-location.svg" alt="">
+                          <strong class="text-secondary">&nbsp;Tên&nbsp;</strong>
+                      </span>
+                    </div>
+                    <div class="mt-1">{{name}}</div>
+                    <hr>
+                    <div>
+                        <span class="w-title">
+                        <img src="../../assets/images/icons/pin-location.svg" alt="">
+                        <strong class="text-secondary">&nbsp;Địa chỉ&nbsp;</strong>
+                    </span>
+                    </div>
+                    <div class="mt-1">{{address}}</div>
+                    <hr>
+                    <div>
+                        <span class="w-title">
+                      <img src="../../assets/images/icons/pin-location.svg" alt="">
+                      <strong class="text-secondary">&nbsp;Thời gian đặt&nbsp;</strong>
+                  </span>
+                    </div>
+                    <div class="mt-1">{{date}} (giao hàng trong vòng 3 ngày)</div>
+                    <hr>
+                    <div>
+                        <div class="text-secondary"><img src="../../assets/images/icons/stars-24px.svg">&nbsp; <strong>DỊCH VỤ</strong></div>
+                        <ng-container *ngFor="let product of products">
+                            <div class="my-2">
+                                <img class="img-fluid" style="width: 70px;" [src]="product.product.image"> {{product.product.name}} - {{product.product.price | currency : "VND"}}
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#bookingDelete">HỦY ĐƠN HÀNG</a>
+                        <!-- <a type="button" [routerLink]="['/order']" data-dismiss="modal" class="btn btn-warning">MUA HÀNG</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
