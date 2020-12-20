@@ -20,7 +20,9 @@
                 </td>
                 <td>{{order.products | totalServicePrice | currency: "VND" }}</td>
                 <td [ngSwitch]="order.orderStatus">
-                    <span *ngSwitchCase="'NEW'" class="badge badge-warning text-grey">Mới</span>
+                    <span *ngSwitchCase="'NEW'" class="badge badge-warning text-grey">Đang chờ xử lý</span>
+                    <span *ngSwitchCase="'CONFIRMED'" class="badge badge-info text-grey">Đang giao hàng</span>
+                    <span *ngSwitchCase="'COMPLETED'" class="badge badge-success text-grey">Đã nhận hàng</span>
                 </td>
                 <td>
                     <a class="btn btn-outline-success btn-sm" (click)="showModal(i, order.orderId)" data-toggle="modal" data-target="#orderDetail">Xem chi tiết</a>
@@ -64,7 +66,7 @@
                     <div class="mt-1">{{date}} (giao hàng trong vòng 3 ngày)</div>
                     <hr>
                     <div>
-                        <div class="text-secondary"><img src="../../assets/images/icons/stars-24px.svg">&nbsp; <strong>DỊCH VỤ</strong></div>
+                        <div class="text-secondary"><img src="../../assets/images/icons/stars-24px.svg">&nbsp; <strong>Sản phẩm</strong></div>
                         <ng-container *ngFor="let product of products">
                             <div class="my-2">
                                 <img class="img-fluid" style="width: 70px;" [src]="product.product.image"> {{product.product.name}} - {{product.product.price | currency : "VND"}}

@@ -86,9 +86,22 @@
                             <a type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#bookingDelete">HỦY LỊCH</a>
                             <a type="button" [routerLink]="['/booking', {id: id}]" data-dismiss="modal" class="btn btn-warning">ĐỔI LỊCH</a>
                         </div>
-                        <!-- <div *ngSwitchCase="'DONE'">
-                            <a type="button" routerLink="/booking" data-dismiss="modal" class="btn btn-success">ĐẶT LỊCH MỚI</a>
-                        </div> -->
+                        <div *ngSwitchCase="'DONE'">
+                            <div class="row">
+                                <div class="col-6">
+                                    <img class="img-fluid m-2" src='{{image1}}'>
+                                </div>
+                                <div class="col-6">
+                                    <img class="img-fluid m-2" src='{{image1}}'>
+                                </div>
+                                <div class="col-6">
+                                    <img class="img-fluid m-2" src='{{image1}}'>
+                                </div>
+                                <div class="col-6">
+                                    <img class="img-fluid m-2" src='{{image1}}'>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

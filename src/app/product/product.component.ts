@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ProductService } from '../service/product.service';
 import { Product } from '../model/product.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,8 @@ export class ProductComponent implements OnInit {
   searchText;
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router
   ) {
   }
 
@@ -27,5 +29,8 @@ export class ProductComponent implements OnInit {
         this.products = res;
       })
   }
-
+  selectProduct(id) {
+    sessionStorage.setItem('idProduct', id);
+    this.router.navigateByUrl('/cart');
+  }
 }

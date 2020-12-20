@@ -12,6 +12,7 @@ export class CheckoutComponent implements OnInit {
   isCheckout = false;
   isLogin = false;
   checkoutForm: FormGroup;
+  account: any;
   items
   total
   constructor(
@@ -30,8 +31,14 @@ export class CheckoutComponent implements OnInit {
       this.isLogin = true;
     }
     else {
+      this.account = JSON.parse(sessionStorage.getItem('account'));
       this.isLogin = false;
-      this.checkoutForm.setValue({name: sessionStorage.getItem('name'), address: '12', phone: '1231', 'email': '1213'})
+      this.checkoutForm.setValue({
+        name: this.account.name,
+        address: this.account.address,
+        phone: this.account.phone,
+        email: this.account.email
+      })
     }
     this.items = JSON.parse(sessionStorage.getItem('items'));
     this.total = JSON.parse(sessionStorage.getItem('total'));
@@ -67,6 +74,7 @@ export class CheckoutComponent implements OnInit {
           alert("Đặt hàng thành công");
           sessionStorage.removeItem('items');
           sessionStorage.removeItem('total');
+          sessionStorage.removeItem('cart');
           window.location.href = '/orderhistory';
         })
         .catch(err => {

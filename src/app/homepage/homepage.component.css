@@ -118,3 +118,30 @@ a {
 .thumb-content {
     text-align: center;
 }
+
+.fixed-bottom {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1030;
+}
+
+.btnBooking {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 45px;
+    right: 15px;
+    background: #fc3;
+    -webkit-filter: drop-shadow(-4px 4px 6px rgba(0, 0, 0, .25));
+    filter: drop-shadow(-4px 4px 6px rgba(0, 0, 0, .25));
+    border-radius: 30px;
+    z-index: 999;
+}
+
+.icon-booking:hover {
+    color: #000000 !important;
+}

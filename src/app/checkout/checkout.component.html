@@ -7,7 +7,7 @@
                 <div style="margin-left: 10px;" class="service-list">{{item.quantity}}</div>
                 <div style="margin-left: 10px;" class="service-list float-right">{{item.product.price| currency : "VND"}}</div>
             </div>
-            <a style="color: rgb(79, 93, 223);" routerLink="/cart" type="button">Cart</a>
+            <a style="color: rgb(79, 93, 223); font-size: 15px;" routerLink="/cart" type="button">Quay lại giỏ hàng</a>
             <div class="float-right">
                 <div style="margin-left: 10px;" class="service-list">{{total| currency : "VND"}}</div>
             </div>
@@ -42,7 +42,7 @@
                         *Vui lòng điền địa chỉ
                     </div>
                 </div>
-                <button type="submit" class="col-12 btn btn-dark">Thanh toán</button>
+                <button type="submit" class="col-12 btn btn-dark">ĐẶT HÀNG</button>
             </form>
             <div class="form-group">
                 <p *ngIf="isLogin">Đăng nhập để thanh toán <a style="color: rgb(79, 93, 223);" data-toggle="modal" data-target="#myModal" type="button">Đăng nhập</a></p>

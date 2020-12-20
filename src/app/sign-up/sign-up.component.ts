@@ -17,7 +17,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private registService: AuthenticationService,
-    private fb: FormBuilder) 
+    private fb: FormBuilder)
     { }
 
   ngOnInit(): void {

@@ -30,8 +30,7 @@ export class AuthenticationService {
       .then(res => {
         sessionStorage.setItem('username', username);
         sessionStorage.setItem('token', 'Bearer ' + res.token);
-        sessionStorage.setItem('name', res.name)
-        sessionStorage.setItem('account', res)
+        sessionStorage.setItem('account', JSON.stringify(res));
         return res;
       })
   }
@@ -48,16 +47,17 @@ export class AuthenticationService {
   registAccount(request: RegistRequest) {
     return this.httpClient.post<void>(`${environment.baseUrl}/register`, request)
       .toPromise()
+
   }
 
-  loginSocial(request: RegistRequest) {
+  loginSocial(request: any) {
     return this.httpClient.post<any>(`${environment.baseUrl}/login/social`, request)
       .toPromise()
       .then(res => {
-        sessionStorage.setItem('name', res.name)
         sessionStorage.setItem('account', JSON.stringify(res))
         sessionStorage.setItem('username', request.username);
         sessionStorage.setItem('token', 'Bearer ' + res.token);
+        sessionStorage.setItem('account', JSON.stringify(res));
         return res;
       })
   }
