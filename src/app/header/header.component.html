@@ -28,9 +28,9 @@
                 <li class="nav-item">
                     <a *ngIf="!isLogin" (click)="btnLogin()" class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal" role="button">Đăng nhập</a>
                     <div *ngIf="isLogin" class="btn-group">
-                        <a type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{name}}</a>
+                        <a type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{account.name}}</a>
                         <div class="dropdown-menu dropdown-menu-right mt-2">
-                            <a routerLink="/history" class="dropdown-item">Thông tin cá nhân</a>
+                            <a routerLink="/profile" class="dropdown-item">Thông tin cá nhân</a>
                             <a routerLink="/history" class="dropdown-item">Lịch đã đặt</a>
                             <a routerLink="/orderhistory" class="dropdown-item">Đơn hàng</a>
                             <a (click)="signOutClick()" class="dropdown-item">Đăng xuất</a>

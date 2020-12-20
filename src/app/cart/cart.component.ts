@@ -39,9 +39,10 @@ export class CartComponent implements OnInit {
     });
     await this.getProduct();
     this.activatedRoute.params.subscribe(params => {
-      var id = params['id'];
+      // var id = params['id'];
+      var id = JSON.parse(sessionStorage.getItem('idProduct'));
       if (id) {
-        let quantity = params['quantity']
+        let quantity = JSON.parse(sessionStorage.getItem('quantityProduct'));
         if (quantity > 1) {
           var item: Item = {
             product: this.find(id),
@@ -49,6 +50,7 @@ export class CartComponent implements OnInit {
           };
         }
         else {
+          sessionStorage.removeItem('quantityProduct');
           var item: Item = {
             product: this.find(id),
             quantity: 1
@@ -57,7 +59,7 @@ export class CartComponent implements OnInit {
         if (sessionStorage.getItem('cart') == null) {
           let cart: any = [];
           cart.push(JSON.stringify(item));
-         sessionStorage.setItem('cart', JSON.stringify(cart));
+          sessionStorage.setItem('cart', JSON.stringify(cart));
         } else {
           let cart: any = JSON.parse(sessionStorage.getItem('cart'));
           let index: number = -1;
@@ -73,9 +75,10 @@ export class CartComponent implements OnInit {
             sessionStorage.setItem('cart', JSON.stringify(cart));
           } else {
             let item: Item = JSON.parse(cart[index]);
-            let quantity = params['quantity']
+            let quantity = JSON.parse(sessionStorage.getItem('quantityProduct'));
             if (quantity > 1) {
               item.quantity += parseInt(quantity);
+              sessionStorage.removeItem('quantityProduct');
             }
             else {
               item.quantity += 1;

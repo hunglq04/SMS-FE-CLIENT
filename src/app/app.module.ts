@@ -57,9 +57,10 @@ import { BookingHistoryComponent } from './booking-history/booking-history.compo
 import { TotalServicePricePipe } from './pipe/total-service-price.pipe';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductDetailComponent } from "./product-detail/product-detail.component";
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { ProfileCustomerComponent } from './profile-customer/profile-customer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +81,8 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
     CheckoutComponent,
     ProductDetailComponent,
     ServiceDetailComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    ProfileCustomerComponent
   ],
   imports: [
     BrowserModule,
