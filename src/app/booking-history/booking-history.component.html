@@ -83,7 +83,7 @@
                     </div>
                     <div class="modal-footer" [ngSwitch]="bookingStatus">
                         <div *ngSwitchCase="'WAITING'">
-                            <a type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#bookingDelete">HỦY LỊCH</a>
+                            <a type="button" class="btn btn-danger mr-1" data-toggle="modal" data-target="#bookingDelete">HỦY LỊCH</a>
                             <a type="button" [routerLink]="['/booking', {id: id}]" data-dismiss="modal" class="btn btn-warning">ĐỔI LỊCH</a>
                         </div>
                         <div *ngSwitchCase="'DONE'">

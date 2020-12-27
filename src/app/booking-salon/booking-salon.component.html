@@ -36,9 +36,29 @@
         </div>
     </div>
 </form>
-<div class="card" style="margin-bottom: 10px" *ngIf="this.provinceForm.get('province').value === ''">
+<!-- Danh sách salon -->
+<mat-card style="margin-bottom: 10px" *ngIf="this.provinceForm.get('province').value === ''">
     <div class="card-body">
-        <h1 style="text-align: center;">Top Salon Miền Nam</h1>
+        <h1 style="text-align: center;">Danh sách Salon</h1>
+        <div class="row salon" style="text-align: center; height: 320px;">
+            <div *ngFor="let salon of this.salons let i = index">
+                <div>
+                    <a style="margin-right:10px;" type="button" (click)="bookingSalon(salon, i)">
+                        <div class="card">
+                            <img src="{{salon.image}}" alt="Avatar" style="width:220px; height:220px">
+                            <div class="container">
+                                <p>{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-card>
+<!-- <div class="card" style="margin-bottom: 60px" *ngIf="this.provinceForm.get('province').value === ''">
+    <div class="card-body">
+        <h1 style="text-align: center;">Top Salon Miền Bắc</h1>
         <div class="row" style="text-align: center;">
             <div *ngFor="let salon of this.salons let i = index">
                 <div>
@@ -52,55 +72,61 @@
             </div>
         </div>
     </div>
-</div>
-<div class="card" style="margin-bottom: 60px" *ngIf="this.provinceForm.get('province').value === ''">
+</div> -->
+<mat-card style="margin-bottom: 10px" *ngIf="this.provinceForm.get('province').value != ''">
     <div class="card-body">
-        <h1 style="text-align: center;">Top Salon Miền Bắc</h1>
-        <div class="row" style="text-align: center;">
-            <div *ngFor="let salon of this.salons">
-                <div>
-                    <a type="button" (click)="bookingSalon(salon)">
-                        <div class="selectService">
-                            <img style="width: 220px; height: 220px; padding: 5px;" src="https://storage.30shine.com/salon_image/front/142.png" data-holder-rendered="true">
-                            <p style="width: 220px; padding: 5px;">{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</p>
+        <h1 style="text-align: center;">Salon tại {{this.provinceForm.get('district').value === '' ? this.provinceForm.get('province').value.name : (this.provinceForm.get('district').value.name)}} {{this.provinceForm.get('district').value !== '' ? this.provinceForm.get('province').value.name
+            : ''}}</h1>
+        <div *ngIf="!findName(this.provinceForm.get('province').value.name) &&this.provinceForm.get('district').value === ''">
+            <h1>Chưa có salon tại Tỉnh/Thành Phố này</h1>
+        </div>
+        <div *ngIf="!findName(this.provinceForm.get('district').value.name) &&this.provinceForm.get('district').value !== ''">
+            <h1>Chưa có salon tại Quận/Huyện này</h1>
+        </div>
+        <div class="row salon" style="text-align: center; height: 320px;">
+            <!-- Lọc salon theo Tỉnh/Thành phố -->
+            <div *ngFor="let salon of this.salons let i = index">
+                <div *ngIf="salon.province === this.provinceForm.get('province').value.name && this.provinceForm.get('district').value === ''">
+                    <a style="margin-right:10px;" type="button" (click)="bookingSalon(salon, i)">
+                        <div class="card">
+                            <img src="{{salon.image}}" alt="Avatar" style="width:220px; height:220px">
+                            <div class="container">
+                                <p>{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</p>
+                            </div>
                         </div>
                     </a>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="card" style="margin-bottom: 10px" *ngIf="this.provinceForm.get('province').value != ''">
-    <div class="card-body">
-        <h1 style="text-align: center;">Salon tại {{this.provinceForm.get('province').value.name}}</h1>
-        <div class="row" style="text-align: center;">
-            <div *ngFor="let salon of this.salons">
+                <!-- Lọc salon theo Quận/Huyện -->
                 <div *ngIf="salon.province === this.provinceForm.get('province').value.name">
-                    <a type="button" (click)="bookingSalon(salon)">
-                        <div class="selectService">
-                            <img style="width: 220px; height: 220px; padding: 5px;" src="https://storage.30shine.com/salon_image/front/142.png" data-holder-rendered="true">
-                            <p style="width: 220px; padding: 5px;">{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</p>
+                    <a *ngIf="salon.district == this.provinceForm.get('district').value.name " style="margin-right:10px;" type="button" (click)="bookingSalon(salon, i)">
+                        <div class="card">
+                            <img src="{{salon.image}}" alt="Avatar" style="width:220px; height:220px">
+                            <div class="container">
+                                <p>{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</p>
+                            </div>
                         </div>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="card" style="margin-bottom: 60px" *ngIf="this.provinceForm.get('province').value != '' && this.provinceForm.get('district').value != ''">
+</mat-card>
+<!-- <mat-card style="margin-bottom: 60px" *ngIf="this.provinceForm.get('province').value != '' && this.provinceForm.get('district').value != ''">
     <div class="card-body">
         <h1 style="text-align: center;">Salon tại {{this.provinceForm.get('district').value.name}}, {{this.provinceForm.get('province').value.name}}</h1>
         <div class="row" style="text-align: center;">
-            <div *ngFor="let salon of this.salons">
+            <div *ngFor="let salon of this.salons let i = index">
                 <div *ngIf="salon.province === this.provinceForm.get('province').value.name && salon.district == this.provinceForm.get('district').value.name ">
-                    <a type="button" (click)="bookingSalon(salon)">
-                        <div class="selectService">
-                            <img style="width: 220px; height: 220px; padding: 5px;" src="https://storage.30shine.com/salon_image/front/142.png" data-holder-rendered="true">
-                            <p style="width: 220px; padding: 5px;">{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</p>
+                    <a style="margin-right:10px;" type="button" (click)="bookingSalon(salon, i)">
+                        <div class="card">
+                            <img src="{{salon.image}}" alt="Avatar" style="width:220px; height:220px">
+                            <div class="container">
+                                <p>{{salon.street}} {{salon.ward}} {{salon.district}} {{salon.province}}</p>
+                            </div>
                         </div>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</mat-card> -->

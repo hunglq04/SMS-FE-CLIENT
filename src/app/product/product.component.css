@@ -45,3 +45,7 @@ h4 {
 .button-none:focus {
     outline: 0;
 }
+
+::ng-deep .mat-tab-body-content {
+    overflow: hidden;
+}

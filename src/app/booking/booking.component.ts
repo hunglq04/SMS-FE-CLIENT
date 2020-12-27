@@ -111,6 +111,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
     this.bookingDetail.salon = [isSelected.street, isSelected.ward, isSelected.district, isSelected.province].join(", ");
     sessionStorage.setItem('salon', JSON.stringify(this.booking.salonId));
     sessionStorage.setItem('salonDetail', this.bookingDetail.salon);
+    
   }
   //Xóa dịch vụ
   deleteService(i, serviceId) {

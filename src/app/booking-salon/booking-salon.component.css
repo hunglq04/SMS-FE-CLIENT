@@ -1,9 +1,19 @@
-.row {
+.salon {
     flex-wrap: nowrap !important;
     overflow-x: auto !important;
 }
 
-.activeSalon div {
-    /* border: 2px solid black;
-    color: rgb(0, 0, 0); */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 222px;
+    height: 290px;
+}
+
+.card:hover {
+    box-shadow: 0 16px 24px 0 rgba(0, 0, 0, 0.9);
+}
+
+.container {
+    padding: 2px 16px;
 }

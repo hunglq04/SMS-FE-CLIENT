@@ -50,9 +50,10 @@ a {
     background-color: red !important;
 }
 
-* {
+
+/* * {
     font-family: 'Times New Roman', Times, serif;
-}
+} */
 
 .img-crop {
     width: 120px;

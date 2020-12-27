@@ -1,92 +1,87 @@
 <div class="card">
     <!-- Step by step -->
-    <div class="card-header">
-        <mat-horizontal-stepper linear #stepper>
-            <!-- Step 1 Chọn địa chỉ -->
-            <mat-step [completed]="isCompletedSalon">
-                <ng-template matStepLabel>Chọn Salon</ng-template>
-                <app-booking-salon (isSelected)="selectSalon($event)" (click)="!this.isCompletedSalon || stepper.next()"></app-booking-salon>
-            </mat-step>
-            <!-- Step 2 Chọn dịch vụ -->
-            <mat-step [completed]="isCompletedService">
-                <ng-template matStepLabel>Chọn Dịch Vụ</ng-template>
-                <app-booking-service *ngIf="isCompletedSalon" (isSelected)="selectService($event)"></app-booking-service>
-            </mat-step>
-            <!-- Step 3 Chọn giờ -->
-            <mat-step [completed]="isCompletedStylist">
-                <ng-template matStepLabel>Chọn Stylist</ng-template>
-                <app-booking-stylist *ngIf="isCompletedService" (isSelectedDate)="selectDate($event)" (isSelectedStylist)="selectStylist($event)" (isSelectedHour)="selectHour($event)">
-                </app-booking-stylist>
-            </mat-step>
-            <!-- Step 4 Hoàn tất -->
-            <mat-step>
-                <ng-template matStepLabel>Hoàn tất</ng-template>
-                <div *ngIf="!isLogin" class="col-6 offset-3">
-                    <div class="alert alert-danger mb-2">
-                        <a class="text-success close" data-dismiss="alert">&times;</a> Bạn chưa đăng nhập đăng nhập để đặt lịch
-                        <a (click)="bookingclick()" class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal" role="button">Đăng nhập</a>
-                    </div>
+    <mat-horizontal-stepper linear #stepper>
+        <!-- Step 1 Chọn địa chỉ -->
+        <mat-step [completed]="isCompletedSalon">
+            <ng-template matStepLabel>Chọn Salon</ng-template>
+            <app-booking-salon (isSelected)="selectSalon($event)" (click)="!this.isCompletedSalon || stepper.next()"></app-booking-salon>
+        </mat-step>
+        <!-- Step 2 Chọn dịch vụ -->
+        <mat-step [completed]="isCompletedService">
+            <ng-template matStepLabel>Chọn Dịch Vụ</ng-template>
+            <app-booking-service *ngIf="isCompletedSalon" (isSelected)="selectService($event)"></app-booking-service>
+        </mat-step>
+        <!-- Step 3 Chọn giờ -->
+        <mat-step [completed]="isCompletedStylist">
+            <ng-template matStepLabel>Chọn Stylist</ng-template>
+            <app-booking-stylist *ngIf="isCompletedService" (isSelectedDate)="selectDate($event)" (isSelectedStylist)="selectStylist($event)" (isSelectedHour)="selectHour($event)">
+            </app-booking-stylist>
+        </mat-step>
+        <!-- Step 4 Hoàn tất -->
+        <mat-step>
+            <ng-template matStepLabel>Hoàn tất</ng-template>
+            <div *ngIf="!isLogin" class="col-6 offset-3">
+                <div class="alert alert-danger mb-2">
+                    <a class="text-success close" data-dismiss="alert">&times;</a> Bạn chưa đăng nhập đăng nhập để đặt lịch
+                    <a (click)="bookingclick()" class="btn btn-outline-warning" data-toggle="modal" data-target="#myModal" role="button">Đăng nhập</a>
                 </div>
-                <div class="ant-affix">
-                    <div class="affix">
-                        <div>
-                            <div>
-                                <div class="text-show content-center-middle pointer f-bee"><span>Thông tin lịch {{this.countService}}</span></div>
-                                <div class="content-info-booking">
-                                    <div class="box-item">
-                                        <div class="title flex item-center f-oswald"><i class="fas fa-map-marker-alt" style="margin-right: 4px;"></i>SALON</div>
-                                        <div class="content f-be">{{this.bookingDetail.salon}}</div>
-                                    </div>
-                                    <div class="box-item">
-                                        <div class="ant-row">
-                                            <div class="ant-col ant-col-8">
-                                                <div class="title flex item-center"><i class="fas fa-calendar-alt" style="margin-right: 4px;"></i>NGÀY</div>
-                                                <div class="content"> {{this.bookingDetail.date}}</div>
-                                            </div>
-                                            <div class="ant-col ant-col-8">
-                                                <div class="title flex item-center"><i class="fas fa-clock" style="margin-right: 4px;"></i>GIỜ</div>
-                                                <div class="content">{{this.bookingDetail.time}}</div>
-                                            </div>
-                                            <div class="ant-col ant-col-8">
-                                                <div class="title flex item-center"><i class="fas fa-user" style="margin-right: 4px;"></i>STYLIST</div>
-                                                <div class="content">{{this.bookingDetail.stylistId}} </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="box-service">
-                                        <div class="title flex item-center"><i class="fas fa-star" style="margin-right: 4px;"></i>DỊCH VỤ ĐÃ CHỌN</div>
-                                        <div style="display: flex; margin-bottom: 10px;" *ngFor="let service of this.bookingDetail.services let i = index">
-                                            <img style="width:70px; height:30px" src="{{service['bookingImage']}}" alt="">
-                                            <div style="margin-left: 10px;" class="service-list">{{service['name']}}</div>
-                                            <div style="margin-left: 10px;" class="service-list">{{service['price']}} VNĐ</div>
-                                        </div>
-                                    </div>
-                                    <div class="box-service">
-                                        <div class="title flex item-center"><i class="fas fa-clock" style="margin-right: 4px;"></i>THỜI GIAN</div>
-                                        <div class="service-list">{{this.bookingDetail.duration}} PHÚT</div>
-                                    </div>
-                                    <div class="box-service">
-                                        <div class="title flex item-center"><i class="fas fa-money-check-alt" style="margin-right: 4px;"></i>TỔNG TIỀN</div>
-                                        <div class="service-list">{{this.bookingDetail.price | currency : "VND"}}</div>
-                                    </div>
-                                    <br>
+            </div>
+            <div class="ant-affix">
+                <div class="card affix">
+                    <div class="text-show content-center-middle pointer f-bee"><span>Thông tin lịch</span></div>
+                    <div class="content-info-booking">
+                        <div class="box-item">
+                            <div class="title flex item-center f-oswald"><i class="fas fa-map-marker-alt" style="margin-right: 4px;"></i>SALON</div>
+                            <div class="content f-be">{{this.bookingDetail.salon}}</div>
+                        </div>
+                        <div class="box-item">
+                            <div class="ant-row">
+                                <div class="ant-col ant-col-8">
+                                    <div class="title flex item-center"><i class="fas fa-calendar-alt" style="margin-right: 4px;"></i>NGÀY</div>
+                                    <div class="content"> {{this.bookingDetail.date}}</div>
+                                </div>
+                                <div class="ant-col ant-col-8">
+                                    <div class="title flex item-center"><i class="fas fa-clock" style="margin-right: 4px;"></i>GIỜ</div>
+                                    <div class="content">{{this.bookingDetail.time}}</div>
+                                </div>
+                                <div class="ant-col ant-col-8">
+                                    <div class="title flex item-center"><i class="fas fa-user" style="margin-right: 4px;"></i>STYLIST</div>
+                                    <div class="content">{{this.bookingDetail.stylistId}} </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="box-service">
+                            <div class="title flex item-center"><i class="fas fa-star" style="margin-right: 4px;"></i>DỊCH VỤ ĐÃ CHỌN</div>
+                            <div style="display: flex; margin-bottom: 10px;" *ngFor="let service of this.bookingDetail.services let i = index">
+                                <img style="width:70px; height:30px" src="{{service['bookingImage']}}" alt="">
+                                <div style="margin-left: 10px;" class="service-list">{{service['name']}}</div>
+                                <div style="margin-left: 10px;" class="service-list">{{service['price']}} VNĐ</div>
+                            </div>
+                        </div>
+                        <div class="box-service">
+                            <div class="title flex item-center"><i class="fas fa-clock" style="margin-right: 4px;"></i>THỜI GIAN</div>
+                            <div class="service-list">{{this.bookingDetail.duration}} PHÚT</div>
+                        </div>
+                        <div class="box-service">
+                            <div class="title flex item-center"><i class="fas fa-money-check-alt" style="margin-right: 4px;"></i>TỔNG TIỀN</div>
+                            <div class="service-list">{{this.bookingDetail.price | currency : "VND"}}</div>
+                        </div>
+                        <br>
                     </div>
                 </div>
-                <div style="text-align: center; margin-bottom: 60px; margin-top:10px;">
-                    <button style="margin-right:10px" class="btn btn-dark" mat-button (click)="previous()" (click)="stepper.previous()">Trở về</button>
-                    <button [hidden]="!isLogin" class="btn btn-dark" (click)="bookingS()">Hoàn tất</button>
-                </div>
-            </mat-step>
-        </mat-horizontal-stepper>
-    </div>
+            </div>
+            <div style="text-align: center; margin-bottom: 60px; margin-top:10px;">
+                <button style="margin-right:10px" class="btn btn-dark" mat-button (click)="previous()" (click)="stepper.previous()">Trở về</button>
+                <button [hidden]="!isLogin" class="btn btn-dark" (click)="bookingS()">Hoàn tất</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+
 </div>
 <div [hidden]="this.stepper.selectedIndex == 0 || this.stepper.selectedIndex == 3" class="fixed-bottom">
     <div class="col-sm-8">
         <div class="ant-affix">
-            <div class="affix">
+            <div class="card affix">
                 <div (click)="isHidden()" class="text-show content-center-middle pointer f-bee"> <span>{{hidden?'Ẩn thông tin' : 'Hiện thông tin'}} {{this.countService}}</span><i class="{{hidden?'fas fa-caret-down': 'fas fa-sort-up'}}"></i></div>
                 <div class="content-info-booking" [hidden]="!hidden">
                     <div class="box-item">

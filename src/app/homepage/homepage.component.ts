@@ -29,12 +29,15 @@ export class HomepageComponent implements OnInit {
   salons: Array<Salon>;
   products: Array<Product>
 
+  imageRanking = [];
+  random = [];
   provinceName: '';
   constructor(
     private fb: FormBuilder,
     private serviceService: ServiceService,
     private salonService: SalonService,
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router
   ) { }
 
   async ngOnInit() {
@@ -52,7 +55,12 @@ export class HomepageComponent implements OnInit {
     await this.getProvince();
     this.getSalon();
     this.getProduct();
-
+    this.imageRanking.push(
+      { image: 'https://i.pinimg.com/originals/97/1c/e3/971ce3c39963e0bce23b814ead4c2d98.jpg', like: '220' },
+      { image: 'https://i.pinimg.com/736x/9d/87/06/9d870638a811f4cdf1f0da26de4d3d78.jpg', like: '200' },
+      { image: 'https://i.pinimg.com/564x/5a/77/94/5a7794ce82d66369dc61c9f28d87a8df.jpg', like: '189' },
+      { image: 'https://i.pinimg.com/originals/c6/44/9b/c6449bc5ac6e7e772ff84bc90a9d0bbb.jpg', like: '172' }
+    )
   }
 
   displayFn(option: any): string {
@@ -102,5 +110,9 @@ export class HomepageComponent implements OnInit {
   }
   pickSalonHomePage(salon) {
     sessionStorage.setItem('selectSalonHome', JSON.stringify(salon));
+  }
+  selectProduct(id) {
+    sessionStorage.setItem('idProduct', id);
+    this.router.navigateByUrl('/cart');
   }
 }

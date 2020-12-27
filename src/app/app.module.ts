@@ -80,7 +80,8 @@ import { ProfileCustomerComponent } from './profile-customer/profile-customer.co
     ProductDetailComponent,
     ServiceDetailComponent,
     OrderHistoryComponent,
-    ProfileCustomerComponent
+    ProfileCustomerComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

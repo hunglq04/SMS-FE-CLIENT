@@ -112,4 +112,20 @@ export class BookingSalonComponent implements OnInit {
   isSelectSalon(isSeclected) {
     return this.selectSalon === isSeclected;
   }
+
+  findName(name1){
+      for(let i = 0; i < this.salons.length; i++){
+        if(name1 == this.salons[i].province)
+        {
+          return true;
+        }
+      }
+      for(let i = 0; i < this.salons.length; i++){
+        if(name1 == this.salons[i].district)
+        {
+          return true;
+        }
+      }
+      return false;
+  }
 }

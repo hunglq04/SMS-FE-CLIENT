@@ -76,7 +76,7 @@
 .affix {
     font-size: 25px;
     /* font-family: 'Times New Roman', Times, serif; */
-    background-color: #151515;
+    background-color: #181414;
     margin-left: 35px;
     margin-right: 35px;
 }
@@ -84,7 +84,7 @@
 .affix .text-show {
     color: rgb(255, 255, 255);
     font-size: 13px;
-    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Times New Roman', Times, serif; */
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -118,7 +118,7 @@
 }
 
 .affix .button-booking a {
-    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Times New Roman', Times, serif; */
     color: rgb(255, 255, 255);
     font-size: 20px;
 }
@@ -128,16 +128,14 @@
 }
 
 .affix .content-info-booking .box-item .title {
-    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Times New Roman', Times, serif; */
     font-size: 14px;
     text-transform: uppercase;
     color: rgb(255, 255, 255);
 }
 
 .affix .content-info-booking .box-item .content {
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: 700;
-    font-size: 14px;
+    /* font-family: 'Times New Roman', Times, serif; */
     color: rgb(255, 255, 255);
 }
 
@@ -175,7 +173,7 @@
 .affix .content-info-booking .box-service {
     max-height: calc(90vh - 270px);
     overflow-y: auto;
-    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Times New Roman', Times, serif; */
     color: rgb(255, 255, 255);
 }
 
@@ -191,6 +189,6 @@
 }
 
 button {
-    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Times New Roman', Times, serif; */
     color: rgb(255, 255, 255);
 }

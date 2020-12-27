@@ -60,12 +60,12 @@
 
 .test:focus {
     border: 1px solid black;
-    background-color: rgb(241, 243, 106);
+    background-color: #fc3;
 }
 
 .activetest {
     border: 1px solid black !important;
-    background-color: rgb(241, 243, 106);
+    background-color: #fc3;
 }
 
 .disableDiv {
@@ -85,6 +85,10 @@
 
 ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
     background-color: rgb(250, 250, 250);
+}
+
+::ng-deep .mat-tab-body-content {
+    overflow: hidden;
 }
 
 
