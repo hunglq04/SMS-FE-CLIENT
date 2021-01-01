@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { StylistService } from '../service/stylist.service';
 import { Stylist } from '../model/stylist.model';
-
+import { DateTimePipe } from '../pipe/date-time.pipe';
 @Component({
   selector: 'app-booking-stylist',
   templateUrl: './booking-stylist.component.html',
@@ -12,7 +12,7 @@ export class BookingStylistComponent implements OnInit {
   @Output() isSelectedStylist = new EventEmitter();
   @Output() isSelectedHour = new EventEmitter();
   stylists: Array<Stylist>;
-  showtimeNow = new Date().toLocaleDateString();
+  showtimeNow
   showtimeTomorow
   showtimeTomorow2
   showtime
@@ -43,7 +43,8 @@ export class BookingStylistComponent implements OnInit {
   slot24 = true;
   salonId = sessionStorage.getItem('salon')
   constructor(
-    private stylistService: StylistService
+    private stylistService: StylistService,
+    private dateTimePipe: DateTimePipe
   ) { }
 
   getStylist() {
@@ -82,27 +83,6 @@ export class BookingStylistComponent implements OnInit {
     timeTomorow2.setDate(timeTomorow2.getDate() + 2);
 
     // Hiển thị ngày
-    if (timeNow.getDate() < 10) {
-      this.showtimeNow = "0" + timeNow.toLocaleDateString();
-    }
-    else {
-      this.showtimeNow = timeNow.toLocaleDateString();
-    }
-    if(timeTomorow.getDate() < 10)
-    {
-      this.showtimeTomorow = "0" + timeTomorow.toLocaleDateString();
-    }
-    else{
-      this.showtimeTomorow = timeTomorow.toLocaleDateString();
-    }
-    if(timeTomorow2.getDate() < 10)
-    {
-      this.showtimeTomorow2 = "0" + timeTomorow2.toLocaleDateString();
-    }
-    else{
-      this.showtimeTomorow2 = timeTomorow2.toLocaleDateString();
-    }
-
 
     if (timeNow.getMinutes() < 10) {
       timeNowMiniute = 0 + timeNow.getMinutes().toString();
@@ -167,16 +147,13 @@ export class BookingStylistComponent implements OnInit {
     return date.split("/").reverse().join("-");
   }
   async ngOnInit() {
-    var date = new Date()
-    if(date.getDate() < 10)
-    {
-      this.showtimeNow = "0" + this.showtimeNow
-    }
+    this.showtimeNow = this.dateTimePipe.transform(new Date());
+    this.showtimeTomorow = this.dateTimePipe.transform(this.dateTimePipe.addDateToDate(new Date(), 1));
+    this.showtimeTomorow2 = this.dateTimePipe.transform(this.dateTimePipe.addDateToDate(new Date(), 2));
     this.getStylist();
     if (sessionStorage.getItem('date2') == null) {
       this.isSelectedDate.emit(this.formatDate(this.showtimeNow))
     }
-
     this.compareTime();
   }
 }

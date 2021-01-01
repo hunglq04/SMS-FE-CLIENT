@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('token');
     sessionStorage.clear();
-    window.location.reload();
+    window.location.href = '/';
   }
   btnLogin() {
     this.tabs.realignInkBar();

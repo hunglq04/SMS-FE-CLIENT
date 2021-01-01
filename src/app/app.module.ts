@@ -54,6 +54,7 @@ import { BookingHistoryComponent } from './booking-history/booking-history.compo
 
 //Custom pipe
 import { TotalServicePricePipe } from './pipe/total-service-price.pipe';
+import { DateTimePipe } from './pipe/date-time.pipe';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductDetailComponent } from "./product-detail/product-detail.component";
@@ -81,7 +82,8 @@ import { ProfileCustomerComponent } from './profile-customer/profile-customer.co
     ServiceDetailComponent,
     OrderHistoryComponent,
     ProfileCustomerComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    DateTimePipe
   ],
   imports: [
     BrowserModule,
@@ -114,6 +116,7 @@ import { ProfileCustomerComponent } from './profile-customer/profile-customer.co
     SalonService,
     StylistService,
     ServiceService,
+    DateTimePipe,
     BookingService,
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     {

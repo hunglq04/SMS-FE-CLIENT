@@ -5,6 +5,7 @@ import { BookingServiceComponent } from '../booking-service/booking-service.comp
 import { MatStepper } from '@angular/material/stepper';
 import { Salon } from '../model/salon.model';
 import { ActivatedRoute } from '@angular/router';
+import { StylistService } from '../service/stylist.service';
 
 
 @Component({
@@ -29,8 +30,14 @@ export class BookingComponent implements OnInit, AfterViewInit {
   isTest = false;
   isLogin;
   hidden = false;
+  //Lịch stylist
+  stylishSchedule = [];
+  checkStylist: boolean;
+  reloadChedule = false;
+  checkHourServiceStylist: boolean;
   //Thông tin lịch
   booking = new Booking();
+
   bookingDetail = {
     salon: '',
     servicesPrice: [],
@@ -48,6 +55,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
   historyBooking = [];
   constructor(
     private activatedRoute: ActivatedRoute,
+    private stylistService: StylistService,
     private bookingService: BookingService
   ) {
     this.booking.date = this.formatDate(new Date().toLocaleDateString());
@@ -64,6 +72,21 @@ export class BookingComponent implements OnInit, AfterViewInit {
       this.bookingDetail.salon = [salonInfo.street, salonInfo.ward, salonInfo.district, salonInfo.province].join(", ");
       this.stepper.selectedIndex = 1;
       sessionStorage.removeItem('selectSalonHome')
+    }
+    //load lại dữ liệu lịch khi đặt trùng giờ
+    if (this.reloadChedule == true) {
+      //load dữ liệu lịch đặt
+      this.booking.salonId = JSON.parse(sessionStorage.getItem('salon'));
+      this.booking.stylistId = JSON.parse(sessionStorage.getItem('stylist'))
+      this.booking.serviceIds = JSON.parse(sessionStorage.getItem('service'));
+      //Load dữ liệu thông tin lịch đặt
+      this.bookingDetail.salon = sessionStorage.getItem('salonDetail');
+      this.bookingDetail.services = JSON.parse(sessionStorage.getItem('serviceDetail'));
+      this.bookingDetail.price = JSON.parse(sessionStorage.getItem('servicePrice'));
+      this.bookingDetail.duration = JSON.parse(sessionStorage.getItem('serviceDuration'));
+      this.isCompletedSalon = true;
+      this.isCompletedService = true;
+      this.stepper.selectedIndex = 2;
     }
   }
   ngOnInit() {
@@ -102,6 +125,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
       sessionStorage.setItem('salon', JSON.parse(sessionStorage.getItem('selectSalonHome'))['id']);
       this.isCompletedSalon = true;
     }
+    // alert(this.reloadChedule);
   }
   //Chọn Salon
   selectSalon(isSelected) {
@@ -111,7 +135,7 @@ export class BookingComponent implements OnInit, AfterViewInit {
     this.bookingDetail.salon = [isSelected.street, isSelected.ward, isSelected.district, isSelected.province].join(", ");
     sessionStorage.setItem('salon', JSON.stringify(this.booking.salonId));
     sessionStorage.setItem('salonDetail', this.bookingDetail.salon);
-    
+
   }
   //Xóa dịch vụ
   deleteService(i, serviceId) {
@@ -240,20 +264,65 @@ export class BookingComponent implements OnInit, AfterViewInit {
     sessionStorage.setItem('stylistDetail', this.bookingDetail.stylistId)
   }
   //Chọn Giờ
-  selectHour(isSelected) {
+  async selectHour(isSelected) {
     this.booking.time = isSelected
     this.bookingDetail.time = isSelected
-    if (this.isSelectStylist && this.isSelectDate) {
-      this.isCompletedStylist = true;
-    }
     sessionStorage.setItem('hour', this.booking.time)
     sessionStorage.setItem('hourDetail', this.bookingDetail.time)
+    if (this.isSelectStylist && this.isSelectDate) {
+      await this.checkstylishSchedule();
+      if (this.checkStylist == false) {
+        this.isCompletedStylist = false;
+        this.booking.time = null;
+        this.bookingDetail.time = null;
+        sessionStorage.removeItem('hour');
+        sessionStorage.removeItem('hourDetail');
+        alert('Đã có người đặt lịch này trước, xin quý khách vui lòng chọn giờ khác')
+      }
+      else {
+        if (this.checkHourServiceStylist == false) {
+          alert('Dịch vụ bạn chọn quá thời gian cho phép thực hiện, bạn vui lòng chọn giờ khác hoặc chọn ít dịch vụ hơn')
+        }
+        this.isCompletedStylist = true;
+      }
+    }
   }
   formatDate(date) {
     return date.split("/").reverse().join("-");
   }
+  async checkstylishSchedule() {
+    await this.stylistService.getSylist(sessionStorage.getItem('salon'), sessionStorage.getItem('date2'))
+      .then(res => {
+        this.stylishSchedule = res;
+      })
+    var stylistid = sessionStorage.getItem('stylist');
+    let index
+    for (let i = 0; i < this.stylishSchedule.length; i++) {
+      if (this.stylishSchedule[i].id == stylistid) {
+        index = i;
+      }
+    }
+    var hour = sessionStorage.getItem('hour');
+    this.checkStylist = this.stylishSchedule[index].stylishSchedule[hour];
+    let sumService = this.bookingDetail.duration / 30;
+    let indexHour
+    var stylist = Object.keys(this.stylishSchedule[index].stylishSchedule).sort();
+    let length = stylist.length;
+    for (let i = 0; i < length; i++) {
+      if (stylist[i] == hour) {
+        indexHour = i
+      }
+    }
+    this.checkHourServiceStylist = true;
+    for (let j = indexHour; j < indexHour + sumService; j++) {
+      if (!this.stylishSchedule[index].stylishSchedule[stylist[j]]) {
+        this.checkHourServiceStylist = false;
+        break;
+      }
+    }
+  }
   //Đặt lịch
-  bookingS() {
+  async bookingS() {
     var id
     this.activatedRoute.params.subscribe(params => {
       id = params['id'];
@@ -262,29 +331,37 @@ export class BookingComponent implements OnInit, AfterViewInit {
       this.bookingService.deleteBooking(id)
         .then(res => console.log(res))
     }
-
-    this.bookingService.postBooking(this.booking)
-      .then(res => {
-        alert("Đặt lịch thành công");
-        sessionStorage.removeItem('salon');
-        sessionStorage.removeItem('stylist');
-        sessionStorage.removeItem('date2');
-        sessionStorage.removeItem('hour');
-        sessionStorage.removeItem('service');
-        sessionStorage.removeItem('salonDetail');
-        sessionStorage.removeItem('isSelectServices');
-        sessionStorage.removeItem('serviceDetail');
-        sessionStorage.removeItem('servicePrice');
-        sessionStorage.removeItem('serviceDuration');
-        sessionStorage.removeItem('dateDetail');
-        sessionStorage.removeItem('stylistDetail');
-        sessionStorage.removeItem('hourDetail');
-        sessionStorage.removeItem('isBookingLogin');
-        window.location.href = '/history';
-      })
-      .catch(err => {
-        alert(err);
-      })
+    await this.checkstylishSchedule();
+    if (this.checkStylist == false) {
+      alert('Đã có người đặt lịch này trước, xin quý khách vui lòng chọn giờ khác')
+      this.reloadChedule = true;
+      await this.reloadChedule;
+      window.location.reload();
+    }
+    else {
+      this.bookingService.postBooking(this.booking)
+        .then(res => {
+          alert("Đặt lịch thành công");
+          sessionStorage.removeItem('salon');
+          sessionStorage.removeItem('stylist');
+          sessionStorage.removeItem('date2');
+          sessionStorage.removeItem('hour');
+          sessionStorage.removeItem('service');
+          sessionStorage.removeItem('salonDetail');
+          sessionStorage.removeItem('isSelectServices');
+          sessionStorage.removeItem('serviceDetail');
+          sessionStorage.removeItem('servicePrice');
+          sessionStorage.removeItem('serviceDuration');
+          sessionStorage.removeItem('dateDetail');
+          sessionStorage.removeItem('stylistDetail');
+          sessionStorage.removeItem('hourDetail');
+          sessionStorage.removeItem('isBookingLogin');
+          window.location.href = '/history';
+        })
+        .catch(err => {
+          alert(err);
+        })
+    }
   }
   //Ẩn hiện form thông tin
   isHidden() {

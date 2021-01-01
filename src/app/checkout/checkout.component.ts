@@ -65,7 +65,7 @@ export class CheckoutComponent implements OnInit {
     this.order.date = this.formatDate(date);
     this.order.total = 0;
 
-    if (this.order.email == '' || this.order.phone == '' || this.order.address == '' || this.order.address == '') {
+    if (this.checkoutForm.get('email').value == null || this.checkoutForm.get('name').value == null || this.checkoutForm.get('phone').value == null || this.checkoutForm.get('address').value == null) {
       alert("Vui lòng điền đẩy đủ thông tin")
     }
     else {
