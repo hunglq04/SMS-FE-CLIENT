@@ -55,7 +55,7 @@
                             <div style="display: flex; margin-bottom: 10px;" *ngFor="let service of this.bookingDetail.services let i = index">
                                 <img style="width:70px; height:30px" src="{{service['bookingImage']}}" alt="">
                                 <div style="margin-left: 10px;" class="service-list">{{service['name']}}</div>
-                                <div style="margin-left: 10px;" class="service-list">{{service['price']}} VNĐ</div>
+                                <div style="margin-left: 10px;" class="service-list">{{service['price']| currency : "VND"}}</div>
                             </div>
                         </div>
                         <div class="box-service">
