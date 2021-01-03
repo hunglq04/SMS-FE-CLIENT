@@ -75,6 +75,7 @@ export class CheckoutComponent implements OnInit {
           sessionStorage.removeItem('items');
           sessionStorage.removeItem('total');
           sessionStorage.removeItem('cart');
+          sessionStorage.removeItem('idProduct');
           window.location.href = '/orderhistory';
         })
         .catch(err => {
