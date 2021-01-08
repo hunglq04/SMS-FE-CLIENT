@@ -16,7 +16,7 @@ import { SalonService } from './service/salon.service';
 import { StylistService } from './service/stylist.service';
 import { ServiceService } from './service/service.service';
 import { BookingService } from './service/booking.service';
-
+import { CustomerService } from './service/customer.service';
 // Component
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -118,6 +118,7 @@ import { ProfileCustomerComponent } from './profile-customer/profile-customer.co
     ServiceService,
     DateTimePipe,
     BookingService,
+    CustomerService,
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     {
       provide: 'SocialAuthServiceConfig',
